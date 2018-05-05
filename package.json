@@ -1,0 +1,66 @@
+{
+  "name": "hotelier",
+  "author": {
+    "name": "Martin Cavoj",
+    "email": "martincavoj@gmail.com"
+  },
+  "license": "MIT",
+  "description": "Tray App for Hotel Process Manager",
+  "version": "0.1.0",
+  "dependencies": {
+    "is-electron": "^2.1.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "electron": "^2.0.0",
+    "electron-builder": "^20.11.1",
+    "foreman": "^2.0.0"
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
+  "proxy": "http://localhost:2000/",
+  "scripts": {
+    "start": "nf start -p 3000",
+    "react-start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-start": "node src/electron-wait-react",
+    "electron:build": "build",
+    "postbuild": "build"
+  },
+  "build": {
+    "appId": "com.macav.hotelier",
+    "productName": "Hotelier",
+    "electronVersion": "2.0.0",
+    "asar": true,
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "files": [
+      "build/**/*",
+      "icon.*"
+    ]
+  }
+}

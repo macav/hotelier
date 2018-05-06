@@ -7,7 +7,9 @@ const assetsDirectory = path.join(__dirname, './assets')
 let tray = undefined
 let window = undefined
 
-app.dock.hide()
+if (process.platform === 'darwin') {
+  app.dock.hide()
+}
 
 app.on('ready', () => {
   createTray()

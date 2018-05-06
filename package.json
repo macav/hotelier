@@ -37,6 +37,11 @@
     "productName": "Hotelier",
     "electronVersion": "2.0.0",
     "asar": true,
+    "mac": {
+      "extendInfo": {
+        "LSUIElement": 1
+      }
+    },
     "linux": {
       "target": [
         {
@@ -45,7 +50,8 @@
             "x64"
           ]
         }
-      ]
+      ],
+      "category": "Development"
     },
     "win": {
       "target": [

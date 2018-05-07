@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   loadServers = () => {
+    this.setState({ loading: true });
     this.getServers().then(servers => {
       servers = Object.keys(servers).map(serverId => {
         const server = servers[serverId];
@@ -29,7 +30,11 @@ class App extends Component {
   getServers = () => {
     return window.fetch(`${this.getHotelUrl()}/_/servers`).then(response => {
       this.setState({ loading: false });
-      return response.json();
+      if (response.ok) {
+        return response.json();
+      } else {
+        return [];
+      }
     });
   };
 
@@ -153,8 +158,8 @@ class App extends Component {
 
           <footer className="toolbar toolbar-footer">
 
-            <div className="footer-link">
-              <a onClick={this.openHotel}>Hotel</a>
+            <div className="toolbar-actions pull-left">
+              <button className="btn btn-default" onClick={this.openHotel}>Hotel</button>
             </div>
 
             <div className="toolbar-actions pull-right">

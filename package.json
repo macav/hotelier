@@ -40,7 +40,8 @@
     "mac": {
       "extendInfo": {
         "LSUIElement": 1
-      }
+      },
+      "icon": "build/icon.icns"
     },
     "linux": {
       "target": [
@@ -51,7 +52,8 @@
           ]
         }
       ],
-      "category": "Development"
+      "category": "Development",
+      "icon": "build/icon.ico"
     },
     "win": {
       "target": [

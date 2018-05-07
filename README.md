@@ -1,6 +1,6 @@
 # Hotelier
 
-Tray App for [Hotel](https://github.com/typicode/hotel) process manager which works on Windows, Mac and Linux.
+Tray App for [Hotel](https://github.com/typicode/hotel) process manager which works on Windows, Mac and (potentially) Linux.
 
 ## Install
 
@@ -22,7 +22,7 @@ I decided to create the app because all other alternatives didn't work properly 
 
 ### Builds
 
-The builds are available for Mac (`.dmg`), Windows (32 & 64 bit) and Linux (`.deb`).
+The builds are available for Mac (`.dmg`) and Windows (32 & 64 bit).
 
 ## Features
 

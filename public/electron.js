@@ -24,7 +24,11 @@ app.on('window-all-closed', () => {
 })
 
 const createTray = () => {
-  tray = new Tray(path.join(assetsDirectory, 'hotelTemplate.png'))
+  if (process.platform === 'darwin') {
+    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate.png'))
+  } else {
+    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate_white.png'))
+  }
   tray.on('right-click', toggleWindow)
   tray.on('click', function (event) {
     toggleWindow()

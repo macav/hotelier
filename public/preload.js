@@ -1,2 +1,2 @@
-const { shell } = require('electron');
+const { shell, Tray } = require('electron');
 window.shell = shell;

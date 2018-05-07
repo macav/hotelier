@@ -8,6 +8,8 @@ Download the [latest release](http://www.github.com/macav/hotelier/releases) and
 
 ## About
 
+![windows_screenshot](public/assets/hotelier_windows.png)
+
 ### Description
 
 The main purpose of the app is allowing easy management of the servers directly from the tray / menu bar, without the need of opening the `Hotel` in the browser, or using the CLI.

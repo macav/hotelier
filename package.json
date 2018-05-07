@@ -62,11 +62,12 @@
             "ia32"
           ]
         }
-      ]
+      ],
+      "icon": "build/icon.ico"
     },
     "files": [
       "build/**/*",
-      "icon.*"
+      "build/icon.*"
     ]
   }
 }

@@ -16,7 +16,11 @@
   "devDependencies": {
     "electron": "^2.0.0",
     "electron-builder": "^20.11.1",
-    "foreman": "^2.0.0"
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "foreman": "^2.0.0",
+    "jest-fetch-mock": "^1.5.0",
+    "react-test-renderer": "^16.3.2"
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -31,6 +35,28 @@
     "electron-start": "node src/electron-wait-react",
     "electron:build": "build",
     "postbuild": "build"
+  },
+  "jest": {
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!src/index.js",
+      "!src/electron-wait-react.js",
+      "!src/registerServiceWorker.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   },
   "build": {
     "appId": "com.macav.hotelier",

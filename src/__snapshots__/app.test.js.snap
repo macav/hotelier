@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App matches the snapshot 1`] = `
+<div>
+  <div
+    className="header-arrow"
+  />
+  <div
+    className="window"
+  >
+    <header
+      className="toolbar toolbar-header"
+    >
+      <h1
+        className="title"
+      >
+        Hotelier
+      </h1>
+    </header>
+    <div
+      className="window-content"
+    >
+      <div
+        className="pane"
+      >
+        <div
+          className="summary js-loading"
+        >
+          Loading…
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Server
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            id="server-list"
+          />
+        </table>
+      </div>
+    </div>
+    <footer
+      className="toolbar toolbar-footer"
+    >
+      <div
+        className="toolbar-actions pull-left"
+      >
+        <button
+          className="btn btn-default"
+          onClick={[Function]}
+        >
+          Hotel
+        </button>
+      </div>
+      <div
+        className="toolbar-actions pull-right"
+      >
+        <div
+          className="btn-group"
+        >
+          <button
+            className="btn btn-default"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-arrows-ccw"
+              title="Refresh"
+            />
+          </button>
+          <button
+            className="btn btn-default"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-cancel"
+              title="Quit"
+            />
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+`;

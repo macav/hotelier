@@ -24,28 +24,25 @@ exports[`App matches the snapshot 1`] = `
         className="pane"
       >
         <div
-          className="summary js-loading"
+          className="summary"
         >
           Loading…
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>
-                Server
-              </th>
-              <th>
-                Status
-              </th>
-              <th>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            id="server-list"
-          />
-        </table>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Server
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody />
+          </table>
+        </div>
       </div>
     </div>
     <footer

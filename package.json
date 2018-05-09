@@ -46,8 +46,7 @@
       "src/**/*.{js,jsx}",
       "!**/node_modules/**",
       "!src/index.js",
-      "!src/electron-wait-react.js",
-      "!src/registerServiceWorker.js"
+      "!src/electron-wait-react.js"
     ],
     "coverageThreshold": {
       "global": {

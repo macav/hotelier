@@ -11,7 +11,7 @@ class App extends Component {
 
   loadServers = () => {
     this.setState({ loading: true });
-    HotelApi.getServers().then(servers => {
+    return HotelApi.getServers().then(servers => {
       this.setState({ loading: false });
       servers = Object.keys(servers).map(serverId => {
         const server = servers[serverId];

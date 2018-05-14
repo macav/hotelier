@@ -18,7 +18,7 @@ export default class AppFooter extends React.Component {
             <button className="btn btn-default" onClick={reload}>
               <span className="icon icon-arrows-ccw" title="Refresh"></span>
             </button>
-            <button className="btn btn-default" onClick={() => window.close()}>
+            <button className="btn btn-default" id="close-app" onClick={() => window.close()}>
               <span className="icon icon-cancel" title="Quit"></span>
             </button>
           </div>

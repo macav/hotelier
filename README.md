@@ -1,4 +1,4 @@
-# Hotelier
+# Hotelier [![Build Status](https://semaphoreci.com/api/v1/macav/hotelier/branches/master/badge.svg)](https://semaphoreci.com/macav/hotelier)
 
 Tray App for [Hotel](https://github.com/typicode/hotel) process manager which works on Windows, Mac and (potentially) Linux.
 

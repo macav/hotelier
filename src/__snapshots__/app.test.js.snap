@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loaded 1`] = `
+<div>
+  <div
+    className="header-arrow"
+  />
+  <div
+    className="window"
+  >
+    <header
+      className="toolbar toolbar-header"
+    >
+      <h1
+        className="title"
+      >
+        Hotelier
+      </h1>
+    </header>
+    <div
+      className="window-content"
+    >
+      <div
+        className="pane"
+      >
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Server
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  onClick={[Function]}
+                >
+                  server1
+                </td>
+                <td>
+                  <button
+                    className="btn btn-negative"
+                    onClick={[Function]}
+                  >
+                    Stop
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  onClick={[Function]}
+                >
+                  server2
+                </td>
+                <td>
+                  <button
+                    className="btn btn-positive"
+                    onClick={[Function]}
+                  >
+                    Start
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <footer
+      className="toolbar toolbar-footer"
+    >
+      <div
+        className="toolbar-actions pull-left"
+      >
+        <button
+          className="btn btn-default"
+          onClick={[Function]}
+        >
+          Hotel
+        </button>
+      </div>
+      <div
+        className="toolbar-actions pull-right"
+      >
+        <div
+          className="btn-group"
+        >
+          <button
+            className="btn btn-default"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-arrows-ccw"
+              title="Refresh"
+            />
+          </button>
+          <button
+            className="btn btn-default"
+            id="close-app"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-cancel"
+              title="Quit"
+            />
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+`;
+
+exports[`loading 1`] = `
+<div>
+  <div
+    className="header-arrow"
+  />
+  <div
+    className="window"
+  >
+    <header
+      className="toolbar toolbar-header"
+    >
+      <h1
+        className="title"
+      >
+        Hotelier
+      </h1>
+    </header>
+    <div
+      className="window-content"
+    >
+      <div
+        className="pane"
+      >
+        <div
+          className="summary"
+        >
+          Loading…
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Server
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody />
+          </table>
+        </div>
+      </div>
+    </div>
+    <footer
+      className="toolbar toolbar-footer"
+    >
+      <div
+        className="toolbar-actions pull-left"
+      >
+        <button
+          className="btn btn-default"
+          onClick={[Function]}
+        >
+          Hotel
+        </button>
+      </div>
+      <div
+        className="toolbar-actions pull-right"
+      >
+        <div
+          className="btn-group"
+        >
+          <button
+            className="btn btn-default"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-arrows-ccw"
+              title="Refresh"
+            />
+          </button>
+          <button
+            className="btn btn-default"
+            id="close-app"
+            onClick={[Function]}
+          >
+            <span
+              className="icon icon-cancel"
+              title="Quit"
+            />
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+`;

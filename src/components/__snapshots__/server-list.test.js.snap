@@ -1,0 +1,462 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ServerList matches the snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ServerList
+    loadServers={[Function]}
+    servers={
+        Array [
+            Object {
+              "id": "test-server-1",
+              "status": "running",
+            },
+            Object {
+              "id": "test-server-2",
+              "status": "stopped",
+            },
+          ]
+    }
+    updateServerStatus={[Function]}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <table>
+        <thead>
+                <tr>
+                        <th>
+                                Server
+                        </th>
+                        <th>
+                                Action
+                        </th>
+                </tr>
+        </thead>
+        <tbody>
+                <ServerItem
+                        openServer={[Function]}
+                        server={
+                                Object {
+                                        "id": "test-server-1",
+                                        "status": "running",
+                                      }
+                        }
+                        toggleServer={[Function]}
+                />
+                <ServerItem
+                        openServer={[Function]}
+                        server={
+                                Object {
+                                        "id": "test-server-2",
+                                        "status": "stopped",
+                                      }
+                        }
+                        toggleServer={[Function]}
+                />
+        </tbody>
+</table>,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <thead>
+            <tr>
+                        <th>
+                                    Server
+                        </th>
+                        <th>
+                                    Action
+                        </th>
+            </tr>
+</thead>,
+          <tbody>
+            <ServerItem
+                        openServer={[Function]}
+                        server={
+                                    Object {
+                                                "id": "test-server-1",
+                                                "status": "running",
+                                              }
+                        }
+                        toggleServer={[Function]}
+            />
+            <ServerItem
+                        openServer={[Function]}
+                        server={
+                                    Object {
+                                                "id": "test-server-2",
+                                                "status": "stopped",
+                                              }
+                        }
+                        toggleServer={[Function]}
+            />
+</tbody>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <tr>
+              <th>
+                            Server
+              </th>
+              <th>
+                            Action
+              </th>
+</tr>,
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <th>
+                  Server
+</th>,
+                <th>
+                  Action
+</th>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Server",
+                },
+                "ref": null,
+                "rendered": "Server",
+                "type": "th",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Action",
+                },
+                "ref": null,
+                "rendered": "Action",
+                "type": "th",
+              },
+            ],
+            "type": "tr",
+          },
+          "type": "thead",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <ServerItem
+                openServer={[Function]}
+                server={
+                                Object {
+                                                "id": "test-server-1",
+                                                "status": "running",
+                                              }
+                }
+                toggleServer={[Function]}
+/>,
+              <ServerItem
+                openServer={[Function]}
+                server={
+                                Object {
+                                                "id": "test-server-2",
+                                                "status": "stopped",
+                                              }
+                }
+                toggleServer={[Function]}
+/>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": "test-server-1",
+              "nodeType": "class",
+              "props": Object {
+                "openServer": [Function],
+                "server": Object {
+                  "id": "test-server-1",
+                  "status": "running",
+                },
+                "toggleServer": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": "test-server-2",
+              "nodeType": "class",
+              "props": Object {
+                "openServer": [Function],
+                "server": Object {
+                  "id": "test-server-2",
+                  "status": "stopped",
+                },
+                "toggleServer": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "tbody",
+        },
+      ],
+      "type": "table",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <table>
+          <thead>
+                    <tr>
+                              <th>
+                                        Server
+                              </th>
+                              <th>
+                                        Action
+                              </th>
+                    </tr>
+          </thead>
+          <tbody>
+                    <ServerItem
+                              openServer={[Function]}
+                              server={
+                                        Object {
+                                                  "id": "test-server-1",
+                                                  "status": "running",
+                                                }
+                              }
+                              toggleServer={[Function]}
+                    />
+                    <ServerItem
+                              openServer={[Function]}
+                              server={
+                                        Object {
+                                                  "id": "test-server-2",
+                                                  "status": "stopped",
+                                                }
+                              }
+                              toggleServer={[Function]}
+                    />
+          </tbody>
+</table>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <thead>
+              <tr>
+                            <th>
+                                          Server
+                            </th>
+                            <th>
+                                          Action
+                            </th>
+              </tr>
+</thead>,
+            <tbody>
+              <ServerItem
+                            openServer={[Function]}
+                            server={
+                                          Object {
+                                                        "id": "test-server-1",
+                                                        "status": "running",
+                                                      }
+                            }
+                            toggleServer={[Function]}
+              />
+              <ServerItem
+                            openServer={[Function]}
+                            server={
+                                          Object {
+                                                        "id": "test-server-2",
+                                                        "status": "stopped",
+                                                      }
+                            }
+                            toggleServer={[Function]}
+              />
+</tbody>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <tr>
+                <th>
+                                Server
+                </th>
+                <th>
+                                Action
+                </th>
+</tr>,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <th>
+                    Server
+</th>,
+                  <th>
+                    Action
+</th>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Server",
+                  },
+                  "ref": null,
+                  "rendered": "Server",
+                  "type": "th",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Action",
+                  },
+                  "ref": null,
+                  "rendered": "Action",
+                  "type": "th",
+                },
+              ],
+              "type": "tr",
+            },
+            "type": "thead",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <ServerItem
+                  openServer={[Function]}
+                  server={
+                                    Object {
+                                                      "id": "test-server-1",
+                                                      "status": "running",
+                                                    }
+                  }
+                  toggleServer={[Function]}
+/>,
+                <ServerItem
+                  openServer={[Function]}
+                  server={
+                                    Object {
+                                                      "id": "test-server-2",
+                                                      "status": "stopped",
+                                                    }
+                  }
+                  toggleServer={[Function]}
+/>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "test-server-1",
+                "nodeType": "class",
+                "props": Object {
+                  "openServer": [Function],
+                  "server": Object {
+                    "id": "test-server-1",
+                    "status": "running",
+                  },
+                  "toggleServer": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": "test-server-2",
+                "nodeType": "class",
+                "props": Object {
+                  "openServer": [Function],
+                  "server": Object {
+                    "id": "test-server-2",
+                    "status": "stopped",
+                  },
+                  "toggleServer": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "tbody",
+          },
+        ],
+        "type": "table",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

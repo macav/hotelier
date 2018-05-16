@@ -1,5 +1,4 @@
 import api from './api';
-import mockFetch from 'jest-fetch-mock';
 
 describe('api', () => {
   describe('#getHotelUrl', () => {
@@ -48,7 +47,7 @@ describe('api', () => {
       expect(window.fetch).toHaveBeenCalledWith('http://localhost', {
         body: JSON.stringify(data),
         headers: { 'content-type': 'application/json' },
-        method: 'POST'
+        method: 'POST',
       });
       done();
     });

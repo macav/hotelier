@@ -1,0 +1,39 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "jest": true,
+        "es6": true
+    },
+    "globals": {
+        "__DEV__": false
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": [
+        "standard",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "semi": [
+            "error",
+            "always"
+        ],
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "never",
+                "exports": "never",
+                "functions": "ignore"
+            }
+        ],
+        "space-before-function-paren": [
+            "error",
+            "never"
+        ],
+        "no-return-assign": "off"
+    }
+}

@@ -1,5 +1,5 @@
-jest.mock('is-electron', () => () => false);
 import utils from './utils';
+jest.mock('is-electron', () => () => false);
 
 describe('utils', () => {
   describe('#isElectron', () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import ServerItem from './server-item';
-import utils from '../utils';
 import { shallow } from 'enzyme';
 import { STOPPED, RUNNING } from '../api';
 

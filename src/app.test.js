@@ -3,6 +3,7 @@ import App from './app';
 import renderer from 'react-test-renderer';
 
 import mockFetch from 'jest-fetch-mock';
+import HotelApi from './api';
 
 describe('App', () => {
   function mockSuccessfulResponse() {
@@ -11,7 +12,7 @@ describe('App', () => {
 
   it('matches the snapshot', done => {
     mockSuccessfulResponse();
-    const rendered = renderer.create(<App/>);
+    const rendered = renderer.create(<App />);
     expect(rendered.toJSON()).toMatchSnapshot('loading');
     process.nextTick(() => {
       expect(rendered.toJSON()).toMatchSnapshot('loaded');
@@ -21,7 +22,7 @@ describe('App', () => {
 
   it('updates the state with the servers loaded from the API', done => {
     mockSuccessfulResponse();
-    const instance = renderer.create(<App/>).getInstance();
+    const instance = renderer.create(<App />).getInstance();
     expect(instance.state.loading).toBe(true);
     process.nextTick(() => {
       expect(instance.state.servers.length).toEqual(2);
@@ -34,10 +35,22 @@ describe('App', () => {
     });
   });
 
+  it('updates the state with the servers loaded from the API', () => {
+    mockSuccessfulResponse();
+    let watchServersCallback;
+    HotelApi.watchServers = jest.fn().mockImplementation(callback => watchServersCallback = callback);
+    const instance = renderer.create(<App />).getInstance();
+    watchServersCallback({ server3: { status: 'running' } });
+    expect(instance.state.servers.length).toEqual(1);
+    expect(instance.state.servers[0].id).toEqual('server3');
+    expect(instance.state.servers[0].status).toEqual('running');
+    expect(instance.state.loading).toBe(false);
+  });
+
   it('renders empty list when we get error from the api', done => {
     try {
       mockFetch.mockResponse('', { status: 500 });
-      const instance = renderer.create(<App/>).getInstance();
+      const instance = renderer.create(<App />).getInstance();
       process.nextTick(() => {
         expect(instance.state.servers).toEqual([]);
         done();
@@ -51,7 +64,7 @@ describe('App', () => {
     beforeEach(() => mockSuccessfulResponse());
 
     it('updates the corresponding server with the new status', done => {
-      const instance = renderer.create(<App/>).getInstance();
+      const instance = renderer.create(<App />).getInstance();
       process.nextTick(() => {
         instance.updateServerStatus('server1', 'stopped');
         expect(instance.state.servers[0].status).toEqual('stopped');

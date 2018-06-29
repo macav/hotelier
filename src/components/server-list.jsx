@@ -4,10 +4,6 @@ import HotelApi, { STOPPED, RUNNING } from '../api';
 import utils from '../utils';
 
 export default class ServerList extends Component {
-  componentDidMount() {
-    this.props.loadServers();
-  }
-
   startServer = (id) => {
     HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, RUNNING));
   }

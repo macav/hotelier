@@ -1,26 +1,22 @@
 import React from 'react';
-import { STOPPED, RUNNING } from '../api';
+import { RUNNING } from '../api';
 
 export default class ServerItem extends React.Component {
   actionName = (status) => {
     switch (status) {
-      case STOPPED:
-        return 'Start';
       case RUNNING:
         return 'Stop';
       default:
-        return '';
+        return 'Start';
     }
   }
 
   actionClassName = (status) => {
     switch (status) {
-      case STOPPED:
-        return 'btn btn-positive'
       case RUNNING:
         return 'btn btn-negative';
       default:
-        return 'btn';
+        return 'btn btn-positive';
     }
   }
 

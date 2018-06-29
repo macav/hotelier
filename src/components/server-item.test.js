@@ -1,7 +1,7 @@
 import React from 'react';
 import ServerItem from './server-item';
 import { shallow } from 'enzyme';
-import { STOPPED, RUNNING } from '../api';
+import { STOPPED, RUNNING, CRASHED } from '../api';
 
 describe('ServerItem', () => {
   const runningServer = { id: 'test-server-1', status: 'running' };
@@ -24,12 +24,16 @@ describe('ServerItem', () => {
       expect(instance.actionName(STOPPED)).toEqual('Start');
     });
 
+    it('is "Start" when status is CRASHED', () => {
+      expect(instance.actionName(CRASHED)).toEqual('Start');
+    });
+
     it('is "Stop" when status is RUNNING', () => {
       expect(instance.actionName(RUNNING)).toEqual('Stop');
     });
 
     it('is "" when status is unknown', () => {
-      expect(instance.actionName('bla')).toEqual('');
+      expect(instance.actionName('bla')).toEqual('Start');
     });
   });
 
@@ -45,7 +49,7 @@ describe('ServerItem', () => {
     });
 
     it('is neutral when status is unknown', () => {
-      expect(instance.actionClassName('bla')).toEqual('btn');
+      expect(instance.actionClassName('bla')).toEqual('btn btn-positive');
     });
   });
 

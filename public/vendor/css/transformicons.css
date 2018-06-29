@@ -1,0 +1,86 @@
+.tcon {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 40px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 40px;
+  background: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; }
+  .tcon > * {
+    display: block; }
+  .tcon:hover, .tcon:focus {
+    outline: none; }
+  .tcon::-moz-focus-inner {
+    border: 0; }
+
+.tcon-remove {
+  height: 40px;
+  position: relative;
+  -webkit-transform: scale(0.75);
+  transform: scale(0.75);
+  width: 40px; }
+  .tcon-remove::before, .tcon-remove::after {
+    content: "";
+    display: block;
+    height: 25%;
+    width: 85%;
+    position: absolute;
+    top: 37%;
+    left: 8%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background: black; }
+  .tcon-remove::before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg); }
+  .tcon-remove::after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg); }
+
+.tcon-remove--chevron-right.tcon-transform::before {
+  left: 20%;
+  -webkit-transform: translate(0, 55%) rotate(-45deg);
+  transform: translate(0, 55%) rotate(-45deg);
+  width: 62%; }
+
+.tcon-remove--chevron-right.tcon-transform::after {
+  left: 20%;
+  -webkit-transform: translate(0, -55%) rotate(45deg);
+  transform: translate(0, -55%) rotate(45deg);
+  width: 62%; }
+
+.tcon-visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+  .tcon-visuallyhidden:active, .tcon-visuallyhidden:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }

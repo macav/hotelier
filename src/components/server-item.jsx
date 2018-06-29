@@ -1,36 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { RUNNING } from '../api';
 
 export default class ServerItem extends React.Component {
-  actionName = (status) => {
-    switch (status) {
-      case RUNNING:
-        return 'Stop';
-      default:
-        return 'Start';
-    }
+  static propTypes = {
+    server: PropTypes.object,
+    openServer: PropTypes.func,
+    toggleServer: PropTypes.func,
   }
 
   actionClassName = (status) => {
     switch (status) {
       case RUNNING:
-        return 'btn btn-negative';
+        return 'btn-negative text-white';
       default:
-        return 'btn btn-positive';
+        return 'tcon-transform btn-default';
     }
   }
 
   render() {
     const { server, openServer, toggleServer } = this.props;
     return (
-      <tr>
-        <td onClick={() => openServer(server)}>{server.id}</td>
-        <td>
-          <button className={this.actionClassName(server.status)} onClick={() => toggleServer(server)}>
-            {this.actionName(server.status)}
+      <li className="list-group-item server-item">
+        <div className={`pull-left server-name server-name--${server.status}`} onClick={() => openServer(server)}>{server.id}</div>
+        <div className="pull-right">
+          <button className={`btn btn-default mr-1 ${server.status === 'running' ? 'd-inline' : 'd-none'}`} onClick={() => toggleServer(server)}>
+            <span className='icon icon-arrows-ccw'></span>
           </button>
-        </td>
-      </tr>
+          <button type="button" className={`animated btn ${this.actionClassName(server.status)}`} aria-label="toggle status" onClick={() => toggleServer(server)}>
+            <span className="tcon-visuallyhidden">toggle status</span>
+            <span className={`tcon tcon-remove tcon-remove--chevron-right ${this.actionClassName(server.status)}`}></span>
+          </button>
+        </div>
+      </li>
     );
   }
 }

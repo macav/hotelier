@@ -3,3 +3,64 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.text-white {
+  color: white !important;
+}
+
+.text-white .tcon-remove::before {
+  background: white;
+}
+
+.text-white .tcon-remove::after {
+  background: white;
+}
+
+.animated {
+  transition: 1s linear;
+}
+
+.mr-1 {
+  margin-right: .125rem;
+}
+
+.server-name {
+  cursor: pointer;
+  width: calc(100% - 2.8rem);
+}
+
+.server-name--running {
+  width: calc(100% - 4.5rem);
+}
+
+.server-item {
+  line-height: 1.5rem;
+  padding: 5px 15px;
+}
+
+.server-item .btn {
+  padding: 0 5px;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-inline {
+  display: inline-block;
+}
+
+.tcon-remove {
+  height: 24px;
+  width: 24px;
+}
+
+.tcon-remove::before,
+.tcon-remove::after {
+  background: #737475;
+}
+
+.btn,
+.btn .icon {
+  cursor: pointer;
+}

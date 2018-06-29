@@ -28,21 +28,13 @@ export default class ServerList extends Component {
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Server</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.servers.map(server => {
-              return (
-                <ServerItem key={server.id} server={server} toggleServer={this.toggleServer} openServer={this.openServer} />
-              );
-            })}
-          </tbody>
-        </table>
+        <ul className="list-group">
+          {this.props.servers.map(server => {
+            return (
+              <ServerItem key={server.id} server={server} toggleServer={this.toggleServer} openServer={this.openServer} />
+            );
+          })}
+        </ul>
       </div>
     );
   }

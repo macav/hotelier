@@ -15,6 +15,23 @@ describe('api', () => {
     });
   });
 
+  describe('#watchServers', () => {
+    beforeEach(() => jest.useFakeTimers());
+
+    it('polls on servers', done => {
+      const servers = { server1: { status: 'running' } };
+      const callback = jest.fn();
+      jest.spyOn(api, 'getServers').mockReturnValue(Promise.resolve(servers));
+      api.watchServers(callback);
+      expect(setInterval).toHaveBeenCalledTimes(1);
+      jest.runOnlyPendingTimers();
+      process.nextTick(() => {
+        expect(callback).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
   describe('#sendCommand', () => {
     it('uses postData method to send the command', () => {
       jest.spyOn(api, 'postData');

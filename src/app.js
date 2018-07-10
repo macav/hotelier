@@ -9,20 +9,30 @@ class App extends Component {
     this.state = { loading: false, servers: [] };
   }
 
+  componentDidMount() {
+    this.loadServers();
+    HotelApi.watchServers(servers => {
+      this.serversLoaded(servers);
+    });
+  }
+
   loadServers = () => {
     this.setState({ loading: true });
     return HotelApi.getServers().then(servers => {
-      this.setState({ loading: false });
-      servers = Object.keys(servers).map(serverId => {
-        const server = servers[serverId];
-        return {
-          id: serverId,
-          status: server.status,
-        };
-      });
-      this.setState({ servers });
+      this.serversLoaded(servers);
     });
   };
+
+  serversLoaded = (servers) => {
+    servers = Object.keys(servers).map(serverId => {
+      const server = servers[serverId];
+      return {
+        id: serverId,
+        status: server.status,
+      };
+    });
+    this.setState({ loading: false, servers });
+  }
 
   updateServerStatus = (id, status) => {
     const servers = this.state.servers;
@@ -44,7 +54,7 @@ class App extends Component {
               <ServerList servers={servers} loadServers={this.loadServers} updateServerStatus={this.updateServerStatus}/>
             </div>
           </div>
-          <AppFooter reload={this.loadServers}/>
+          <AppFooter/>
         </div>
       </div>
     );

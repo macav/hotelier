@@ -32,40 +32,30 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <table>
-        <thead>
-                <tr>
-                        <th>
-                                Server
-                        </th>
-                        <th>
-                                Action
-                        </th>
-                </tr>
-        </thead>
-        <tbody>
-                <ServerItem
-                        openServer={[Function]}
-                        server={
-                                Object {
-                                        "id": "test-server-1",
-                                        "status": "running",
-                                      }
-                        }
-                        toggleServer={[Function]}
-                />
-                <ServerItem
-                        openServer={[Function]}
-                        server={
-                                Object {
-                                        "id": "test-server-2",
-                                        "status": "stopped",
-                                      }
-                        }
-                        toggleServer={[Function]}
-                />
-        </tbody>
-</table>,
+      "children": <ul
+        className="list-group"
+>
+        <ServerItem
+                openServer={[Function]}
+                server={
+                        Object {
+                                "id": "test-server-1",
+                                "status": "running",
+                              }
+                }
+                toggleServer={[Function]}
+        />
+        <ServerItem
+                openServer={[Function]}
+                server={
+                        Object {
+                                "id": "test-server-2",
+                                "status": "stopped",
+                              }
+                }
+                toggleServer={[Function]}
+        />
+</ul>,
     },
     "ref": null,
     "rendered": Object {
@@ -74,167 +64,65 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <thead>
-            <tr>
-                        <th>
-                                    Server
-                        </th>
-                        <th>
-                                    Action
-                        </th>
-            </tr>
-</thead>,
-          <tbody>
-            <ServerItem
-                        openServer={[Function]}
-                        server={
-                                    Object {
-                                                "id": "test-server-1",
-                                                "status": "running",
-                                              }
-                        }
-                        toggleServer={[Function]}
-            />
-            <ServerItem
-                        openServer={[Function]}
-                        server={
-                                    Object {
-                                                "id": "test-server-2",
-                                                "status": "stopped",
-                                              }
-                        }
-                        toggleServer={[Function]}
-            />
-</tbody>,
+          <ServerItem
+            openServer={[Function]}
+            server={
+                        Object {
+                                    "id": "test-server-1",
+                                    "status": "running",
+                                  }
+            }
+            toggleServer={[Function]}
+/>,
+          <ServerItem
+            openServer={[Function]}
+            server={
+                        Object {
+                                    "id": "test-server-2",
+                                    "status": "stopped",
+                                  }
+            }
+            toggleServer={[Function]}
+/>,
         ],
+        "className": "list-group",
       },
       "ref": null,
       "rendered": Array [
         Object {
           "instance": null,
-          "key": undefined,
-          "nodeType": "host",
+          "key": "test-server-1",
+          "nodeType": "class",
           "props": Object {
-            "children": <tr>
-              <th>
-                            Server
-              </th>
-              <th>
-                            Action
-              </th>
-</tr>,
+            "openServer": [Function],
+            "server": Object {
+              "id": "test-server-1",
+              "status": "running",
+            },
+            "toggleServer": [Function],
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <th>
-                  Server
-</th>,
-                <th>
-                  Action
-</th>,
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Server",
-                },
-                "ref": null,
-                "rendered": "Server",
-                "type": "th",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Action",
-                },
-                "ref": null,
-                "rendered": "Action",
-                "type": "th",
-              },
-            ],
-            "type": "tr",
-          },
-          "type": "thead",
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
-          "key": undefined,
-          "nodeType": "host",
+          "key": "test-server-2",
+          "nodeType": "class",
           "props": Object {
-            "children": Array [
-              <ServerItem
-                openServer={[Function]}
-                server={
-                                Object {
-                                                "id": "test-server-1",
-                                                "status": "running",
-                                              }
-                }
-                toggleServer={[Function]}
-/>,
-              <ServerItem
-                openServer={[Function]}
-                server={
-                                Object {
-                                                "id": "test-server-2",
-                                                "status": "stopped",
-                                              }
-                }
-                toggleServer={[Function]}
-/>,
-            ],
+            "openServer": [Function],
+            "server": Object {
+              "id": "test-server-2",
+              "status": "stopped",
+            },
+            "toggleServer": [Function],
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": "test-server-1",
-              "nodeType": "class",
-              "props": Object {
-                "openServer": [Function],
-                "server": Object {
-                  "id": "test-server-1",
-                  "status": "running",
-                },
-                "toggleServer": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": "test-server-2",
-              "nodeType": "class",
-              "props": Object {
-                "openServer": [Function],
-                "server": Object {
-                  "id": "test-server-2",
-                  "status": "stopped",
-                },
-                "toggleServer": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": "tbody",
+          "rendered": null,
+          "type": [Function],
         },
       ],
-      "type": "table",
+      "type": "ul",
     },
     "type": "div",
   },
@@ -244,40 +132,30 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <table>
-          <thead>
-                    <tr>
-                              <th>
-                                        Server
-                              </th>
-                              <th>
-                                        Action
-                              </th>
-                    </tr>
-          </thead>
-          <tbody>
-                    <ServerItem
-                              openServer={[Function]}
-                              server={
-                                        Object {
-                                                  "id": "test-server-1",
-                                                  "status": "running",
-                                                }
-                              }
-                              toggleServer={[Function]}
-                    />
-                    <ServerItem
-                              openServer={[Function]}
-                              server={
-                                        Object {
-                                                  "id": "test-server-2",
-                                                  "status": "stopped",
-                                                }
-                              }
-                              toggleServer={[Function]}
-                    />
-          </tbody>
-</table>,
+        "children": <ul
+          className="list-group"
+>
+          <ServerItem
+                    openServer={[Function]}
+                    server={
+                              Object {
+                                        "id": "test-server-1",
+                                        "status": "running",
+                                      }
+                    }
+                    toggleServer={[Function]}
+          />
+          <ServerItem
+                    openServer={[Function]}
+                    server={
+                              Object {
+                                        "id": "test-server-2",
+                                        "status": "stopped",
+                                      }
+                    }
+                    toggleServer={[Function]}
+          />
+</ul>,
       },
       "ref": null,
       "rendered": Object {
@@ -286,167 +164,65 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <thead>
-              <tr>
-                            <th>
-                                          Server
-                            </th>
-                            <th>
-                                          Action
-                            </th>
-              </tr>
-</thead>,
-            <tbody>
-              <ServerItem
-                            openServer={[Function]}
-                            server={
-                                          Object {
-                                                        "id": "test-server-1",
-                                                        "status": "running",
-                                                      }
-                            }
-                            toggleServer={[Function]}
-              />
-              <ServerItem
-                            openServer={[Function]}
-                            server={
-                                          Object {
-                                                        "id": "test-server-2",
-                                                        "status": "stopped",
-                                                      }
-                            }
-                            toggleServer={[Function]}
-              />
-</tbody>,
+            <ServerItem
+              openServer={[Function]}
+              server={
+                            Object {
+                                          "id": "test-server-1",
+                                          "status": "running",
+                                        }
+              }
+              toggleServer={[Function]}
+/>,
+            <ServerItem
+              openServer={[Function]}
+              server={
+                            Object {
+                                          "id": "test-server-2",
+                                          "status": "stopped",
+                                        }
+              }
+              toggleServer={[Function]}
+/>,
           ],
+          "className": "list-group",
         },
         "ref": null,
         "rendered": Array [
           Object {
             "instance": null,
-            "key": undefined,
-            "nodeType": "host",
+            "key": "test-server-1",
+            "nodeType": "class",
             "props": Object {
-              "children": <tr>
-                <th>
-                                Server
-                </th>
-                <th>
-                                Action
-                </th>
-</tr>,
+              "openServer": [Function],
+              "server": Object {
+                "id": "test-server-1",
+                "status": "running",
+              },
+              "toggleServer": [Function],
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <th>
-                    Server
-</th>,
-                  <th>
-                    Action
-</th>,
-                ],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Server",
-                  },
-                  "ref": null,
-                  "rendered": "Server",
-                  "type": "th",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Action",
-                  },
-                  "ref": null,
-                  "rendered": "Action",
-                  "type": "th",
-                },
-              ],
-              "type": "tr",
-            },
-            "type": "thead",
+            "rendered": null,
+            "type": [Function],
           },
           Object {
             "instance": null,
-            "key": undefined,
-            "nodeType": "host",
+            "key": "test-server-2",
+            "nodeType": "class",
             "props": Object {
-              "children": Array [
-                <ServerItem
-                  openServer={[Function]}
-                  server={
-                                    Object {
-                                                      "id": "test-server-1",
-                                                      "status": "running",
-                                                    }
-                  }
-                  toggleServer={[Function]}
-/>,
-                <ServerItem
-                  openServer={[Function]}
-                  server={
-                                    Object {
-                                                      "id": "test-server-2",
-                                                      "status": "stopped",
-                                                    }
-                  }
-                  toggleServer={[Function]}
-/>,
-              ],
+              "openServer": [Function],
+              "server": Object {
+                "id": "test-server-2",
+                "status": "stopped",
+              },
+              "toggleServer": [Function],
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": "test-server-1",
-                "nodeType": "class",
-                "props": Object {
-                  "openServer": [Function],
-                  "server": Object {
-                    "id": "test-server-1",
-                    "status": "running",
-                  },
-                  "toggleServer": [Function],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": "test-server-2",
-                "nodeType": "class",
-                "props": Object {
-                  "openServer": [Function],
-                  "server": Object {
-                    "id": "test-server-2",
-                    "status": "stopped",
-                  },
-                  "toggleServer": [Function],
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": "tbody",
+            "rendered": null,
+            "type": [Function],
           },
         ],
-        "type": "table",
+        "type": "ul",
       },
       "type": "div",
     },

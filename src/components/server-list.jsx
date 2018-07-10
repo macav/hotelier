@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ServerItem from './server-item';
 import HotelApi, { STOPPED, RUNNING } from '../api';
 import utils from '../utils';
 
 export default class ServerList extends Component {
-  componentDidMount() {
-    this.props.loadServers();
+  static propTypes = {
+    updateServerStatus: PropTypes.func,
+    loadServers: PropTypes.func,
+    servers: PropTypes.array,
   }
-
   startServer = (id) => {
     HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, RUNNING));
   }
 
   stopServer = (id) => {
     HotelApi.stopServer(id).then(() => this.props.updateServerStatus(id, STOPPED));
+  }
+
+  restartServer = async(server) => {
+    await HotelApi.stopServer(server.id);
+    await HotelApi.startServer(server.id);
   }
 
   toggleServer = (server) => {
@@ -32,21 +39,14 @@ export default class ServerList extends Component {
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Server</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.servers.map(server => {
-              return (
-                <ServerItem key={server.id} server={server} toggleServer={this.toggleServer} openServer={this.openServer} />
-              );
-            })}
-          </tbody>
-        </table>
+        <ul className="list-group">
+          {this.props.servers.map(server => {
+            return (
+              <ServerItem key={server.id} server={server} toggleServer={this.toggleServer} openServer={this.openServer}
+                restartServer={this.restartServer}/>
+            );
+          })}
+        </ul>
       </div>
     );
   }

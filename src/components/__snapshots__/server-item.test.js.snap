@@ -25,20 +25,41 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <td
+        <div
+          className="pull-left server-name server-name--running"
           onClick={[Function]}
 >
           test-server-1
-</td>,
-        <td>
+</div>,
+        <div
+          className="pull-right"
+>
           <button
-                    className="btn btn-negative"
+                    className="btn btn-default mr-1 d-inline"
                     onClick={[Function]}
           >
-                    Stop
+                    <span
+                              className="icon icon-arrows-ccw"
+                    />
           </button>
-</td>,
+          <button
+                    aria-label="toggle status"
+                    className="animated btn btn-negative text-white"
+                    onClick={[Function]}
+                    type="button"
+          >
+                    <span
+                              className="tcon-visuallyhidden"
+                    >
+                              toggle status
+                    </span>
+                    <span
+                              className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                    />
+          </button>
+</div>,
       ],
+      "className": "list-group-item server-item",
     },
     "ref": null,
     "rendered": Array [
@@ -48,42 +69,125 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "test-server-1",
+          "className": "pull-left server-name server-name--running",
           "onClick": [Function],
         },
         "ref": null,
         "rendered": "test-server-1",
-        "type": "td",
+        "type": "div",
       },
       Object {
         "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <button
-            className="btn btn-negative"
-            onClick={[Function]}
+          "children": Array [
+            <button
+              className="btn btn-default mr-1 d-inline"
+              onClick={[Function]}
 >
-            Stop
+              <span
+                            className="icon icon-arrows-ccw"
+              />
 </button>,
+            <button
+              aria-label="toggle status"
+              className="animated btn btn-negative text-white"
+              onClick={[Function]}
+              type="button"
+>
+              <span
+                            className="tcon-visuallyhidden"
+              >
+                            toggle status
+              </span>
+              <span
+                            className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+              />
+</button>,
+          ],
+          "className": "pull-right",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Stop",
-            "className": "btn btn-negative",
-            "onClick": [Function],
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <span
+                className="icon icon-arrows-ccw"
+/>,
+              "className": "btn btn-default mr-1 d-inline",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "icon icon-arrows-ccw",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "span",
+            },
+            "type": "button",
           },
-          "ref": null,
-          "rendered": "Stop",
-          "type": "button",
-        },
-        "type": "td",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "aria-label": "toggle status",
+              "children": Array [
+                <span
+                  className="tcon-visuallyhidden"
+>
+                  toggle status
+</span>,
+                <span
+                  className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+/>,
+              ],
+              "className": "animated btn btn-negative text-white",
+              "onClick": [Function],
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "toggle status",
+                  "className": "tcon-visuallyhidden",
+                },
+                "ref": null,
+                "rendered": "toggle status",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "className": "tcon tcon-remove tcon-remove--chevron-right btn-negative text-white",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "span",
+              },
+            ],
+            "type": "button",
+          },
+        ],
+        "type": "div",
       },
     ],
-    "type": "tr",
+    "type": "li",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -92,20 +196,41 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <td
+          <div
+            className="pull-left server-name server-name--running"
             onClick={[Function]}
 >
             test-server-1
-</td>,
-          <td>
+</div>,
+          <div
+            className="pull-right"
+>
             <button
-                        className="btn btn-negative"
+                        className="btn btn-default mr-1 d-inline"
                         onClick={[Function]}
             >
-                        Stop
+                        <span
+                                    className="icon icon-arrows-ccw"
+                        />
             </button>
-</td>,
+            <button
+                        aria-label="toggle status"
+                        className="animated btn btn-negative text-white"
+                        onClick={[Function]}
+                        type="button"
+            >
+                        <span
+                                    className="tcon-visuallyhidden"
+                        >
+                                    toggle status
+                        </span>
+                        <span
+                                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                        />
+            </button>
+</div>,
         ],
+        "className": "list-group-item server-item",
       },
       "ref": null,
       "rendered": Array [
@@ -115,42 +240,125 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "test-server-1",
+            "className": "pull-left server-name server-name--running",
             "onClick": [Function],
           },
           "ref": null,
           "rendered": "test-server-1",
-          "type": "td",
+          "type": "div",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <button
-              className="btn btn-negative"
-              onClick={[Function]}
+            "children": Array [
+              <button
+                className="btn btn-default mr-1 d-inline"
+                onClick={[Function]}
 >
-              Stop
+                <span
+                                className="icon icon-arrows-ccw"
+                />
 </button>,
+              <button
+                aria-label="toggle status"
+                className="animated btn btn-negative text-white"
+                onClick={[Function]}
+                type="button"
+>
+                <span
+                                className="tcon-visuallyhidden"
+                >
+                                toggle status
+                </span>
+                <span
+                                className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                />
+</button>,
+            ],
+            "className": "pull-right",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Stop",
-              "className": "btn btn-negative",
-              "onClick": [Function],
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <span
+                  className="icon icon-arrows-ccw"
+/>,
+                "className": "btn btn-default mr-1 d-inline",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "className": "icon icon-arrows-ccw",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "span",
+              },
+              "type": "button",
             },
-            "ref": null,
-            "rendered": "Stop",
-            "type": "button",
-          },
-          "type": "td",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "aria-label": "toggle status",
+                "children": Array [
+                  <span
+                    className="tcon-visuallyhidden"
+>
+                    toggle status
+</span>,
+                  <span
+                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+/>,
+                ],
+                "className": "animated btn btn-negative text-white",
+                "onClick": [Function],
+                "type": "button",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "toggle status",
+                    "className": "tcon-visuallyhidden",
+                  },
+                  "ref": null,
+                  "rendered": "toggle status",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "tcon tcon-remove tcon-remove--chevron-right btn-negative text-white",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "span",
+                },
+              ],
+              "type": "button",
+            },
+          ],
+          "type": "div",
         },
       ],
-      "type": "tr",
+      "type": "li",
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -188,20 +396,41 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <td
+        <div
+          className="pull-left server-name server-name--stopped"
           onClick={[Function]}
 >
           test-server-2
-</td>,
-        <td>
+</div>,
+        <div
+          className="pull-right"
+>
           <button
-                    className="btn btn-positive"
+                    className="btn btn-default mr-1 d-none"
                     onClick={[Function]}
           >
-                    Start
+                    <span
+                              className="icon icon-arrows-ccw"
+                    />
           </button>
-</td>,
+          <button
+                    aria-label="toggle status"
+                    className="animated btn tcon-transform btn-default"
+                    onClick={[Function]}
+                    type="button"
+          >
+                    <span
+                              className="tcon-visuallyhidden"
+                    >
+                              toggle status
+                    </span>
+                    <span
+                              className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                    />
+          </button>
+</div>,
       ],
+      "className": "list-group-item server-item",
     },
     "ref": null,
     "rendered": Array [
@@ -211,42 +440,125 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "test-server-2",
+          "className": "pull-left server-name server-name--stopped",
           "onClick": [Function],
         },
         "ref": null,
         "rendered": "test-server-2",
-        "type": "td",
+        "type": "div",
       },
       Object {
         "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <button
-            className="btn btn-positive"
-            onClick={[Function]}
+          "children": Array [
+            <button
+              className="btn btn-default mr-1 d-none"
+              onClick={[Function]}
 >
-            Start
+              <span
+                            className="icon icon-arrows-ccw"
+              />
 </button>,
+            <button
+              aria-label="toggle status"
+              className="animated btn tcon-transform btn-default"
+              onClick={[Function]}
+              type="button"
+>
+              <span
+                            className="tcon-visuallyhidden"
+              >
+                            toggle status
+              </span>
+              <span
+                            className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+              />
+</button>,
+          ],
+          "className": "pull-right",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Start",
-            "className": "btn btn-positive",
-            "onClick": [Function],
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <span
+                className="icon icon-arrows-ccw"
+/>,
+              "className": "btn btn-default mr-1 d-none",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "icon icon-arrows-ccw",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "span",
+            },
+            "type": "button",
           },
-          "ref": null,
-          "rendered": "Start",
-          "type": "button",
-        },
-        "type": "td",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "aria-label": "toggle status",
+              "children": Array [
+                <span
+                  className="tcon-visuallyhidden"
+>
+                  toggle status
+</span>,
+                <span
+                  className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+/>,
+              ],
+              "className": "animated btn tcon-transform btn-default",
+              "onClick": [Function],
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "toggle status",
+                  "className": "tcon-visuallyhidden",
+                },
+                "ref": null,
+                "rendered": "toggle status",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "className": "tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "span",
+              },
+            ],
+            "type": "button",
+          },
+        ],
+        "type": "div",
       },
     ],
-    "type": "tr",
+    "type": "li",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -255,20 +567,41 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <td
+          <div
+            className="pull-left server-name server-name--stopped"
             onClick={[Function]}
 >
             test-server-2
-</td>,
-          <td>
+</div>,
+          <div
+            className="pull-right"
+>
             <button
-                        className="btn btn-positive"
+                        className="btn btn-default mr-1 d-none"
                         onClick={[Function]}
             >
-                        Start
+                        <span
+                                    className="icon icon-arrows-ccw"
+                        />
             </button>
-</td>,
+            <button
+                        aria-label="toggle status"
+                        className="animated btn tcon-transform btn-default"
+                        onClick={[Function]}
+                        type="button"
+            >
+                        <span
+                                    className="tcon-visuallyhidden"
+                        >
+                                    toggle status
+                        </span>
+                        <span
+                                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                        />
+            </button>
+</div>,
         ],
+        "className": "list-group-item server-item",
       },
       "ref": null,
       "rendered": Array [
@@ -278,42 +611,125 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "test-server-2",
+            "className": "pull-left server-name server-name--stopped",
             "onClick": [Function],
           },
           "ref": null,
           "rendered": "test-server-2",
-          "type": "td",
+          "type": "div",
         },
         Object {
           "instance": null,
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <button
-              className="btn btn-positive"
-              onClick={[Function]}
+            "children": Array [
+              <button
+                className="btn btn-default mr-1 d-none"
+                onClick={[Function]}
 >
-              Start
+                <span
+                                className="icon icon-arrows-ccw"
+                />
 </button>,
+              <button
+                aria-label="toggle status"
+                className="animated btn tcon-transform btn-default"
+                onClick={[Function]}
+                type="button"
+>
+                <span
+                                className="tcon-visuallyhidden"
+                >
+                                toggle status
+                </span>
+                <span
+                                className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                />
+</button>,
+            ],
+            "className": "pull-right",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Start",
-              "className": "btn btn-positive",
-              "onClick": [Function],
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <span
+                  className="icon icon-arrows-ccw"
+/>,
+                "className": "btn btn-default mr-1 d-none",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "className": "icon icon-arrows-ccw",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "span",
+              },
+              "type": "button",
             },
-            "ref": null,
-            "rendered": "Start",
-            "type": "button",
-          },
-          "type": "td",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "aria-label": "toggle status",
+                "children": Array [
+                  <span
+                    className="tcon-visuallyhidden"
+>
+                    toggle status
+</span>,
+                  <span
+                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+/>,
+                ],
+                "className": "animated btn tcon-transform btn-default",
+                "onClick": [Function],
+                "type": "button",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "toggle status",
+                    "className": "tcon-visuallyhidden",
+                  },
+                  "ref": null,
+                  "rendered": "toggle status",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "span",
+                },
+              ],
+              "type": "button",
+            },
+          ],
+          "type": "div",
         },
       ],
-      "type": "tr",
+      "type": "li",
     },
   ],
   Symbol(enzyme.__options__): Object {

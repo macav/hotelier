@@ -1,4 +1,5 @@
 export const RUNNING = 'running';
+export const RESTARTING = 'restarting';
 export const STOPPED = 'stopped';
 export const CRASHED = 'crashed';
 
@@ -14,7 +15,7 @@ export default class HotelApi {
   };
 
   static watchServers = (cb) => {
-    setInterval(() => HotelApi.getServers().then(data => cb(data)), 1000);
+    setInterval(() => HotelApi.getServers().then(data => cb(data)), 3000);
   }
 
   static getHotelUrl = () => {

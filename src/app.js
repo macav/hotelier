@@ -54,7 +54,7 @@ class App extends Component {
               <ServerList servers={servers} loadServers={this.loadServers} updateServerStatus={this.updateServerStatus}/>
             </div>
           </div>
-          <AppFooter reload={this.loadServers}/>
+          <AppFooter/>
         </div>
       </div>
     );

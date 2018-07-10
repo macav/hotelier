@@ -24,50 +24,84 @@ exports[`loaded 1`] = `
         className="pane"
       >
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Server
-                </th>
-                <th>
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td
+          <ul
+            className="list-group"
+          >
+            <li
+              className="list-group-item server-item"
+            >
+              <div
+                className="pull-left server-name server-name--running"
+                onClick={[Function]}
+              >
+                server1
+              </div>
+              <div
+                className="pull-right"
+              >
+                <button
+                  className="btn btn-default mr-1 d-inline"
                   onClick={[Function]}
                 >
-                  server1
-                </td>
-                <td>
-                  <button
-                    className="btn btn-negative"
-                    onClick={[Function]}
+                  <span
+                    className="icon icon-arrows-ccw"
+                  />
+                </button>
+                <button
+                  aria-label="toggle status"
+                  className="animated btn btn-negative text-white"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    className="tcon-visuallyhidden"
                   >
-                    Stop
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td
+                    toggle status
+                  </span>
+                  <span
+                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                  />
+                </button>
+              </div>
+            </li>
+            <li
+              className="list-group-item server-item"
+            >
+              <div
+                className="pull-left server-name server-name--stopped"
+                onClick={[Function]}
+              >
+                server2
+              </div>
+              <div
+                className="pull-right"
+              >
+                <button
+                  className="btn btn-default mr-1 d-none"
                   onClick={[Function]}
                 >
-                  server2
-                </td>
-                <td>
-                  <button
-                    className="btn btn-positive"
-                    onClick={[Function]}
+                  <span
+                    className="icon icon-arrows-ccw"
+                  />
+                </button>
+                <button
+                  aria-label="toggle status"
+                  className="animated btn tcon-transform btn-default"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    className="tcon-visuallyhidden"
                   >
-                    Start
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    toggle status
+                  </span>
+                  <span
+                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                  />
+                </button>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -145,19 +179,9 @@ exports[`loading 1`] = `
           Loading…
         </div>
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Server
-                </th>
-                <th>
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody />
-          </table>
+          <ul
+            className="list-group"
+          />
         </div>
       </div>
     </div>

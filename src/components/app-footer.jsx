@@ -7,7 +7,6 @@ export default class AppFooter extends React.Component {
   }
 
   render() {
-    const { reload } = this.props;
     return (
       <footer className="toolbar toolbar-footer">
         <div className="toolbar-actions pull-left">
@@ -15,9 +14,6 @@ export default class AppFooter extends React.Component {
         </div>
         <div className="toolbar-actions pull-right">
           <div className="btn-group">
-            <button className="btn btn-default" onClick={reload}>
-              <span className="icon icon-arrows-ccw" title="Refresh"></span>
-            </button>
             <button className="btn btn-default" id="close-app" onClick={() => window.close()}>
               <span className="icon icon-cancel" title="Quit"></span>
             </button>

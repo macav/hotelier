@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RUNNING, RESTARTING } from '../api';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 export default class ServerItem extends React.Component {
   static propTypes = {
@@ -55,16 +55,11 @@ export default class ServerItem extends React.Component {
         </div>
         <div className="pull-right">
           <div className="d-inline">
-            <CSSTransitionGroup
-              transitionName="server-item"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}>
-              {[RUNNING, RESTARTING].includes(server.status) && (
-                <button className={`btn btn-default mr-1`} onClick={() => this.restartServer(server)}>
-                  <span className={`icon icon-arrows-ccw ${server.status === RESTARTING ? 'spin' : ''}`}></span>
-                </button>
-              )}
-            </CSSTransitionGroup>
+            <CSSTransition in={[RUNNING, RESTARTING].includes(server.status)} unmountOnExit classNames="server-item" timeout={{ enter: 350, exit: 350 }}>
+              <button className="btn btn-default mr-1 restart-button" onClick={() => this.restartServer(server)}>
+                <span className={`icon icon-arrows-ccw ${server.status === RESTARTING ? 'spin' : ''}`}></span>
+              </button>
+            </CSSTransition>
           </div>
           <div className="d-inline">
             <button type="button" className={`btn ${this.actionClassName(server.status)}`} onClick={() => toggleServer(server)}>

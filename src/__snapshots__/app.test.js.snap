@@ -39,29 +39,22 @@ exports[`loaded 1`] = `
               <div
                 className="pull-right"
               >
-                <button
-                  className="btn btn-default mr-1 d-inline"
-                  onClick={[Function]}
+                <div
+                  className="d-inline"
+                />
+                <div
+                  className="d-inline"
                 >
-                  <span
-                    className="icon icon-arrows-ccw"
-                  />
-                </button>
-                <button
-                  aria-label="toggle status"
-                  className="animated btn btn-negative text-white"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  <span
-                    className="tcon-visuallyhidden"
+                  <button
+                    className="btn btn-negative text-white"
+                    onClick={[Function]}
+                    type="button"
                   >
-                    toggle status
-                  </span>
-                  <span
-                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
-                  />
-                </button>
+                    <span
+                      className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                    />
+                  </button>
+                </div>
               </div>
             </li>
             <li
@@ -76,29 +69,22 @@ exports[`loaded 1`] = `
               <div
                 className="pull-right"
               >
-                <button
-                  className="btn btn-default mr-1 d-none"
-                  onClick={[Function]}
+                <div
+                  className="d-inline"
+                />
+                <div
+                  className="d-inline"
                 >
-                  <span
-                    className="icon icon-arrows-ccw"
-                  />
-                </button>
-                <button
-                  aria-label="toggle status"
-                  className="animated btn tcon-transform btn-default"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  <span
-                    className="tcon-visuallyhidden"
+                  <button
+                    className="btn tcon-transform btn-default"
+                    onClick={[Function]}
+                    type="button"
                   >
-                    toggle status
-                  </span>
-                  <span
-                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
-                  />
-                </button>
+                    <span
+                      className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                    />
+                  </button>
+                </div>
               </div>
             </li>
           </ul>
@@ -124,15 +110,6 @@ exports[`loaded 1`] = `
         <div
           className="btn-group"
         >
-          <button
-            className="btn btn-default"
-            onClick={[Function]}
-          >
-            <span
-              className="icon icon-arrows-ccw"
-              title="Refresh"
-            />
-          </button>
           <button
             className="btn btn-default"
             id="close-app"
@@ -204,15 +181,6 @@ exports[`loading 1`] = `
         <div
           className="btn-group"
         >
-          <button
-            className="btn btn-default"
-            onClick={[Function]}
-          >
-            <span
-              className="icon icon-arrows-ccw"
-              title="Refresh"
-            />
-          </button>
           <button
             className="btn btn-default"
             id="close-app"

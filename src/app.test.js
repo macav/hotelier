@@ -5,6 +5,8 @@ import renderer from 'react-test-renderer';
 import mockFetch from 'jest-fetch-mock';
 import HotelApi from './api';
 
+jest.mock('react-transition-group');
+
 describe('App', () => {
   function mockSuccessfulResponse() {
     mockFetch.mockResponse('{"server1":{"status":"running"},"server2":{"status":"stopped"}}');
@@ -61,7 +63,9 @@ describe('App', () => {
   });
 
   describe('#updateServerStatus', () => {
-    beforeEach(() => mockSuccessfulResponse());
+    beforeEach(() => {
+      mockSuccessfulResponse();
+    });
 
     it('updates the corresponding server with the new status', done => {
       const instance = renderer.create(<App />).getInstance();

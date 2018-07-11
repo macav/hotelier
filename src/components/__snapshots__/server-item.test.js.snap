@@ -34,29 +34,43 @@ ShallowWrapper {
         <div
           className="pull-right"
 >
-          <button
-                    className="btn btn-default mr-1 d-inline"
-                    onClick={[Function]}
+          <div
+                    className="d-inline"
           >
-                    <span
-                              className="icon icon-arrows-ccw"
-                    />
-          </button>
-          <button
-                    aria-label="toggle status"
-                    className="animated btn btn-negative text-white"
-                    onClick={[Function]}
-                    type="button"
-          >
-                    <span
-                              className="tcon-visuallyhidden"
+                    <CSSTransition
+                              classNames="server-item"
+                              in={true}
+                              timeout={
+                                        Object {
+                                                  "enter": 350,
+                                                  "exit": 350,
+                                                }
+                              }
+                              unmountOnExit={true}
                     >
-                              toggle status
-                    </span>
-                    <span
-                              className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
-                    />
-          </button>
+                              <button
+                                        className="btn btn-default mr-1 restart-button"
+                                        onClick={[Function]}
+                              >
+                                        <span
+                                                  className="icon icon-arrows-ccw "
+                                        />
+                              </button>
+                    </CSSTransition>
+          </div>
+          <div
+                    className="d-inline"
+          >
+                    <button
+                              className="btn btn-negative text-white"
+                              onClick={[Function]}
+                              type="button"
+                    >
+                              <span
+                                        className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                              />
+                    </button>
+          </div>
 </div>,
       ],
       "className": "list-group-item server-item",
@@ -82,29 +96,43 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <button
-              className="btn btn-default mr-1 d-inline"
-              onClick={[Function]}
+            <div
+              className="d-inline"
 >
-              <span
-                            className="icon icon-arrows-ccw"
-              />
-</button>,
-            <button
-              aria-label="toggle status"
-              className="animated btn btn-negative text-white"
-              onClick={[Function]}
-              type="button"
->
-              <span
-                            className="tcon-visuallyhidden"
+              <CSSTransition
+                            classNames="server-item"
+                            in={true}
+                            timeout={
+                                          Object {
+                                                        "enter": 350,
+                                                        "exit": 350,
+                                                      }
+                            }
+                            unmountOnExit={true}
               >
-                            toggle status
-              </span>
-              <span
-                            className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
-              />
-</button>,
+                            <button
+                                          className="btn btn-default mr-1 restart-button"
+                                          onClick={[Function]}
+                            >
+                                          <span
+                                                        className="icon icon-arrows-ccw "
+                                          />
+                            </button>
+              </CSSTransition>
+</div>,
+            <div
+              className="d-inline"
+>
+              <button
+                            className="btn btn-negative text-white"
+                            onClick={[Function]}
+                            type="button"
+              >
+                            <span
+                                          className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                            />
+              </button>
+</div>,
           ],
           "className": "pull-right",
         },
@@ -115,11 +143,95 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <span
-                className="icon icon-arrows-ccw"
+              "children": <CSSTransition
+                classNames="server-item"
+                in={true}
+                timeout={
+                                Object {
+                                                "enter": 350,
+                                                "exit": 350,
+                                              }
+                }
+                unmountOnExit={true}
+>
+                <button
+                                className="btn btn-default mr-1 restart-button"
+                                onClick={[Function]}
+                >
+                                <span
+                                                className="icon icon-arrows-ccw "
+                                />
+                </button>
+</CSSTransition>,
+              "className": "d-inline",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <button
+                  className="btn btn-default mr-1 restart-button"
+                  onClick={[Function]}
+>
+                  <span
+                                    className="icon icon-arrows-ccw "
+                  />
+</button>,
+                "classNames": "server-item",
+                "in": true,
+                "timeout": Object {
+                  "enter": 350,
+                  "exit": 350,
+                },
+                "unmountOnExit": true,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <span
+                    className="icon icon-arrows-ccw "
 />,
-              "className": "btn btn-default mr-1 d-inline",
-              "onClick": [Function],
+                  "className": "btn btn-default mr-1 restart-button",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "icon icon-arrows-ccw ",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "span",
+                },
+                "type": "button",
+              },
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <button
+                className="btn btn-negative text-white"
+                onClick={[Function]}
+                type="button"
+>
+                <span
+                                className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                />
+</button>,
+              "className": "d-inline",
             },
             "ref": null,
             "rendered": Object {
@@ -127,49 +239,15 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "className": "icon icon-arrows-ccw",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "span",
-            },
-            "type": "button",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "aria-label": "toggle status",
-              "children": Array [
-                <span
-                  className="tcon-visuallyhidden"
->
-                  toggle status
-</span>,
-                <span
+                "children": <span
                   className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
 />,
-              ],
-              "className": "animated btn btn-negative text-white",
-              "onClick": [Function],
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "toggle status",
-                  "className": "tcon-visuallyhidden",
-                },
-                "ref": null,
-                "rendered": "toggle status",
-                "type": "span",
+                "className": "btn btn-negative text-white",
+                "onClick": [Function],
+                "type": "button",
               },
-              Object {
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
@@ -180,8 +258,9 @@ ShallowWrapper {
                 "rendered": null,
                 "type": "span",
               },
-            ],
-            "type": "button",
+              "type": "button",
+            },
+            "type": "div",
           },
         ],
         "type": "div",
@@ -205,29 +284,43 @@ ShallowWrapper {
           <div
             className="pull-right"
 >
-            <button
-                        className="btn btn-default mr-1 d-inline"
-                        onClick={[Function]}
+            <div
+                        className="d-inline"
             >
-                        <span
-                                    className="icon icon-arrows-ccw"
-                        />
-            </button>
-            <button
-                        aria-label="toggle status"
-                        className="animated btn btn-negative text-white"
-                        onClick={[Function]}
-                        type="button"
-            >
-                        <span
-                                    className="tcon-visuallyhidden"
+                        <CSSTransition
+                                    classNames="server-item"
+                                    in={true}
+                                    timeout={
+                                                Object {
+                                                            "enter": 350,
+                                                            "exit": 350,
+                                                          }
+                                    }
+                                    unmountOnExit={true}
                         >
-                                    toggle status
-                        </span>
-                        <span
-                                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
-                        />
-            </button>
+                                    <button
+                                                className="btn btn-default mr-1 restart-button"
+                                                onClick={[Function]}
+                                    >
+                                                <span
+                                                            className="icon icon-arrows-ccw "
+                                                />
+                                    </button>
+                        </CSSTransition>
+            </div>
+            <div
+                        className="d-inline"
+            >
+                        <button
+                                    className="btn btn-negative text-white"
+                                    onClick={[Function]}
+                                    type="button"
+                        >
+                                    <span
+                                                className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                                    />
+                        </button>
+            </div>
 </div>,
         ],
         "className": "list-group-item server-item",
@@ -253,29 +346,43 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <button
-                className="btn btn-default mr-1 d-inline"
-                onClick={[Function]}
+              <div
+                className="d-inline"
 >
-                <span
-                                className="icon icon-arrows-ccw"
-                />
-</button>,
-              <button
-                aria-label="toggle status"
-                className="animated btn btn-negative text-white"
-                onClick={[Function]}
-                type="button"
->
-                <span
-                                className="tcon-visuallyhidden"
+                <CSSTransition
+                                classNames="server-item"
+                                in={true}
+                                timeout={
+                                                Object {
+                                                                "enter": 350,
+                                                                "exit": 350,
+                                                              }
+                                }
+                                unmountOnExit={true}
                 >
-                                toggle status
-                </span>
-                <span
-                                className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
-                />
-</button>,
+                                <button
+                                                className="btn btn-default mr-1 restart-button"
+                                                onClick={[Function]}
+                                >
+                                                <span
+                                                                className="icon icon-arrows-ccw "
+                                                />
+                                </button>
+                </CSSTransition>
+</div>,
+              <div
+                className="d-inline"
+>
+                <button
+                                className="btn btn-negative text-white"
+                                onClick={[Function]}
+                                type="button"
+                >
+                                <span
+                                                className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                                />
+                </button>
+</div>,
             ],
             "className": "pull-right",
           },
@@ -286,11 +393,95 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": <span
-                  className="icon icon-arrows-ccw"
+                "children": <CSSTransition
+                  classNames="server-item"
+                  in={true}
+                  timeout={
+                                    Object {
+                                                      "enter": 350,
+                                                      "exit": 350,
+                                                    }
+                  }
+                  unmountOnExit={true}
+>
+                  <button
+                                    className="btn btn-default mr-1 restart-button"
+                                    onClick={[Function]}
+                  >
+                                    <span
+                                                      className="icon icon-arrows-ccw "
+                                    />
+                  </button>
+</CSSTransition>,
+                "className": "d-inline",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <button
+                    className="btn btn-default mr-1 restart-button"
+                    onClick={[Function]}
+>
+                    <span
+                                        className="icon icon-arrows-ccw "
+                    />
+</button>,
+                  "classNames": "server-item",
+                  "in": true,
+                  "timeout": Object {
+                    "enter": 350,
+                    "exit": 350,
+                  },
+                  "unmountOnExit": true,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <span
+                      className="icon icon-arrows-ccw "
 />,
-                "className": "btn btn-default mr-1 d-inline",
-                "onClick": [Function],
+                    "className": "btn btn-default mr-1 restart-button",
+                    "onClick": [Function],
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "icon icon-arrows-ccw ",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "span",
+                  },
+                  "type": "button",
+                },
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <button
+                  className="btn btn-negative text-white"
+                  onClick={[Function]}
+                  type="button"
+>
+                  <span
+                                    className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
+                  />
+</button>,
+                "className": "d-inline",
               },
               "ref": null,
               "rendered": Object {
@@ -298,49 +489,15 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "className": "icon icon-arrows-ccw",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "span",
-              },
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "aria-label": "toggle status",
-                "children": Array [
-                  <span
-                    className="tcon-visuallyhidden"
->
-                    toggle status
-</span>,
-                  <span
+                  "children": <span
                     className="tcon tcon-remove tcon-remove--chevron-right btn-negative text-white"
 />,
-                ],
-                "className": "animated btn btn-negative text-white",
-                "onClick": [Function],
-                "type": "button",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "toggle status",
-                    "className": "tcon-visuallyhidden",
-                  },
-                  "ref": null,
-                  "rendered": "toggle status",
-                  "type": "span",
+                  "className": "btn btn-negative text-white",
+                  "onClick": [Function],
+                  "type": "button",
                 },
-                Object {
+                "ref": null,
+                "rendered": Object {
                   "instance": null,
                   "key": undefined,
                   "nodeType": "host",
@@ -351,8 +508,9 @@ ShallowWrapper {
                   "rendered": null,
                   "type": "span",
                 },
-              ],
-              "type": "button",
+                "type": "button",
+              },
+              "type": "div",
             },
           ],
           "type": "div",
@@ -405,29 +563,43 @@ ShallowWrapper {
         <div
           className="pull-right"
 >
-          <button
-                    className="btn btn-default mr-1 d-none"
-                    onClick={[Function]}
+          <div
+                    className="d-inline"
           >
-                    <span
-                              className="icon icon-arrows-ccw"
-                    />
-          </button>
-          <button
-                    aria-label="toggle status"
-                    className="animated btn tcon-transform btn-default"
-                    onClick={[Function]}
-                    type="button"
-          >
-                    <span
-                              className="tcon-visuallyhidden"
+                    <CSSTransition
+                              classNames="server-item"
+                              in={false}
+                              timeout={
+                                        Object {
+                                                  "enter": 350,
+                                                  "exit": 350,
+                                                }
+                              }
+                              unmountOnExit={true}
                     >
-                              toggle status
-                    </span>
-                    <span
-                              className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
-                    />
-          </button>
+                              <button
+                                        className="btn btn-default mr-1 restart-button"
+                                        onClick={[Function]}
+                              >
+                                        <span
+                                                  className="icon icon-arrows-ccw "
+                                        />
+                              </button>
+                    </CSSTransition>
+          </div>
+          <div
+                    className="d-inline"
+          >
+                    <button
+                              className="btn tcon-transform btn-default"
+                              onClick={[Function]}
+                              type="button"
+                    >
+                              <span
+                                        className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                              />
+                    </button>
+          </div>
 </div>,
       ],
       "className": "list-group-item server-item",
@@ -453,29 +625,43 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <button
-              className="btn btn-default mr-1 d-none"
-              onClick={[Function]}
+            <div
+              className="d-inline"
 >
-              <span
-                            className="icon icon-arrows-ccw"
-              />
-</button>,
-            <button
-              aria-label="toggle status"
-              className="animated btn tcon-transform btn-default"
-              onClick={[Function]}
-              type="button"
->
-              <span
-                            className="tcon-visuallyhidden"
+              <CSSTransition
+                            classNames="server-item"
+                            in={false}
+                            timeout={
+                                          Object {
+                                                        "enter": 350,
+                                                        "exit": 350,
+                                                      }
+                            }
+                            unmountOnExit={true}
               >
-                            toggle status
-              </span>
-              <span
-                            className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
-              />
-</button>,
+                            <button
+                                          className="btn btn-default mr-1 restart-button"
+                                          onClick={[Function]}
+                            >
+                                          <span
+                                                        className="icon icon-arrows-ccw "
+                                          />
+                            </button>
+              </CSSTransition>
+</div>,
+            <div
+              className="d-inline"
+>
+              <button
+                            className="btn tcon-transform btn-default"
+                            onClick={[Function]}
+                            type="button"
+              >
+                            <span
+                                          className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                            />
+              </button>
+</div>,
           ],
           "className": "pull-right",
         },
@@ -486,11 +672,95 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <span
-                className="icon icon-arrows-ccw"
+              "children": <CSSTransition
+                classNames="server-item"
+                in={false}
+                timeout={
+                                Object {
+                                                "enter": 350,
+                                                "exit": 350,
+                                              }
+                }
+                unmountOnExit={true}
+>
+                <button
+                                className="btn btn-default mr-1 restart-button"
+                                onClick={[Function]}
+                >
+                                <span
+                                                className="icon icon-arrows-ccw "
+                                />
+                </button>
+</CSSTransition>,
+              "className": "d-inline",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <button
+                  className="btn btn-default mr-1 restart-button"
+                  onClick={[Function]}
+>
+                  <span
+                                    className="icon icon-arrows-ccw "
+                  />
+</button>,
+                "classNames": "server-item",
+                "in": false,
+                "timeout": Object {
+                  "enter": 350,
+                  "exit": 350,
+                },
+                "unmountOnExit": true,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <span
+                    className="icon icon-arrows-ccw "
 />,
-              "className": "btn btn-default mr-1 d-none",
-              "onClick": [Function],
+                  "className": "btn btn-default mr-1 restart-button",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "icon icon-arrows-ccw ",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "span",
+                },
+                "type": "button",
+              },
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <button
+                className="btn tcon-transform btn-default"
+                onClick={[Function]}
+                type="button"
+>
+                <span
+                                className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                />
+</button>,
+              "className": "d-inline",
             },
             "ref": null,
             "rendered": Object {
@@ -498,49 +768,15 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "className": "icon icon-arrows-ccw",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "span",
-            },
-            "type": "button",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "aria-label": "toggle status",
-              "children": Array [
-                <span
-                  className="tcon-visuallyhidden"
->
-                  toggle status
-</span>,
-                <span
+                "children": <span
                   className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
 />,
-              ],
-              "className": "animated btn tcon-transform btn-default",
-              "onClick": [Function],
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "toggle status",
-                  "className": "tcon-visuallyhidden",
-                },
-                "ref": null,
-                "rendered": "toggle status",
-                "type": "span",
+                "className": "btn tcon-transform btn-default",
+                "onClick": [Function],
+                "type": "button",
               },
-              Object {
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
@@ -551,8 +787,9 @@ ShallowWrapper {
                 "rendered": null,
                 "type": "span",
               },
-            ],
-            "type": "button",
+              "type": "button",
+            },
+            "type": "div",
           },
         ],
         "type": "div",
@@ -576,29 +813,43 @@ ShallowWrapper {
           <div
             className="pull-right"
 >
-            <button
-                        className="btn btn-default mr-1 d-none"
-                        onClick={[Function]}
+            <div
+                        className="d-inline"
             >
-                        <span
-                                    className="icon icon-arrows-ccw"
-                        />
-            </button>
-            <button
-                        aria-label="toggle status"
-                        className="animated btn tcon-transform btn-default"
-                        onClick={[Function]}
-                        type="button"
-            >
-                        <span
-                                    className="tcon-visuallyhidden"
+                        <CSSTransition
+                                    classNames="server-item"
+                                    in={false}
+                                    timeout={
+                                                Object {
+                                                            "enter": 350,
+                                                            "exit": 350,
+                                                          }
+                                    }
+                                    unmountOnExit={true}
                         >
-                                    toggle status
-                        </span>
-                        <span
-                                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
-                        />
-            </button>
+                                    <button
+                                                className="btn btn-default mr-1 restart-button"
+                                                onClick={[Function]}
+                                    >
+                                                <span
+                                                            className="icon icon-arrows-ccw "
+                                                />
+                                    </button>
+                        </CSSTransition>
+            </div>
+            <div
+                        className="d-inline"
+            >
+                        <button
+                                    className="btn tcon-transform btn-default"
+                                    onClick={[Function]}
+                                    type="button"
+                        >
+                                    <span
+                                                className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                                    />
+                        </button>
+            </div>
 </div>,
         ],
         "className": "list-group-item server-item",
@@ -624,29 +875,43 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <button
-                className="btn btn-default mr-1 d-none"
-                onClick={[Function]}
+              <div
+                className="d-inline"
 >
-                <span
-                                className="icon icon-arrows-ccw"
-                />
-</button>,
-              <button
-                aria-label="toggle status"
-                className="animated btn tcon-transform btn-default"
-                onClick={[Function]}
-                type="button"
->
-                <span
-                                className="tcon-visuallyhidden"
+                <CSSTransition
+                                classNames="server-item"
+                                in={false}
+                                timeout={
+                                                Object {
+                                                                "enter": 350,
+                                                                "exit": 350,
+                                                              }
+                                }
+                                unmountOnExit={true}
                 >
-                                toggle status
-                </span>
-                <span
-                                className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
-                />
-</button>,
+                                <button
+                                                className="btn btn-default mr-1 restart-button"
+                                                onClick={[Function]}
+                                >
+                                                <span
+                                                                className="icon icon-arrows-ccw "
+                                                />
+                                </button>
+                </CSSTransition>
+</div>,
+              <div
+                className="d-inline"
+>
+                <button
+                                className="btn tcon-transform btn-default"
+                                onClick={[Function]}
+                                type="button"
+                >
+                                <span
+                                                className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                                />
+                </button>
+</div>,
             ],
             "className": "pull-right",
           },
@@ -657,11 +922,95 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": <span
-                  className="icon icon-arrows-ccw"
+                "children": <CSSTransition
+                  classNames="server-item"
+                  in={false}
+                  timeout={
+                                    Object {
+                                                      "enter": 350,
+                                                      "exit": 350,
+                                                    }
+                  }
+                  unmountOnExit={true}
+>
+                  <button
+                                    className="btn btn-default mr-1 restart-button"
+                                    onClick={[Function]}
+                  >
+                                    <span
+                                                      className="icon icon-arrows-ccw "
+                                    />
+                  </button>
+</CSSTransition>,
+                "className": "d-inline",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <button
+                    className="btn btn-default mr-1 restart-button"
+                    onClick={[Function]}
+>
+                    <span
+                                        className="icon icon-arrows-ccw "
+                    />
+</button>,
+                  "classNames": "server-item",
+                  "in": false,
+                  "timeout": Object {
+                    "enter": 350,
+                    "exit": 350,
+                  },
+                  "unmountOnExit": true,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <span
+                      className="icon icon-arrows-ccw "
 />,
-                "className": "btn btn-default mr-1 d-none",
-                "onClick": [Function],
+                    "className": "btn btn-default mr-1 restart-button",
+                    "onClick": [Function],
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "icon icon-arrows-ccw ",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "span",
+                  },
+                  "type": "button",
+                },
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <button
+                  className="btn tcon-transform btn-default"
+                  onClick={[Function]}
+                  type="button"
+>
+                  <span
+                                    className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
+                  />
+</button>,
+                "className": "d-inline",
               },
               "ref": null,
               "rendered": Object {
@@ -669,49 +1018,15 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "className": "icon icon-arrows-ccw",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "span",
-              },
-              "type": "button",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "aria-label": "toggle status",
-                "children": Array [
-                  <span
-                    className="tcon-visuallyhidden"
->
-                    toggle status
-</span>,
-                  <span
+                  "children": <span
                     className="tcon tcon-remove tcon-remove--chevron-right tcon-transform btn-default"
 />,
-                ],
-                "className": "animated btn tcon-transform btn-default",
-                "onClick": [Function],
-                "type": "button",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "toggle status",
-                    "className": "tcon-visuallyhidden",
-                  },
-                  "ref": null,
-                  "rendered": "toggle status",
-                  "type": "span",
+                  "className": "btn tcon-transform btn-default",
+                  "onClick": [Function],
+                  "type": "button",
                 },
-                Object {
+                "ref": null,
+                "rendered": Object {
                   "instance": null,
                   "key": undefined,
                   "nodeType": "host",
@@ -722,8 +1037,9 @@ ShallowWrapper {
                   "rendered": null,
                   "type": "span",
                 },
-              ],
-              "type": "button",
+                "type": "button",
+              },
+              "type": "div",
             },
           ],
           "type": "div",

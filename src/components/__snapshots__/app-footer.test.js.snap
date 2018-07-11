@@ -36,15 +36,6 @@ ShallowWrapper {
           >
                     <button
                               className="btn btn-default"
-                              onClick={undefined}
-                    >
-                              <span
-                                        className="icon icon-arrows-ccw"
-                                        title="Refresh"
-                              />
-                    </button>
-                    <button
-                              className="btn btn-default"
                               id="close-app"
                               onClick={[Function]}
                     >
@@ -99,15 +90,6 @@ ShallowWrapper {
 >
             <button
                         className="btn btn-default"
-                        onClick={undefined}
-            >
-                        <span
-                                    className="icon icon-arrows-ccw"
-                                    title="Refresh"
-                        />
-            </button>
-            <button
-                        className="btn btn-default"
                         id="close-app"
                         onClick={[Function]}
             >
@@ -125,87 +107,47 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
-              <button
-                className="btn btn-default"
-                onClick={undefined}
+            "children": <button
+              className="btn btn-default"
+              id="close-app"
+              onClick={[Function]}
 >
-                <span
-                                className="icon icon-arrows-ccw"
-                                title="Refresh"
-                />
+              <span
+                            className="icon icon-cancel"
+                            title="Quit"
+              />
 </button>,
-              <button
-                className="btn btn-default"
-                id="close-app"
-                onClick={[Function]}
->
-                <span
-                                className="icon icon-cancel"
-                                title="Quit"
-                />
-</button>,
-            ],
             "className": "btn-group",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <span
+                className="icon icon-cancel"
+                title="Quit"
+/>,
+              "className": "btn btn-default",
+              "id": "close-app",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": <span
-                  className="icon icon-arrows-ccw"
-                  title="Refresh"
-/>,
-                "className": "btn btn-default",
-                "onClick": undefined,
+                "className": "icon icon-cancel",
+                "title": "Quit",
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "className": "icon icon-arrows-ccw",
-                  "title": "Refresh",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "span",
-              },
-              "type": "button",
+              "rendered": null,
+              "type": "span",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <span
-                  className="icon icon-cancel"
-                  title="Quit"
-/>,
-                "className": "btn btn-default",
-                "id": "close-app",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "className": "icon icon-cancel",
-                  "title": "Quit",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "span",
-              },
-              "type": "button",
-            },
-          ],
+            "type": "button",
+          },
           "type": "div",
         },
         "type": "div",
@@ -236,15 +178,6 @@ ShallowWrapper {
             <div
                         className="btn-group"
             >
-                        <button
-                                    className="btn btn-default"
-                                    onClick={undefined}
-                        >
-                                    <span
-                                                className="icon icon-arrows-ccw"
-                                                title="Refresh"
-                                    />
-                        </button>
                         <button
                                     className="btn btn-default"
                                     id="close-app"
@@ -301,15 +234,6 @@ ShallowWrapper {
 >
               <button
                             className="btn btn-default"
-                            onClick={undefined}
-              >
-                            <span
-                                          className="icon icon-arrows-ccw"
-                                          title="Refresh"
-                            />
-              </button>
-              <button
-                            className="btn btn-default"
                             id="close-app"
                             onClick={[Function]}
               >
@@ -327,87 +251,47 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": Array [
-                <button
-                  className="btn btn-default"
-                  onClick={undefined}
+              "children": <button
+                className="btn btn-default"
+                id="close-app"
+                onClick={[Function]}
 >
-                  <span
-                                    className="icon icon-arrows-ccw"
-                                    title="Refresh"
-                  />
+                <span
+                                className="icon icon-cancel"
+                                title="Quit"
+                />
 </button>,
-                <button
-                  className="btn btn-default"
-                  id="close-app"
-                  onClick={[Function]}
->
-                  <span
-                                    className="icon icon-cancel"
-                                    title="Quit"
-                  />
-</button>,
-              ],
               "className": "btn-group",
             },
             "ref": null,
-            "rendered": Array [
-              Object {
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <span
+                  className="icon icon-cancel"
+                  title="Quit"
+/>,
+                "className": "btn btn-default",
+                "id": "close-app",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <span
-                    className="icon icon-arrows-ccw"
-                    title="Refresh"
-/>,
-                  "className": "btn btn-default",
-                  "onClick": undefined,
+                  "className": "icon icon-cancel",
+                  "title": "Quit",
                 },
                 "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "className": "icon icon-arrows-ccw",
-                    "title": "Refresh",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": "span",
-                },
-                "type": "button",
+                "rendered": null,
+                "type": "span",
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": <span
-                    className="icon icon-cancel"
-                    title="Quit"
-/>,
-                  "className": "btn btn-default",
-                  "id": "close-app",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "className": "icon icon-cancel",
-                    "title": "Quit",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": "span",
-                },
-                "type": "button",
-              },
-            ],
+              "type": "button",
+            },
             "type": "div",
           },
           "type": "div",

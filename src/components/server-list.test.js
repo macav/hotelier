@@ -62,6 +62,22 @@ describe('ServerList', () => {
     });
   });
 
+  describe('#restartServer', () => {
+    let instance;
+
+    beforeEach(() => {
+      instance = create().instance();
+      hotelApi.startServer = jest.fn().mockReturnValue(Promise.resolve());
+      hotelApi.stopServer = jest.fn().mockReturnValue(Promise.resolve());
+      instance.restartServer(servers[0]);
+    });
+
+    it('calls the api', () => {
+      expect(hotelApi.startServer).toHaveBeenCalledWith('test-server-1');
+      expect(hotelApi.stopServer).toHaveBeenCalledWith('test-server-1');
+    });
+  });
+
   describe('#toggleServer', () => {
     let instance;
 

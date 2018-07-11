@@ -82,12 +82,12 @@ body {
   transition: all 350ms ease-in;
 }
 
-.server-item-leave {
+.server-item-exit {
   opacity: 1;
   transform: translate(0);
 }
 
-.server-item-leave.server-item-leave-active {
+.server-item-exit.server-item-exit-active {
   opacity: 0.01;
   transform: translate(2rem);
   transition: all 350ms ease-in;

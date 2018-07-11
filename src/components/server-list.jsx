@@ -10,6 +10,7 @@ export default class ServerList extends Component {
     loadServers: PropTypes.func,
     servers: PropTypes.array,
   }
+
   startServer = (id) => {
     HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, RUNNING));
   }

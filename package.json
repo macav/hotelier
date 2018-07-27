@@ -11,8 +11,10 @@
     "is-electron": "^2.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "react-transition-group": "~2.4"
+    "react-transition-group": "~2.4",
+    "tail": "^1.2.4"
   },
   "devDependencies": {
     "electron": "^2.0.0",

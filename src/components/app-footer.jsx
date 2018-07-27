@@ -6,11 +6,16 @@ export default class AppFooter extends React.Component {
     utils.openExternalLink('http://localhost:2000');
   }
 
+  openLogs = () => {
+    window.ipcRenderer.send('showDock');
+  }
+
   render() {
     return (
       <footer className="toolbar toolbar-footer">
         <div className="toolbar-actions pull-left">
           <button className="btn btn-default" onClick={this.openHotel}>Hotel</button>
+          <button className="btn btn-default" onClick={this.openLogs}>Logs</button>
         </div>
         <div className="toolbar-actions pull-right">
           <div className="btn-group">

@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import './app.css';
 import { AppFooter, AppHeader, ServerList } from './components';
 import HotelApi from './api';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
-class App extends Component {
+const Logs = () => {
+  return <div>Logs</div>;
+};
+
+class Main extends Component {
   constructor() {
     super();
     this.state = { loading: false, servers: [] };
@@ -47,16 +52,28 @@ class App extends Component {
       <div>
         <div className="header-arrow"></div>
         <div className="window">
-          <AppHeader/>
+          <AppHeader />
           <div className="window-content">
             <div className="pane">
               {loading && (<div className="summary">Loading&hellip;</div>)}
-              <ServerList servers={servers} loadServers={this.loadServers} updateServerStatus={this.updateServerStatus}/>
+              <ServerList servers={servers} loadServers={this.loadServers} updateServerStatus={this.updateServerStatus} />
             </div>
           </div>
-          <AppFooter/>
+          <AppFooter />
         </div>
       </div>
+    );
+  }
+}
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route exact path='/' component={Main} />
+          <Route exact path='/logs' component={Logs} />
+        </div>
+      </Router >
     );
   }
 }

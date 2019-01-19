@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const homedir = require('os').homedir();
+// eslint-disable-next-line no-unused-vars
 const { shell, Tray } = require('electron');
 
 // Read Hotel config and store port number

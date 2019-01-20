@@ -68,6 +68,7 @@ const createWindow = () => {
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
     },
   });
   const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -75,6 +76,9 @@ const createWindow = () => {
     protocol: 'file:',
     slashes: true,
   });
+
+  // Send hotelPort to renderer process before loading the `startUrl`
+  window.webContents.send('hotelPort', { msg: window.hotelPort });
   window.loadURL(startUrl);
 
   window.on('blur', () => {

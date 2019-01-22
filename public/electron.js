@@ -76,9 +76,6 @@ const createWindow = () => {
     protocol: 'file:',
     slashes: true,
   });
-
-  // Send hotelPort to renderer process before loading the `startUrl`
-  window.webContents.send('hotelPort', { msg: window.hotelPort });
   window.loadURL(startUrl);
 
   window.on('blur', () => {

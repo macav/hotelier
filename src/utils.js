@@ -1,13 +1,4 @@
 import isElectron from 'is-electron';
-import fs from 'fs';
-import { ipcRenderer } from 'electron';
-
-console.log(fs);
-
-ipcRenderer.once('hotelPort', (msg) => {
-  // window.hotelPort =
-  console.log(msg);
-});
 
 export default class Utils {
   static isElectron = () => {

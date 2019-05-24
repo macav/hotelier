@@ -4,8 +4,10 @@ import { AppFooter, AppHeader, ServerList } from './components';
 import HotelApi from './api';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-const Logs = () => {
-  return <div>Logs</div>;
+class Logs extends Component {
+  render() {
+    return <div>Logs</div>;
+  }
 };
 
 class Main extends Component {
@@ -39,6 +41,11 @@ class Main extends Component {
     this.setState({ loading: false, servers });
   }
 
+  watch = () => {
+    HotelApi.watch((output) => console.log('events', output));
+    HotelApi.watchOutput((output) => console.log('output', output));
+  }
+
   updateServerStatus = (id, status) => {
     const servers = this.state.servers;
     const serverId = servers.findIndex(server => server.id === id);
@@ -53,6 +60,7 @@ class Main extends Component {
         <div className="header-arrow"></div>
         <div className="window">
           <AppHeader />
+          <button onClick={this.watch}>watch</button>
           <div className="window-content">
             <div className="pane">
               {loading && (<div className="summary">Loading&hellip;</div>)}

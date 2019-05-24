@@ -2,6 +2,7 @@ export const RUNNING = 'running';
 export const RESTARTING = 'restarting';
 export const STOPPED = 'stopped';
 export const CRASHED = 'crashed';
+export const HOTEL_URL = 'http://localhost:2000';
 
 export default class HotelApi {
   static getServers = () => {
@@ -14,12 +15,34 @@ export default class HotelApi {
     });
   };
 
+  static watch = (cb) => {
+    if (window.EventSource) {
+      new window.EventSource(`${HOTEL_URL}/_/events`).onmessage = (event) => {
+        const data = JSON.parse(event.data)
+        cb(data);
+      }
+    } else {
+      console.log('no EventSource support');
+    }
+  }
+
+  static watchOutput = (cb) => {
+    if (window.EventSource) {
+      new window.EventSource(`${HOTEL_URL}/_/events/output`).onmessage = (event) => {
+        const data = JSON.parse(event.data)
+        cb(data);
+      }
+    } else {
+      console.log('no EventSource support');
+    }
+  }
+
   static watchServers = (cb) => {
     setInterval(() => HotelApi.getServers().then(data => cb(data)), 3000);
   }
 
   static getHotelUrl = () => {
-    return process.env.NODE_ENV === 'development' ? '' : 'http://localhost:2000';
+    return process.env.NODE_ENV === 'development' ? '' : HOTEL_URL;
   }
 
   static sendCommand = (id, command) => {

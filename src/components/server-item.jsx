@@ -9,6 +9,7 @@ export default class ServerItem extends React.Component {
     openServer: PropTypes.func,
     toggleServer: PropTypes.func,
     restartServer: PropTypes.func,
+    openLogs: PropTypes.func,
   }
 
   constructor(props) {
@@ -46,7 +47,7 @@ export default class ServerItem extends React.Component {
   }
 
   render() {
-    const { openServer, toggleServer } = this.props;
+    const { openServer, toggleServer, openLogs } = this.props;
     const { server } = this.state;
     return (
       <li className="list-group-item server-item">
@@ -64,6 +65,11 @@ export default class ServerItem extends React.Component {
           <div className="d-inline">
             <button type="button" className={`btn ${this.actionClassName(server.status)}`} onClick={() => toggleServer(server)}>
               <span className={`tcon tcon-remove tcon-remove--chevron-right ${this.actionClassName(server.status)}`}></span>
+            </button>
+          </div>
+          <div className="d-inline">
+            <button type="button" className='btn-default' onClick={() => openLogs(server)}>
+              L
             </button>
           </div>
         </div>

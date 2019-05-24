@@ -11,6 +11,7 @@ let logsWindow;
 let closingApp = false;
 // workaround for Windows, where blur event occured when clicking on a tray icon
 let blurredRecently = false;
+let activeLogsWindowServer = null;
 
 if (process.platform === 'darwin') {
   app.dock.hide();
@@ -94,11 +95,14 @@ const createWindow = () => {
 
 const createLogWindow = () => {
   logsWindow = new BrowserWindow({
-    width: 600,
+    width: 800,
     height: 600,
     show: false,
     resizable: true,
     frame: true,
+  });
+  logsWindow.on('page-title-updated', (evt) => {
+    evt.preventDefault();
   });
   const startUrl = process.env.ELECTRON_START_URL || url.format({
     pathname: `${__dirname}/index.html`,
@@ -132,12 +136,17 @@ const showWindow = () => {
   window.focus();
 };
 
-ipcMain.on('showDock', () => {
-  if (logsWindow.isVisible()) {
+ipcMain.on('showDock', (_event, serverId) => {
+  if (serverId === activeLogsWindowServer && logsWindow.isVisible()) {
     logsWindow.hide();
     app.dock.hide();
   } else {
-    logsWindow.show();
-    app.dock.show();
+    activeLogsWindowServer = serverId;
+    logsWindow.setTitle(`Hotelier - ${serverId} logs`);
+    logsWindow.webContents.executeJavaScript(`location.href = "/#/logs/${serverId}"`);
+    if (!logsWindow.isVisible()) {
+      logsWindow.show();
+      app.dock.show();
+    }
   }
 });

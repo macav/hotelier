@@ -19,7 +19,7 @@ export default class ServerList extends Component {
     HotelApi.stopServer(id).then(() => this.props.updateServerStatus(id, STOPPED));
   }
 
-  restartServer = async(server) => {
+  restartServer = async (server) => {
     await HotelApi.stopServer(server.id);
     await HotelApi.startServer(server.id);
   }
@@ -37,14 +37,24 @@ export default class ServerList extends Component {
     setTimeout(() => this.props.loadServers(), 1000);
   }
 
+  openLogs = (server) => {
+    window.ipcRenderer.send('showDock', server.id);
+  }
+
   render() {
     return (
       <div>
         <ul className="list-group">
           {this.props.servers.map(server => {
             return (
-              <ServerItem key={server.id} server={server} toggleServer={this.toggleServer} openServer={this.openServer}
-                restartServer={this.restartServer}/>
+              <ServerItem
+                key={server.id}
+                server={server}
+                toggleServer={this.toggleServer}
+                openLogs={this.openLogs}
+                openServer={this.openServer}
+                restartServer={this.restartServer}
+              />
             );
           })}
         </ul>

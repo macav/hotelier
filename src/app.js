@@ -3,17 +3,60 @@ import './app.css';
 import { AppFooter, AppHeader, ServerList } from './components';
 import HotelApi from './api';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import { formatLines } from './formatter';
+import uniqueId from 'lodash/uniqueId'
 
 class Logs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { logs: {} };
+    this.onScroll = this.onScroll.bind(this);
+    this.isAtBottom = true;
+  }
+
+  componentDidMount() {
+    this.watch();
+    window.addEventListener('scroll', this.onScroll);
+  }
+
+  scrollToBottomIfNecessary() {
+    if (this.isAtBottom) {
+      window.scrollTo(0, document.documentElement.scrollHeight);
+    }
+  }
+
+  onScroll() {
+    this.isAtBottom = document.documentElement.scrollHeight === document.documentElement.scrollTop + document.documentElement.clientHeight;
+  }
+
+  watch = () => {
+    HotelApi.watch((output) => console.log('events', output));
+    HotelApi.watchOutput((output) => {
+      const { logs } = this.state;
+      const lines = formatLines(output.output).map(html => ({ html, id: uniqueId() }));
+      const logInstance = [...(logs[output.id] || []), ...lines];
+      this.setState({ logs: { ...logs, [output.id]: logInstance } });
+      this.scrollToBottomIfNecessary();
+    });
+  }
+
   render() {
-    return <div>Logs</div>;
+    const appId = this.props.match.params.server;
+    const logs = this.state.logs[appId] || [];
+    return (
+      <pre>
+        {logs.map(log => (
+          <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}></div>
+        ))}
+      </pre>
+    );
   }
 };
 
 class Main extends Component {
-  constructor() {
-    super();
-    this.state = { loading: false, servers: [] };
+  constructor(props) {
+    super(props);
+    this.state = { loading: false, servers: [], logs: {} };
   }
 
   componentDidMount() {
@@ -41,11 +84,6 @@ class Main extends Component {
     this.setState({ loading: false, servers });
   }
 
-  watch = () => {
-    HotelApi.watch((output) => console.log('events', output));
-    HotelApi.watchOutput((output) => console.log('output', output));
-  }
-
   updateServerStatus = (id, status) => {
     const servers = this.state.servers;
     const serverId = servers.findIndex(server => server.id === id);
@@ -60,7 +98,6 @@ class Main extends Component {
         <div className="header-arrow"></div>
         <div className="window">
           <AppHeader />
-          <button onClick={this.watch}>watch</button>
           <div className="window-content">
             <div className="pane">
               {loading && (<div className="summary">Loading&hellip;</div>)}
@@ -79,7 +116,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path='/' component={Main} />
-          <Route exact path='/logs' component={Logs} />
+          <Route exact path='/logs/:server' component={Logs} />
         </div>
       </Router >
     );

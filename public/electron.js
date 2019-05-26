@@ -37,7 +37,7 @@ const createTray = () => {
   tray.on('click', function(event) {
     toggleWindow();
 
-    if (window.isVisible() && process.defaultApp && event.metaKey) {
+    if (window.isVisible() && event.shiftKey) {
       window.openDevTools({ mode: 'detach' });
     }
   });
@@ -59,6 +59,12 @@ const getWindowPosition = () => {
   return { x: x, y: y };
 };
 
+const startUrl = process.env.ELECTRON_START_URL || url.format({
+  pathname: path.join(__dirname, './index.html'),
+  protocol: 'file:',
+  slashes: true,
+});
+
 const createWindow = () => {
   window = new BrowserWindow({
     width: 300,
@@ -73,10 +79,8 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
     },
   });
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, './index.html'),
-    protocol: 'file:',
-    slashes: true,
+  window.on('page-title-updated', (evt) => {
+    evt.preventDefault();
   });
   window.loadURL(startUrl);
 
@@ -100,16 +104,10 @@ const createLogWindow = () => {
     show: false,
     resizable: true,
     frame: true,
+    darkTheme: true,
   });
   logsWindow.on('page-title-updated', (evt) => {
     evt.preventDefault();
-  });
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: `${__dirname}/index.html`,
-    protocol: 'file:',
-  });
-  logsWindow.webContents.once('dom-ready', () => {
-    logsWindow.webContents.executeJavaScript('location.href = "/#/logs"');
   });
   logsWindow.loadURL(startUrl);
   logsWindow.on('close', e => {
@@ -142,8 +140,9 @@ ipcMain.on('showDock', (_event, serverId) => {
     app.dock.hide();
   } else {
     activeLogsWindowServer = serverId;
-    logsWindow.setTitle(`Hotelier - ${serverId} logs`);
-    logsWindow.webContents.executeJavaScript(`location.href = "/#/logs/${serverId}"`);
+    logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
+    logsWindow.webContents.executeJavaScript(`location.href = "#/logs/${serverId}"`);
+    logsWindow.focus();
     if (!logsWindow.isVisible()) {
       logsWindow.show();
       app.dock.show();

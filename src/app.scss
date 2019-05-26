@@ -1,0 +1,86 @@
+@import './variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+.server-name {
+  cursor: pointer;
+  width: calc(100% - 7rem);
+}
+
+.list-group-item {
+  border-radius: 0 !important;
+}
+
+.server-item {
+  line-height: 1.5rem;
+  height: 2.25rem;
+  padding: 5px 15px;
+
+  .btn {
+    padding: 0 5px;
+    font-size: 1rem;
+    width: 2rem;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .tcon {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    line-height: 22px;
+    font-size: 16px;
+  }
+}
+
+.navbar {
+  padding-top: 0rem;
+  cursor: pointer;
+}
+
+.server-item-enter {
+  opacity: 0.01;
+  transform: translate(2rem);
+}
+
+.server-item-enter.server-item-enter-active {
+  opacity: 1;
+  transform: translate(0);
+  transition: all 150ms ease-in;
+}
+
+.server-item-exit {
+  opacity: 1;
+  transform: translate(0);
+}
+
+.text-white .tcon-remove::before {
+  background: white;
+}
+
+.text-white .tcon-remove::after {
+  background: white;
+}
+
+.server-item-exit.server-item-exit-active {
+  opacity: 0.01;
+  transform: translate(2rem);
+  transition: all 150ms ease-in;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-redo.spin {
+  animation: spin 1s ease-out;
+}
+
+.window {
+  border: 1px solid darken($primary, 10%);
+  right: 1px;
+  padding-bottom: 2rem;
+}

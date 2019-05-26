@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './app.css';
 import { AppFooter, AppHeader, ServerList } from './components';
 import HotelApi from './api';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { formatLines } from './formatter';
 import uniqueId from 'lodash/uniqueId'
+import './app.scss';
 
 class Logs extends Component {
   constructor(props) {

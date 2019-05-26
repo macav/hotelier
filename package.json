@@ -25,8 +25,8 @@
     "tail": "^1.2.4"
   },
   "devDependencies": {
-    "electron": "^2.0.0",
-    "electron-builder": "^20.11.1",
+    "electron": "^5.0.2",
+    "electron-builder": "^20.41.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.16.0",
@@ -81,7 +81,7 @@
   "build": {
     "appId": "com.macav.hotelier",
     "productName": "Hotelier",
-    "electronVersion": "2.0.0",
+    "electronVersion": "5.0.0",
     "asar": true,
     "mac": {
       "extendInfo": {

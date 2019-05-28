@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ServerItem from './server-item';
-import HotelApi, { STOPPED, RUNNING } from '../api';
+import HotelApi, { STOPPED, RUNNING, CRASHED } from '../api';
 import utils from '../utils';
 
 export default class ServerList extends Component {
@@ -25,7 +25,7 @@ export default class ServerList extends Component {
   }
 
   toggleServer = (server) => {
-    if (server.status === STOPPED) {
+    if ([STOPPED, CRASHED].includes(server.status)) {
       this.startServer(server.id);
     } else {
       this.stopServer(server.id);

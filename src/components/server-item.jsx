@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RUNNING, RESTARTING, STOPPED } from '../api';
+import { RUNNING, RESTARTING, STOPPED, CRASHED } from '../api';
 import { CSSTransition } from 'react-transition-group';
 
 export default class ServerItem extends React.Component {
@@ -39,6 +39,7 @@ export default class ServerItem extends React.Component {
   actionIconClassName = (status) => {
     switch (status) {
       case STOPPED:
+      case CRASHED:
         return 'tcon-transform';
       default:
         return '';

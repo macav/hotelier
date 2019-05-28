@@ -40,15 +40,28 @@ class Logs extends Component {
     });
   }
 
+  clearLogs = () => {
+    const appId = this.props.match.params.server;
+    this.setState({ logs: { ...this.state.logs, [appId]: [] }});
+  }
+
   render() {
     const appId = this.props.match.params.server;
     const logs = this.state.logs[appId] || [];
     return (
-      <pre>
-        {logs.map(log => (
-          <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}></div>
-        ))}
-      </pre>
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
+          <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
+          <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
+            <i class="fas fa-eraser"></i>
+          </button>
+        </nav>
+        <pre>
+          {logs.map(log => (
+            <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}></div>
+          ))}
+        </pre>
+      </div>
     );
   }
 };

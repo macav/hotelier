@@ -53,7 +53,7 @@ class Logs extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
           <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
           <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
-            <i class="fas fa-eraser"></i>
+            <i className="fas fa-eraser"></i>
           </button>
         </nav>
         <pre>

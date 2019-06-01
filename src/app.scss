@@ -2,6 +2,18 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  border: 1px solid darken($primary, 10%);
+  right: 1px;
+  padding-bottom: 2rem;
+}
+
 .server-name {
   cursor: pointer;
   width: calc(100% - 7rem);
@@ -77,10 +89,4 @@
 
 .fa-redo.spin {
   animation: spin 1s ease-out;
-}
-
-.window {
-  border: 1px solid darken($primary, 10%);
-  right: 1px;
-  padding-bottom: 2rem;
 }

@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, Tray } = electron;
+const { app, BrowserWindow, ipcMain, Tray, Menu } = electron;
 const path = require('path');
 const url = require('url');
 
@@ -16,6 +16,8 @@ let activeLogsWindowServer = null;
 if (process.platform === 'darwin') {
   app.dock.hide();
 }
+
+Menu.setApplicationMenu(null);
 
 app.on('ready', () => {
   createTray();
@@ -113,7 +115,9 @@ const createLogWindow = () => {
   logsWindow.on('close', e => {
     if (!closingApp) {
       e.preventDefault();
-      app.dock.hide();
+      if (process.platform === 'darwin') {
+        app.dock.hide();
+      }
       logsWindow.hide();
     }
   });
@@ -137,7 +141,9 @@ const showWindow = () => {
 ipcMain.on('showDock', (_event, serverId) => {
   if (serverId === activeLogsWindowServer && logsWindow.isVisible()) {
     logsWindow.hide();
-    app.dock.hide();
+    if (process.platform === 'darwin') {
+      app.dock.hide();
+    }
   } else {
     activeLogsWindowServer = serverId;
     logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
@@ -145,7 +151,9 @@ ipcMain.on('showDock', (_event, serverId) => {
     logsWindow.focus();
     if (!logsWindow.isVisible()) {
       logsWindow.show();
-      app.dock.show();
+      if (process.platform === 'darwin') {
+        app.dock.show();
+      }
     }
   }
 });

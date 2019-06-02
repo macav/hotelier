@@ -2,6 +2,7 @@ const electron = require('electron');
 const { app, BrowserWindow, ipcMain, Tray, Menu } = electron;
 const path = require('path');
 const url = require('url');
+const positioner = require('electron-traywindow-positioner');
 
 const assetsDirectory = path.join(__dirname, './assets');
 
@@ -43,22 +44,6 @@ const createTray = () => {
       window.openDevTools({ mode: 'detach' });
     }
   });
-};
-
-const getWindowPosition = () => {
-  const windowBounds = window.getBounds();
-  const trayBounds = tray.getBounds();
-  const { height } = electron.screen.getPrimaryDisplay().workAreaSize;
-
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
-
-  let y = Math.round(trayBounds.y + trayBounds.height + 4);
-
-  if (height < y) {
-    y = Math.round(trayBounds.y - windowBounds.height - 4);
-  }
-
-  return { x: x, y: y };
 };
 
 const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -132,8 +117,7 @@ const toggleWindow = () => {
 };
 
 const showWindow = () => {
-  const position = getWindowPosition();
-  window.setPosition(position.x, position.y, false);
+  positioner.position(window, tray.getBounds());
   window.show();
   window.focus();
 };

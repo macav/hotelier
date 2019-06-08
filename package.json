@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-free": "^5.8.2",
     "ansi2html": "^0.0.1",
     "bootstrap": "^4.3.1",
+    "electron-traywindow-positioner": "^0.0.2",
     "escape-html": "^1.0.3",
     "eventsource": "^1.0.7",
     "is-electron": "^2.1.0",

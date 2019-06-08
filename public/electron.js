@@ -1,7 +1,8 @@
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, Tray } = electron;
+const { app, BrowserWindow, ipcMain, Tray, Menu } = electron;
 const path = require('path');
 const url = require('url');
+const positioner = require('electron-traywindow-positioner');
 var EventSource = require('eventsource');
 
 const assetsDirectory = path.join(__dirname, './assets');
@@ -23,6 +24,8 @@ let activeLogsWindowServer = null;
 if (process.platform === 'darwin') {
   app.dock.hide();
 }
+
+Menu.setApplicationMenu(null);
 
 app.on('ready', () => {
   createTray();
@@ -48,22 +51,6 @@ const createTray = () => {
       window.openDevTools({ mode: 'detach' });
     }
   });
-};
-
-const getWindowPosition = () => {
-  const windowBounds = window.getBounds();
-  const trayBounds = tray.getBounds();
-  const { height } = electron.screen.getPrimaryDisplay().workAreaSize;
-
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
-
-  let y = Math.round(trayBounds.y + trayBounds.height + 4);
-
-  if (height < y) {
-    y = Math.round(trayBounds.y - windowBounds.height - 4);
-  }
-
-  return { x: x, y: y };
 };
 
 const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -124,7 +111,9 @@ const createLogWindow = () => {
   logsWindow.on('close', e => {
     if (!closingApp) {
       e.preventDefault();
-      app.dock.hide();
+      if (process.platform === 'darwin') {
+        app.dock.hide();
+      }
       logsWindow.hide();
     }
   });
@@ -139,8 +128,7 @@ const toggleWindow = () => {
 };
 
 const showWindow = () => {
-  const position = getWindowPosition();
-  window.setPosition(position.x, position.y, false);
+  positioner.position(window, tray.getBounds());
   window.show();
   window.focus();
 };
@@ -148,14 +136,18 @@ const showWindow = () => {
 ipcMain.on('showDock', (_event, serverId) => {
   if (serverId === activeLogsWindowServer && logsWindow.isVisible()) {
     logsWindow.hide();
-    app.dock.hide();
+    if (process.platform === 'darwin') {
+      app.dock.hide();
+    }
   } else {
     activeLogsWindowServer = serverId;
     logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
     logsWindow.webContents.executeJavaScript(`location.href = "#/logs/${serverId}"`);
     if (!logsWindow.isVisible()) {
       logsWindow.show();
-      app.dock.show();
+      if (process.platform === 'darwin') {
+        app.dock.show();
+      }
     }
   }
 });

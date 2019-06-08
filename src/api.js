@@ -17,7 +17,7 @@ export default class HotelApi {
 
   static watch = (cb) => {
     if (window.EventSource) {
-      new window.EventSource(`${HOTEL_URL}/_/events`).onmessage = (event) => {
+      new window.EventSource(`${HotelApi.getHotelUrl()}/_/events`).onmessage = (event) => {
         const data = JSON.parse(event.data)
         cb(data);
       }
@@ -28,7 +28,7 @@ export default class HotelApi {
 
   static watchOutput = (cb) => {
     if (window.EventSource) {
-      new window.EventSource(`${HOTEL_URL}/_/events/output`).onmessage = (event) => {
+      new window.EventSource(`${HotelApi.getHotelUrl()}/_/events/output`).onmessage = (event) => {
         const data = JSON.parse(event.data)
         cb(data);
       }

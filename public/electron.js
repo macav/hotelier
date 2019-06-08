@@ -2,8 +2,15 @@ const electron = require('electron');
 const { app, BrowserWindow, ipcMain, Tray } = electron;
 const path = require('path');
 const url = require('url');
+var EventSource = require('eventsource');
 
 const assetsDirectory = path.join(__dirname, './assets');
+
+// TODO: Read port from the config
+events = new EventSource(`http://localhost:2000/_/events/output`);
+events.addEventListener('message', event => {
+  logsWindow.webContents.send('output', JSON.parse(event.data));
+});
 
 let tray;
 let window;
@@ -34,7 +41,7 @@ const createTray = () => {
     tray = new Tray(path.join(assetsDirectory, 'hotelTemplate_white.png'));
   }
   tray.on('right-click', toggleWindow);
-  tray.on('click', function(event) {
+  tray.on('click', function (event) {
     toggleWindow();
 
     if (window.isVisible() && event.shiftKey) {
@@ -105,6 +112,10 @@ const createLogWindow = () => {
     resizable: true,
     frame: true,
     darkTheme: true,
+    webPreferences: {
+      backgroundThrottling: false,
+      preload: path.join(__dirname, 'preload.js'),
+    },
   });
   logsWindow.on('page-title-updated', (evt) => {
     evt.preventDefault();
@@ -142,7 +153,6 @@ ipcMain.on('showDock', (_event, serverId) => {
     activeLogsWindowServer = serverId;
     logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
     logsWindow.webContents.executeJavaScript(`location.href = "#/logs/${serverId}"`);
-    logsWindow.focus();
     if (!logsWindow.isVisible()) {
       logsWindow.show();
       app.dock.show();

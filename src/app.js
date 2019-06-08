@@ -30,8 +30,8 @@ class Logs extends Component {
   }
 
   watch = () => {
-    HotelApi.watch((output) => console.log('events', output));
-    HotelApi.watchOutput((output) => {
+    // HotelApi.watch((output) => console.log('events', output));
+    window.ipcRenderer.on('output', (_e, output) => {
       const { logs } = this.state;
       const lines = formatLines(output.output).map(html => ({ html, id: uniqueId() }));
       const logInstance = [...(logs[output.id] || []), ...lines];
@@ -53,7 +53,7 @@ class Logs extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
           <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
           <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
-            <i class="fas fa-eraser"></i>
+            <i className="fas fa-eraser"></i>
           </button>
         </nav>
         <pre>

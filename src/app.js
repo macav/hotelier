@@ -30,7 +30,6 @@ class Logs extends Component {
   }
 
   watch = () => {
-    // HotelApi.watch((output) => console.log('events', output));
     window.ipcRenderer.on('output', (_e, output) => {
       const { logs } = this.state;
       const lines = formatLines(output.output).map(html => ({ html, id: uniqueId() }));
@@ -77,6 +76,9 @@ class Main extends Component {
     HotelApi.watchServers(servers => {
       this.serversLoaded(servers);
     });
+    window.ipcRenderer.on('events', (_e, event) => {
+      this.serversLoaded(event);
+    });
   }
 
   loadServers = () => {
@@ -92,6 +94,7 @@ class Main extends Component {
       return {
         id: serverId,
         status: server.status,
+        env: server.env,
       };
     });
     this.setState({ loading: false, servers });

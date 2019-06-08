@@ -1,8 +1,8 @@
+
 export const RUNNING = 'running';
 export const RESTARTING = 'restarting';
 export const STOPPED = 'stopped';
 export const CRASHED = 'crashed';
-export const HOTEL_URL = 'http://localhost:2000';
 
 export default class HotelApi {
   static getServers = () => {
@@ -15,34 +15,13 @@ export default class HotelApi {
     });
   };
 
-  static watch = (cb) => {
-    if (window.EventSource) {
-      new window.EventSource(`${HotelApi.getHotelUrl()}/_/events`).onmessage = (event) => {
-        const data = JSON.parse(event.data)
-        cb(data);
-      }
-    } else {
-      console.log('no EventSource support');
-    }
-  }
-
-  static watchOutput = (cb) => {
-    if (window.EventSource) {
-      new window.EventSource(`${HotelApi.getHotelUrl()}/_/events/output`).onmessage = (event) => {
-        const data = JSON.parse(event.data)
-        cb(data);
-      }
-    } else {
-      console.log('no EventSource support');
-    }
-  }
-
   static watchServers = (cb) => {
     setInterval(() => HotelApi.getServers().then(data => cb(data)), 3000);
   }
 
   static getHotelUrl = () => {
-    return process.env.NODE_ENV === 'development' ? '' : HOTEL_URL;
+    // In development, we have a reverse proxy to localhost:2000 (see package.json)
+    return process.env.NODE_ENV === 'development' ? '' : window.hotelUrl;
   }
 
   static sendCommand = (id, command) => {

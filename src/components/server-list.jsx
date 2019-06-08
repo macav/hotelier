@@ -33,8 +33,12 @@ export default class ServerList extends Component {
   }
 
   openServer = (server) => {
-    utils.openExternalLink(`http://${server.id}.localhost`);
-    setTimeout(() => this.props.loadServers(), 1000);
+    let serverUrl = `http://${server.id}.${window.hotelTld}`;
+    if (server.env.PORT) {
+      serverUrl += `:${server.env.PORT}`;
+    }
+    utils.openExternalLink(serverUrl);
+    this.props.loadServers();
   }
 
   openLogs = (server) => {

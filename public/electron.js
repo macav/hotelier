@@ -4,20 +4,27 @@ const path = require('path');
 const url = require('url');
 const positioner = require('electron-traywindow-positioner');
 var EventSource = require('eventsource');
+const { hotelUrl } = require('./hotel-config');
 
 const assetsDirectory = path.join(__dirname, './assets');
 
-// TODO: Read port from the config
-events = new EventSource(`http://localhost:2000/_/events/output`);
-events.addEventListener('message', event => {
+const output = new EventSource(`${hotelUrl}/_/events/output`);
+output.addEventListener('message', event => {
   logsWindow.webContents.send('output', JSON.parse(event.data));
+  window.webContents.send('output', JSON.parse(event.data));
+});
+
+const events = new EventSource(`${hotelUrl}/_/events`);
+events.addEventListener('message', event => {
+  logsWindow.webContents.send('events', JSON.parse(event.data));
+  window.webContents.send('events', JSON.parse(event.data));
 });
 
 let tray;
 let window;
 let logsWindow;
 let closingApp = false;
-// workaround for Windows, where blur event occured when clicking on a tray icon
+// workaround for Windows, where blur event occurs when clicking on a tray icon
 let blurredRecently = false;
 let activeLogsWindowServer = null;
 
@@ -47,8 +54,13 @@ const createTray = () => {
   tray.on('click', function (event) {
     toggleWindow();
 
-    if (window.isVisible() && event.shiftKey) {
-      window.openDevTools({ mode: 'detach' });
+    if (event.shiftKey) {
+      if (window.isVisible()) {
+        window.openDevTools({ mode: 'detach' });
+      }
+      if (logsWindow.isVisible()) {
+        logsWindow.openDevTools({ mode: 'detach' });
+      }
     }
   });
 };

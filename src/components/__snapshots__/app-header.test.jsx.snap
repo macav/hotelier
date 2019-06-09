@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader matches the snapshot 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-dark bg-primary"
+>
+  <div
+    className="mx-auto font-weight-bold text-center text-white"
+  >
+    Hotelier
+  </div>
+</nav>
+`;

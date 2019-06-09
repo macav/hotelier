@@ -1,4 +1,4 @@
 #!/bin/sh
 
 yarn lint
-yarn test --coverage
+yarn test

@@ -6,8 +6,9 @@ import hotelApi, { STOPPED, RUNNING } from '../api';
 
 describe('ServerList', () => {
   const servers = [
-    { id: 'test-server-1', status: 'running' },
-    { id: 'test-server-2', status: 'stopped' },
+    { id: 'test-server-1', status: 'running', env: {} },
+    { id: 'test-server-2', status: 'stopped', env: {} },
+    { id: 'test-server-3', status: 'running', env: { PORT: 3000 } },
   ];
   let updateServerStatusFn;
   let loadServersFn;
@@ -98,14 +99,44 @@ describe('ServerList', () => {
     });
   });
 
-  it('can open server and reload servers afterwards', () => {
-    jest.useFakeTimers();
-    const instance = create().instance();
-    jest.spyOn(utils, 'openExternalLink');
-    instance.openServer(servers[0]);
-    expect(utils.openExternalLink).toHaveBeenCalledWith('http://test-server-1.localhost');
-    loadServersFn.mockClear();
-    jest.runAllTimers();
-    expect(loadServersFn).toHaveBeenCalled();
+  describe('#openLogs', () => {
+    let instance;
+
+    beforeEach(() => {
+      instance = create().instance();
+    });
+
+    it('send an event via ipcRenderer', () => {
+      global.ipcRenderer = { send: jest.fn() };
+      instance.openLogs(servers[1]);
+      expect(global.ipcRenderer.send).toHaveBeenCalledWith('showDock', servers[1].id);
+    });
+  });
+
+  describe('#openServer', () => {
+    let instance, openLinkSpy;
+
+    beforeEach(() => {
+      instance = create().instance();
+      openLinkSpy = jest.spyOn(utils, 'openExternalLink');
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+      openLinkSpy.mockClear();
+    });
+
+    it('can open server and reload servers afterwards', () => {
+      instance.openServer(servers[0]);
+      expect(utils.openExternalLink).toHaveBeenCalledWith('http://test-server-1.localhost');
+      expect(loadServersFn).toHaveBeenCalled();
+      loadServersFn.mockClear();
+    });
+
+    it('can open server with port in URL if defined', () => {
+      instance.openServer(servers[2]);
+      expect(utils.openExternalLink).toHaveBeenCalledWith('http://test-server-3.localhost:3000');
+    });
   });
 });

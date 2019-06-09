@@ -1,4 +1,4 @@
-# Hotelier [![Build Status](https://semaphoreci.com/api/v1/macav/hotelier/branches/master/badge.svg)](https://semaphoreci.com/macav/hotelier)
+# Hotelier [![CircleCI](https://circleci.com/gh/macav/hotelier/tree/master.svg?style=svg)](https://circleci.com/gh/macav/hotelier/tree/master)
 
 Tray App for [Hotel](https://github.com/typicode/hotel) process manager which works on Windows, Mac and (potentially) Linux.
 
@@ -28,18 +28,18 @@ The builds are available for Mac (`.dmg`) and Windows (32 & 64 bit).
 
 ## Features
 
-Currently, the implemented features are following:
+Currently, the following features are implemented:
 
 * **See all your servers with status**
 * **Start / stop servers**
 * **Open the server URL by clicking on the server**
+* **Browse logs**
+* **Handles Hotel configuration (host, port, TLD)**
 
 In the future, I plan to add at least:
 
-* Handling of different Hotel configurations (different port, etc.)
 * Handling of edge cases (e.g. Hotel not installed)
 * Dark mode
-* Refresh via events without polling
 
 ## Contribution
 

@@ -5,6 +5,9 @@ const url = require('url');
 const positioner = require('electron-traywindow-positioner');
 var EventSource = require('eventsource');
 const { hotelUrl } = require('./hotel-config');
+const { autoUpdater } = require("electron-updater")
+
+autoUpdater.checkForUpdatesAndNotify();
 
 const assetsDirectory = path.join(__dirname, './assets');
 

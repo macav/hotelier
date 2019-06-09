@@ -12,6 +12,7 @@
     "ansi2html": "^0.0.1",
     "bootstrap": "^4.3.1",
     "electron-traywindow-positioner": "^0.0.2",
+    "electron-updater": "^4.0.6",
     "escape-html": "^1.0.3",
     "eventsource": "^1.0.7",
     "is-electron": "^2.1.0",
@@ -56,6 +57,8 @@
     "electron-start": "node src/electron-wait-react",
     "electron:build": "build",
     "postbuild": "build",
+    "pregh-publish": "react-scripts build",
+    "gh-publish": "build --mac --win -p always",
     "lint": "eslint src",
     "fixcode": "eslint src --fix"
   },
@@ -85,10 +88,16 @@
     "productName": "Hotelier",
     "electronVersion": "5.0.0",
     "asar": true,
+    "publish": [{
+      "provider": "github",
+      "owner": "macav",
+      "repo": "hotelier"
+    }],
     "mac": {
       "extendInfo": {
         "LSUIElement": 1
       },
+      "target": ["dmg"],
       "icon": "build/icon.icns"
     },
     "linux": {

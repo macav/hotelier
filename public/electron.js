@@ -1,59 +1,78 @@
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, Tray } = electron;
+const { app, BrowserWindow, ipcMain, Tray, Menu } = electron;
 const path = require('path');
 const url = require('url');
+const positioner = require('electron-traywindow-positioner');
+var EventSource = require('eventsource');
+const { hotelUrl } = require('./hotel-config');
+const { autoUpdater } = require("electron-updater")
 
-const assetsDirectory = path.join(__dirname, './assets')
+autoUpdater.checkForUpdatesAndNotify();
 
-let tray = undefined;
-let window = undefined;
-// workaround for Windows, where blur event occured when clicking on a tray icon
+const assetsDirectory = path.join(__dirname, './assets');
+
+const output = new EventSource(`${hotelUrl}/_/events/output`);
+output.addEventListener('message', event => {
+  logsWindow.webContents.send('output', JSON.parse(event.data));
+  window.webContents.send('output', JSON.parse(event.data));
+});
+
+const events = new EventSource(`${hotelUrl}/_/events`);
+events.addEventListener('message', event => {
+  logsWindow.webContents.send('events', JSON.parse(event.data));
+  window.webContents.send('events', JSON.parse(event.data));
+});
+
+let tray;
+let window;
+let logsWindow;
+let closingApp = false;
+// workaround for Windows, where blur event occurs when clicking on a tray icon
 let blurredRecently = false;
+let activeLogsWindowServer = null;
 
 if (process.platform === 'darwin') {
-  app.dock.hide()
+  app.dock.hide();
 }
 
+Menu.setApplicationMenu(null);
+
 app.on('ready', () => {
-  createTray()
-  createWindow()
-})
+  createTray();
+  createWindow();
+  createLogWindow();
+});
 
 app.on('window-all-closed', () => {
-  app.quit()
-})
+  app.quit();
+});
 
 const createTray = () => {
   if (process.platform === 'darwin') {
-    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate.png'))
+    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate.png'));
   } else {
-    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate_white.png'))
+    tray = new Tray(path.join(assetsDirectory, 'hotelTemplate_white.png'));
   }
-  tray.on('right-click', toggleWindow)
+  tray.on('right-click', toggleWindow);
   tray.on('click', function (event) {
-    toggleWindow()
+    toggleWindow();
 
-    if (window.isVisible() && process.defaultApp && event.metaKey) {
-      window.openDevTools({ mode: 'detach' })
+    if (event.shiftKey) {
+      if (window.isVisible()) {
+        window.openDevTools({ mode: 'detach' });
+      }
+      if (logsWindow.isVisible()) {
+        logsWindow.openDevTools({ mode: 'detach' });
+      }
     }
-  })
-}
+  });
+};
 
-const getWindowPosition = () => {
-  const windowBounds = window.getBounds()
-  const trayBounds = tray.getBounds()
-  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
-
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
-
-  let y = Math.round(trayBounds.y + trayBounds.height + 4)
-
-  if (height < y) {
-    y = Math.round(trayBounds.y - windowBounds.height - 4)
-  }
-
-  return { x: x, y: y }
-}
+const startUrl = process.env.ELECTRON_START_URL || url.format({
+  pathname: path.join(__dirname, './index.html'),
+  protocol: 'file:',
+  slashes: true,
+});
 
 const createWindow = () => {
   window = new BrowserWindow({
@@ -62,17 +81,15 @@ const createWindow = () => {
     show: false,
     frame: false,
     fullscreenable: false,
-    resizable: false,
+    resizable: true,
     transparent: true,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, 'preload.js'),
-    }
-  })
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, './index.html'),
-    protocol: 'file:',
-    slashes: true
+    },
+  });
+  window.on('page-title-updated', (evt) => {
+    evt.preventDefault();
   });
   window.loadURL(startUrl);
 
@@ -80,22 +97,72 @@ const createWindow = () => {
     blurredRecently = true;
     setTimeout(() => blurredRecently = false, 100);
     if (!window.webContents.isDevToolsOpened()) {
-      window.hide()
+      window.hide();
     }
-  })
-}
+  });
+  window.on('close', e => {
+    closingApp = true;
+    logsWindow.close();
+  });
+};
+
+const createLogWindow = () => {
+  logsWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    show: false,
+    resizable: true,
+    frame: true,
+    darkTheme: true,
+    webPreferences: {
+      backgroundThrottling: false,
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
+  logsWindow.on('page-title-updated', (evt) => {
+    evt.preventDefault();
+  });
+  logsWindow.loadURL(startUrl);
+  logsWindow.on('close', e => {
+    if (!closingApp) {
+      e.preventDefault();
+      if (process.platform === 'darwin') {
+        app.dock.hide();
+      }
+      logsWindow.hide();
+    }
+  });
+};
 
 const toggleWindow = () => {
   if (window.isVisible() || blurredRecently) {
-    window.hide()
+    window.hide();
   } else {
-    showWindow()
+    showWindow();
   }
-}
+};
 
 const showWindow = () => {
-  const position = getWindowPosition()
-  window.setPosition(position.x, position.y, false)
-  window.show()
-  window.focus()
-}
+  positioner.position(window, tray.getBounds());
+  window.show();
+  window.focus();
+};
+
+ipcMain.on('showDock', (_event, serverId) => {
+  if (serverId === activeLogsWindowServer && logsWindow.isVisible()) {
+    logsWindow.hide();
+    if (process.platform === 'darwin') {
+      app.dock.hide();
+    }
+  } else {
+    activeLogsWindowServer = serverId;
+    logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
+    logsWindow.webContents.executeJavaScript(`location.href = "#/logs/${serverId}"`);
+    if (!logsWindow.isVisible()) {
+      logsWindow.show();
+      if (process.platform === 'darwin') {
+        app.dock.show();
+      }
+    }
+  }
+});

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+hotel_bin=`which hotel`
+hotelSrcDir=`dirname $hotel_bin`
+hotelSrcDir=`dirname $hotelSrcDir`
+hotelSrcFile="$hotelSrcDir/lib/node_modules/hotel/lib/daemon/routers/api/events.js"
+echo "== Patching $hotelSrcFile =="
+patch $hotelSrcFile bin/0001-Patch-events.patch
+
+if [ $? -ne 0 ]; then
+  echo '== Patching failed. Reverting the changes. Please change the file manually according to the README.md =='
+  patch -R $hotelSrcFile bin/0001-Patch-events.patch
+  exit 1
+else
+  echo '== Patching successful. Restarting hotel... =='
+  hotel stop && hotel start
+fi

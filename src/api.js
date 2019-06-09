@@ -1,3 +1,4 @@
+
 export const RUNNING = 'running';
 export const RESTARTING = 'restarting';
 export const STOPPED = 'stopped';
@@ -19,7 +20,8 @@ export default class HotelApi {
   }
 
   static getHotelUrl = () => {
-    return process.env.NODE_ENV === 'development' ? '' : 'http://localhost:2000';
+    // In development, we have a reverse proxy to localhost:2000 (see package.json)
+    return process.env.NODE_ENV === 'development' ? '' : window.hotelUrl;
   }
 
   static sendCommand = (id, command) => {

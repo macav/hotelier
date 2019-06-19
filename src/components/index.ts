@@ -1,5 +1,5 @@
-import AppHeader from './app-header';
 import AppFooter from './app-footer';
+import AppHeader from './app-header';
 import ServerItem from './server-item';
 import ServerList from './server-list';
 

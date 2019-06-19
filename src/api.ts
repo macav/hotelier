@@ -1,9 +1,3 @@
-
-export const RUNNING = 'running';
-export const RESTARTING = 'restarting';
-export const STOPPED = 'stopped';
-export const CRASHED = 'crashed';
-
 export default class HotelApi {
   static getServers = () => {
     return window.fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(response => {
@@ -13,9 +7,9 @@ export default class HotelApi {
         return [];
       }
     });
-  };
+  }
 
-  static watchServers = (cb) => {
+  static watchServers = (cb: any) => {
     setInterval(() => HotelApi.getServers().then(data => cb(data)), 3000);
   }
 
@@ -24,19 +18,19 @@ export default class HotelApi {
     return process.env.NODE_ENV === 'development' ? '' : window.hotelUrl;
   }
 
-  static sendCommand = (id, command) => {
+  static sendCommand = (id: string, command: string) => {
     return HotelApi.postData(`${HotelApi.getHotelUrl()}/_/servers/${id}/${command}`, null);
   }
 
-  static startServer = (id) => {
+  static startServer = (id: string) => {
     return HotelApi.sendCommand(id, 'start');
   }
 
-  static stopServer = (id) => {
+  static stopServer = (id: string) => {
     return HotelApi.sendCommand(id, 'stop');
   }
 
-  static postData = (url, data) => {
+  static postData = (url: string, data: any) => {
     return fetch(url, {
       method: 'POST',
       headers: {

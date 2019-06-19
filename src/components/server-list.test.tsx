@@ -1,17 +1,18 @@
-import React from 'react';
-import ServerList from './server-list';
-import utils from '../utils';
 import { shallow } from 'enzyme';
-import hotelApi, { STOPPED, RUNNING } from '../api';
+import React from 'react';
+import hotelApi from '../api';
+import { Server, Status } from '../interfaces';
+import utils from '../utils';
+import ServerList from './server-list';
 
 describe('ServerList', () => {
-  const servers = [
-    { id: 'test-server-1', status: 'running', env: {} },
-    { id: 'test-server-2', status: 'stopped', env: {} },
-    { id: 'test-server-3', status: 'running', env: { PORT: 3000 } },
+  const servers: Server[] = [
+    { id: 'test-server-1', status: Status.RUNNING, env: {} },
+    { id: 'test-server-2', status: Status.STOPPED, env: {} },
+    { id: 'test-server-3', status: Status.RUNNING, env: { PORT: 3000 } },
   ];
-  let updateServerStatusFn;
-  let loadServersFn;
+  let updateServerStatusFn: any;
+  let loadServersFn: any;
 
   beforeEach(() => {
     updateServerStatusFn = jest.fn();
@@ -31,7 +32,7 @@ describe('ServerList', () => {
     let instance;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
       hotelApi.startServer = jest.fn().mockReturnValue(Promise.resolve());
       instance.startServer(servers[0].id);
     });
@@ -41,7 +42,7 @@ describe('ServerList', () => {
     });
 
     it('updates the state', () => {
-      expect(updateServerStatusFn).toHaveBeenCalledWith('test-server-1', RUNNING);
+      expect(updateServerStatusFn).toHaveBeenCalledWith('test-server-1', Status.RUNNING);
     });
   });
 
@@ -49,7 +50,7 @@ describe('ServerList', () => {
     let instance;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
       hotelApi.stopServer = jest.fn().mockReturnValue(Promise.resolve());
       instance.stopServer(servers[0].id);
     });
@@ -59,7 +60,7 @@ describe('ServerList', () => {
     });
 
     it('updates the state', () => {
-      expect(updateServerStatusFn).toHaveBeenCalledWith('test-server-1', STOPPED);
+      expect(updateServerStatusFn).toHaveBeenCalledWith('test-server-1', Status.STOPPED);
     });
   });
 
@@ -67,7 +68,7 @@ describe('ServerList', () => {
     let instance;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
       hotelApi.startServer = jest.fn().mockReturnValue(Promise.resolve());
       hotelApi.stopServer = jest.fn().mockReturnValue(Promise.resolve());
       instance.restartServer(servers[0]);
@@ -80,10 +81,10 @@ describe('ServerList', () => {
   });
 
   describe('#toggleServer', () => {
-    let instance;
+    let instance: ServerList;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
       hotelApi.startServer = jest.fn().mockReturnValue(Promise.resolve());
       hotelApi.stopServer = jest.fn().mockReturnValue(Promise.resolve());
     });
@@ -100,24 +101,25 @@ describe('ServerList', () => {
   });
 
   describe('#openLogs', () => {
-    let instance;
+    let instance: ServerList;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
     });
 
     it('send an event via ipcRenderer', () => {
-      global.ipcRenderer = { send: jest.fn() };
+      (global as any).ipcRenderer = { send: jest.fn() };
       instance.openLogs(servers[1]);
-      expect(global.ipcRenderer.send).toHaveBeenCalledWith('showDock', servers[1].id);
+      expect((global as any).ipcRenderer.send).toHaveBeenCalledWith('showDock', servers[1].id);
     });
   });
 
   describe('#openServer', () => {
-    let instance, openLinkSpy;
+    let instance: ServerList;
+    let openLinkSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      instance = create().instance();
+      instance = create().instance() as ServerList;
       openLinkSpy = jest.spyOn(utils, 'openExternalLink');
       jest.useFakeTimers();
     });

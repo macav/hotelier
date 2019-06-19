@@ -5,7 +5,7 @@ export default class Utils {
     return isElectron();
   }
 
-  static openExternalLink = (url) => {
+  static openExternalLink = (url: string) => {
     if (Utils.isElectron()) {
       window.shell.openExternal(url);
     } else {

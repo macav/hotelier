@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
-import { AppFooter, AppHeader, ServerList } from '../components';
 import HotelApi from '../api';
+import { AppFooter, AppHeader, ServerList } from '../components';
+import { Server, Status } from '../interfaces';
 
-class Main extends Component {
-  constructor(props) {
+interface Props { }
+interface HotelEvent { }
+interface State {
+  loading: boolean;
+  servers: Server[];
+}
+
+class Main extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
-    this.state = { loading: false, servers: [], logs: {} };
+    this.state = { loading: false, servers: [] };
   }
 
   componentDidMount() {
     this.loadServers();
-    HotelApi.watchServers(servers => {
+    HotelApi.watchServers((servers: Server[]) => {
       this.serversLoaded(servers);
     });
-    window.ipcRenderer.on('events', (_e, event) => {
+    window.ipcRenderer.on('events', (e: Event, event: HotelEvent) => {
       this.serversLoaded(event);
     });
   }
@@ -23,11 +31,11 @@ class Main extends Component {
     return HotelApi.getServers().then(servers => {
       this.serversLoaded(servers);
     });
-  };
+  }
 
-  serversLoaded = (servers) => {
-    servers = Object.keys(servers).map(serverId => {
-      const server = servers[serverId];
+  serversLoaded = (hotelServers: { [key: string]: any }) => {
+    const servers: Server[] = Object.keys(hotelServers).sort().map(serverId => {
+      const server: Server = hotelServers[serverId];
       return {
         id: serverId,
         status: server.status,
@@ -37,7 +45,7 @@ class Main extends Component {
     this.setState({ loading: false, servers });
   }
 
-  updateServerStatus = (id, status) => {
+  updateServerStatus = (id: string, status: Status) => {
     const servers = this.state.servers;
     const serverId = servers.findIndex(server => server.id === id);
     servers[serverId].status = status;
@@ -47,8 +55,8 @@ class Main extends Component {
   render() {
     const { loading, servers } = this.state;
     return (
-      <div>
-        <div className="header-arrow"></div>
+      <div className="main-container">
+        <div className="header-arrow"/>
         <div className="window">
           <AppHeader />
           <div className="window-content">

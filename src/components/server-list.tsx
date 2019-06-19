@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ServerItem from './server-item';
-import HotelApi, { STOPPED, RUNNING, CRASHED } from '../api';
+import HotelApi from '../api';
+import { Server, Status } from '../interfaces';
 import utils from '../utils';
+import ServerItem from './server-item';
 
-export default class ServerList extends Component {
-  static propTypes = {
-    updateServerStatus: PropTypes.func,
-    loadServers: PropTypes.func,
-    servers: PropTypes.array,
+interface Props {
+  loadServers: () => void;
+  updateServerStatus: (id: string, status: Status) => void;
+  servers: Server[];
+}
+
+export default class ServerList extends Component<Props> {
+  startServer = (id: string) => {
+    HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, Status.RUNNING));
   }
 
-  startServer = (id) => {
-    HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, RUNNING));
+  stopServer = (id: string) => {
+    HotelApi.stopServer(id).then(() => this.props.updateServerStatus(id, Status.STOPPED));
   }
 
-  stopServer = (id) => {
-    HotelApi.stopServer(id).then(() => this.props.updateServerStatus(id, STOPPED));
-  }
-
-  restartServer = async (server) => {
+  restartServer = async (server: Server) => {
     await HotelApi.stopServer(server.id);
     await HotelApi.startServer(server.id);
   }
 
-  toggleServer = (server) => {
-    if ([STOPPED, CRASHED].includes(server.status)) {
+  toggleServer = (server: Server) => {
+    if ([Status.STOPPED, Status.CRASHED].includes(server.status)) {
       this.startServer(server.id);
     } else {
       this.stopServer(server.id);
     }
   }
 
-  openServer = (server) => {
+  openServer = (server: Server) => {
     let serverUrl = `http://${server.id}.${window.hotelTld}`;
     if (server.env.PORT) {
       serverUrl += `:${server.env.PORT}`;
@@ -41,7 +41,7 @@ export default class ServerList extends Component {
     this.props.loadServers();
   }
 
-  openLogs = (server) => {
+  openLogs = (server: Server) => {
     window.ipcRenderer.send('showDock', server.id);
   }
 

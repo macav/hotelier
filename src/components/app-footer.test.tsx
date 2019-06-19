@@ -1,7 +1,7 @@
-import React from 'react';
-import AppFooter from './app-footer';
-import utils from '../utils';
 import { shallow } from 'enzyme';
+import React from 'react';
+import utils from '../utils';
+import AppFooter from './app-footer';
 
 describe('AppFooter', () => {
   function create() {

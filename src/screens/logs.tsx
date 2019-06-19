@@ -1,14 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { formatLines } from '../formatter';
 import uniqueId from 'lodash/uniqueId';
+import React, { Component } from 'react';
+import { match } from 'react-router-dom';
+import { formatLines } from '../formatter';
 
-class Logs extends Component {
-  static propTypes = {
-    match: PropTypes.object,
-  }
+interface Output {
+  id: string;
+  output: string;
+}
 
-  constructor(props) {
+interface Props {
+  match: match<{ server: string }>;
+}
+
+interface State {
+  logs: { [key: string]: Array<{ id: string, html: string }> };
+}
+
+class Logs extends Component<Props, State> {
+  isAtBottom: boolean;
+  logsRef: HTMLPreElement | null = null;
+
+  constructor(props: Props) {
     super(props);
     this.state = { logs: {} };
     this.onScroll = this.onScroll.bind(this);
@@ -17,21 +29,24 @@ class Logs extends Component {
 
   componentDidMount() {
     this.watch();
-    window.addEventListener('scroll', this.onScroll);
+    if (this.logsRef) {
+      this.logsRef.addEventListener('scroll', this.onScroll);
+    }
   }
 
   scrollToBottomIfNecessary() {
-    if (this.isAtBottom) {
-      window.scrollTo(0, document.documentElement.scrollHeight);
+    if (this.isAtBottom && this.logsRef) {
+      this.logsRef.scrollTop = this.logsRef.scrollHeight;
     }
   }
 
   onScroll() {
-    this.isAtBottom = document.documentElement.scrollHeight === document.documentElement.scrollTop + document.documentElement.clientHeight;
+    const { scrollHeight, scrollTop, clientHeight } = this.logsRef!;
+    this.isAtBottom = scrollHeight - scrollTop === clientHeight;
   }
 
   watch = () => {
-    window.ipcRenderer.on('output', (_e, output) => {
+    window.ipcRenderer.on('output', (e: Event, output: Output) => {
       const { logs } = this.state;
       const lines = formatLines(output.output).map(html => ({ html, id: uniqueId() }));
       const logInstance = [...(logs[output.id] || []), ...lines];
@@ -49,21 +64,22 @@ class Logs extends Component {
     const appId = this.props.match.params.server;
     const logs = this.state.logs[appId] || [];
     return (
-      <div>
+      <div className="h-100">
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
           <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
           <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
-            <i className="fas fa-eraser"></i>
+            <i className="fas fa-eraser"/>
           </button>
         </nav>
-        <pre>
+        <pre className="logs-window" ref={ref => this.logsRef = ref}>
           {logs.map(log => (
-            <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}></div>
+
+            <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}/>
           ))}
         </pre>
       </div>
     );
   }
-};
+}
 
 export default Logs;

@@ -1,6 +1,6 @@
 import React from 'react';
-import AppHeader from './app-header';
 import renderer from 'react-test-renderer';
+import AppHeader from './app-header';
 
 describe('AppHeader', () => {
   it('matches the snapshot', () => {

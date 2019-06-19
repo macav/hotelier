@@ -15,7 +15,7 @@ export default class AppFooter extends React.Component {
         <div className="float-right">
           <div className="btn-group">
             <button className="btn btn-primary" id="close-app" onClick={() => window.close()}>
-              <span className="fas fa-power-off" title="Quit"></span>
+              <span className="fas fa-power-off" title="Quit"/>
             </button>
           </div>
         </div>

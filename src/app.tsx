@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import Main from './screens/main';
-import Logs from './screens/logs';
 import './app.scss';
+import Logs from './screens/logs';
+import Main from './screens/main';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path='/' component={Main} />
-          <Route exact path='/logs/:server' component={Logs} />
+        <div className="h-100">
+          <Route exact={true} path="/" component={Main} />
+          <Route exact={true} path="/logs/:server" component={Logs} />
         </div>
       </Router >
     );

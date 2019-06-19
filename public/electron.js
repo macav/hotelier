@@ -163,6 +163,8 @@ ipcMain.on('showDock', (_event, serverId) => {
       if (process.platform === 'darwin') {
         app.dock.show();
       }
+    } else {
+      logsWindow.focus();
     }
   }
 });

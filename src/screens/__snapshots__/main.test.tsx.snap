@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main matches the snapshot: loaded 1`] = `
-<div>
+exports['Main matches the snapshot: loaded 1'] = `
+<div
+  className="main-container"
+>
   <div
     className="header-arrow"
   />
@@ -165,8 +167,10 @@ exports[`Main matches the snapshot: loaded 1`] = `
 </div>
 `;
 
-exports[`Main matches the snapshot: loading 1`] = `
-<div>
+exports['Main matches the snapshot: loading 1'] = `
+<div
+  className="main-container"
+>
   <div
     className="header-arrow"
   />

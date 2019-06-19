@@ -6,7 +6,7 @@
   },
   "license": "MIT",
   "description": "Tray App for Hotel Process Manager",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "ansi2html": "^0.0.1",
@@ -28,21 +28,25 @@
     "tail": "^1.2.4"
   },
   "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/enzyme": "^3.9.3",
+    "@types/escape-html": "^0.0.20",
+    "@types/lodash": "^4.14.134",
+    "@types/react": "^16.8.20",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
+    "@types/react-test-renderer": "^16.8.2",
+    "@types/react-transition-group": "^2.9.2",
     "electron": "^5.0.2",
     "electron-builder": "^20.41.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-react": "^7.7.0",
-    "eslint-plugin-standard": "^3.0.1",
     "foreman": "^3.0.1",
     "jest-fetch-mock": "^1.5.0",
     "react-test-renderer": "^16.3.2",
-    "typescript": "^3.4.5"
+    "tslint": "^5.17.0",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.5.2"
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -59,8 +63,8 @@
     "postbuild": "build",
     "pregh-publish": "react-scripts build",
     "gh-publish": "build --mac --win -p always",
-    "lint": "eslint src",
-    "fixcode": "eslint src --fix"
+    "lint": "tslint -c tslint.json 'src/**/*.ts{,x}'",
+    "fixcode": "yarn lint --fix"
   },
   "jest": {
     "coverageReporters": [
@@ -69,9 +73,9 @@
       "text-summary"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
+      "src/**/*.{ts,tsx}",
       "!**/node_modules/**",
-      "!src/index.js",
+      "!src/index.tsx",
       "!src/electron-wait-react.js"
     ],
     "coverageThreshold": {
@@ -88,16 +92,20 @@
     "productName": "Hotelier",
     "electronVersion": "5.0.0",
     "asar": true,
-    "publish": [{
-      "provider": "github",
-      "owner": "macav",
-      "repo": "hotelier"
-    }],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "macav",
+        "repo": "hotelier"
+      }
+    ],
     "mac": {
       "extendInfo": {
         "LSUIElement": 1
       },
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "build/icon.icns"
     },
     "linux": {

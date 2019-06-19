@@ -8,15 +8,19 @@ body,
   height: 100%;
 }
 
-#root {
+.main-container {
   border: 1px solid darken($primary, 10%);
   right: 1px;
+}
+
+.window {
   padding-bottom: 2rem;
 }
 
 .server-name {
   cursor: pointer;
   width: calc(100% - 7rem);
+  white-space: nowrap;
 }
 
 .list-group-item {
@@ -89,4 +93,12 @@ body,
 
 .fa-redo.spin {
   animation: spin 1s ease-out;
+}
+
+.logs-window {
+  height: calc(100% - 2.55rem);
+}
+
+pre {
+  margin-bottom: 0;
 }

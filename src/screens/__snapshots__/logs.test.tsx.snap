@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Logs matches the snapshot 1`] = `
-<div>
+exports['Logs matches the snapshot 1'] = `
+<div
+  className="h-100"
+>
   <nav
     className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1"
   >
@@ -21,12 +23,16 @@ exports[`Logs matches the snapshot 1`] = `
       />
     </button>
   </nav>
-  <pre />
+  <pre
+    className="logs-window"
+  />
 </div>
 `;
 
-exports[`Logs updates the state of logs: with logs 1`] = `
-<div>
+exports['Logs updates the state of logs: with logs 1'] = `
+<div
+  className="h-100"
+>
   <nav
     className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1"
   >
@@ -46,7 +52,9 @@ exports[`Logs updates the state of logs: with logs 1`] = `
       />
     </button>
   </nav>
-  <pre>
+  <pre
+    className="logs-window"
+  >
     <div
       dangerouslySetInnerHTML={
         Object {

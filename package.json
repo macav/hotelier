@@ -103,9 +103,6 @@
       "extendInfo": {
         "LSUIElement": 1
       },
-      "target": [
-        "dmg"
-      ],
       "icon": "build/icon.icns"
     },
     "linux": {

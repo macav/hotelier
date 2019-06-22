@@ -1,0 +1,48 @@
+:root {
+  --color-dark: #323232;
+}
+
+[data-theme^="light"],
+[data-theme] [data-theme^="light"] {
+  --main-color: var(--color-dark);
+  --lighter-color: #f8f9fa;
+  --main-color-components: 50, 50, 50;
+  --background-color: #fff;
+}
+
+[data-theme^="dark"],
+[data-theme] [data-theme^="dark"],
+[data-theme="light-dark-sidebar"] nav {
+  --main-color: #fff;
+  --lighter-color: #656565;
+  --main-color-components: 255, 255, 255;
+  --background-color: #272a2e;
+}
+
+body, .list-group-item, .list-group-item:hover {
+  background-color: var(--background-color);
+  color: var(--main-color);
+  border: 1px solid rgba(var(--main-color-components), 0.125);
+}
+
+pre {
+  color: var(--main-color);
+}
+
+.btn-light:hover {
+  .tcon-remove::before,
+  .tcon-remove::after {
+    background-color: var(--color-dark);
+  }
+}
+
+.tcon-remove::before,
+.tcon-remove::after {
+  background-color: var(--main-color);
+}
+
+.btn-light {
+  background-color: var(--lighter-color);
+  border-color: var(--lighter-color);
+  color: var(--main-color);
+}

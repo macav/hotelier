@@ -113,7 +113,6 @@ const createLogWindow = () => {
     show: false,
     resizable: true,
     frame: true,
-    darkTheme: true,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, 'preload.js'),

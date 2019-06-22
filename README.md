@@ -30,16 +30,17 @@ The builds are available for Mac (`.dmg`) and Windows (32 & 64 bit).
 
 Currently, the following features are implemented:
 
-* **See all your servers with status**
-* **Start / stop servers**
-* **Open the server URL by clicking on the server**
-* **Browse logs**
-* **Handles Hotel configuration (host, port, TLD)**
+* See all your servers with status
+* Start / stop servers
+* Open the server URL by clicking on the server
+* Browse logs
+* Handles Hotel configuration (host, port, TLD)
+* Dark mode
 
 In the future, I plan to add at least:
 
 * Handling of edge cases (e.g. Hotel not installed)
-* Dark mode
+* Custom config (per-server - such as opening URL, or global - theme)
 
 ## Contribution
 

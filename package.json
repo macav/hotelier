@@ -6,7 +6,7 @@
   },
   "license": "MIT",
   "description": "Tray App for Hotel Process Manager",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "ansi2html": "^0.0.1",
@@ -38,7 +38,7 @@
     "@types/react-test-renderer": "^16.8.2",
     "@types/react-transition-group": "^2.9.2",
     "electron": "^5.0.2",
-    "electron-builder": "^20.41.1",
+    "electron-builder": "^20.43.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "foreman": "^3.0.1",
@@ -103,7 +103,8 @@
       "extendInfo": {
         "LSUIElement": 1
       },
-      "icon": "build/icon.icns"
+      "icon": "build/icon.icns",
+      "darkModeSupport": true
     },
     "linux": {
       "target": [

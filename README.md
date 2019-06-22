@@ -9,6 +9,10 @@ Download the [latest release](http://www.github.com/macav/hotelier/releases) and
 ## About
 
 ![windows_screenshot](public/assets/hotelier_windows.png)
+![mac_light_screenshot](public/assets/hotelier_mac_light.png)
+![mac_dark_screenshot](public/assets/hotelier_mac_dark.png)
+
+![mac_dark_logs](public/assets/hotelier_logs.png)
 
 ### Description
 

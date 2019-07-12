@@ -6,7 +6,7 @@
   },
   "license": "MIT",
   "description": "Tray App for Hotel Process Manager",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "ansi2html": "^0.0.1",

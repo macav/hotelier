@@ -33,9 +33,9 @@ let activeLogsWindowServer = null;
 
 if (process.platform === 'darwin') {
   app.dock.hide();
+} else {
+  Menu.setApplicationMenu(null);
 }
-
-Menu.setApplicationMenu(null);
 
 app.on('ready', () => {
   createTray();
@@ -118,6 +118,7 @@ const createLogWindow = () => {
       preload: path.join(__dirname, 'preload.js'),
     },
   });
+
   logsWindow.on('page-title-updated', (evt) => {
     evt.preventDefault();
   });

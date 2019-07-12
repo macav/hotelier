@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports['ServerList matches the snapshot 1'] = `
-ShallowWrapper {
-  "length": 1,
-}
-`;
+exports[`ServerList matches the snapshot 1`] = `ShallowWrapper {}`;

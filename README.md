@@ -4,7 +4,14 @@ Tray App for [Hotel](https://github.com/typicode/hotel) process manager which wo
 
 ## Install
 
-Download the [latest release](http://www.github.com/macav/hotelier/releases) and install it.
+Download the [latest release](https://www.github.com/macav/hotelier/releases) and install it.
+
+Alternately, install with [Homebrew](https://brew.sh) on macOS:
+
+```shellsession
+$ brew tap macav/hotelier https://www.github.com/macav/hotelier.git
+$ brew cask install hotelier
+```
 
 ## About
 

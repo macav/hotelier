@@ -16,7 +16,7 @@
     "escape-html": "^1.0.3",
     "eventsource": "^1.0.7",
     "is-electron": "^2.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
     "popper.js": "^1.15.0",

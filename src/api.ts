@@ -1,12 +1,26 @@
+import { Server } from "./interfaces";
+
 export default class HotelApi {
-  static getServers = () => {
-    return window.fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(response => {
+  static getServers = (): Promise<Server[]> => {
+    return window.fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(async response => {
       if (response.ok) {
-        return response.json();
+        return HotelApi.transformServersData(await response.json());
       } else {
+        console.error('Failed to load the servers', response.body);
         return [];
       }
     });
+  }
+
+  static transformServersData = (data: any): Server[] => {
+    return Object.keys(data).sort().map(serverId => {
+      const server: Server = data[serverId];
+      return {
+        id: serverId,
+        status: server.status,
+        env: server.env,
+      };
+    })
   }
 
   static watchServers = (cb: any) => {

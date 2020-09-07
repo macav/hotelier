@@ -22,26 +22,18 @@ class Main extends Component<Props, State> {
       this.serversLoaded(servers);
     });
     window.ipcRenderer.on('events', (e: Event, event: HotelEvent) => {
-      this.serversLoaded(event);
+      this.serversLoaded(HotelApi.transformServersData(event));
     });
   }
 
   loadServers = () => {
     this.setState({ loading: true });
     return HotelApi.getServers().then(servers => {
-      this.serversLoaded(servers);
+      this.setState({ loading: false, servers });
     });
   }
 
-  serversLoaded = (hotelServers: { [key: string]: any }) => {
-    const servers: Server[] = Object.keys(hotelServers).sort().map(serverId => {
-      const server: Server = hotelServers[serverId];
-      return {
-        id: serverId,
-        status: server.status,
-        env: server.env,
-      };
-    });
+  serversLoaded = (servers: Server[]) => {
     this.setState({ loading: false, servers });
   }
 

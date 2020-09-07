@@ -2,6 +2,9 @@ import uniqueId from 'lodash/uniqueId';
 import React, { Component } from 'react';
 import { match } from 'react-router-dom';
 import { formatLines } from '../formatter';
+import ServerRestartButton from '../components/server-restart-button';
+import HotelApi from '../api';
+import { Server } from '../interfaces';
 
 interface Output {
   id: string;
@@ -14,6 +17,7 @@ interface Props {
 
 interface State {
   logs: { [key: string]: Array<{ id: string, html: string }> };
+  server?: Server;
 }
 
 class Logs extends Component<Props, State> {
@@ -32,6 +36,7 @@ class Logs extends Component<Props, State> {
     if (this.logsRef) {
       this.logsRef.addEventListener('scroll', this.onScroll);
     }
+    this.getServer().then(server => this.setState({ server }));
   }
 
   scrollToBottomIfNecessary() {
@@ -55,6 +60,12 @@ class Logs extends Component<Props, State> {
     });
   }
 
+  getServer = async () => {
+    const serverId = this.props.match.params.server;
+    const servers = await HotelApi.getServers();
+    return servers.find(server => server.id === serverId);
+  }
+
   clearLogs = () => {
     const appId = this.props.match.params.server;
     this.setState({ logs: { ...this.state.logs, [appId]: [] } });
@@ -67,6 +78,7 @@ class Logs extends Component<Props, State> {
       <div className="h-100">
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
           <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
+          {this.state.server && <ServerRestartButton btnStyle='btn-primary' server={this.state.server} />}
           <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
             <i className="fas fa-eraser"/>
           </button>

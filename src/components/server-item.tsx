@@ -1,6 +1,6 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { Server, Status } from '../interfaces';
+import ServerRestartButton from './server-restart-button';
 
 interface Props {
   server: Server;
@@ -49,16 +49,6 @@ export default class ServerItem extends React.Component<Props, State> {
     }
   }
 
-  restartServer = (server: Server) => {
-    server.status = Status.RESTARTING;
-    this.setState({ server });
-    this.props.restartServer(server);
-    setTimeout(() => {
-      server.status = Status.RUNNING;
-      this.setState({ server });
-    }, 1000);
-  }
-
   render() {
     const { openServer, toggleServer, openLogs } = this.props;
     const { server } = this.state;
@@ -70,17 +60,7 @@ export default class ServerItem extends React.Component<Props, State> {
           </div>
           <div className="float-right">
             <div className="d-inline">
-              <CSSTransition
-                title="Restart"
-                in={[Status.RUNNING, Status.RESTARTING].includes(server.status)}
-                unmountOnExit={true}
-                classNames="server-item"
-                timeout={{ enter: 350, exit: 350 }}
-              >
-                <button className="btn btn-secondary restart-button" onClick={() => this.restartServer(server)}>
-                  <span className={`fas fa-redo ${server.status === Status.RESTARTING ? 'spin' : ''}`} />
-                </button>
-              </CSSTransition>
+              <ServerRestartButton server={server} />
             </div>
             <div className="d-inline mx-1">
               <button

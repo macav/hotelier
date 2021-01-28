@@ -37,7 +37,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/react-test-renderer": "^16.8.2",
     "@types/react-transition-group": "^2.9.2",
-    "electron": "^7.2.4",
+    "electron": "^9.4.0",
     "electron-builder": "^20.43.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

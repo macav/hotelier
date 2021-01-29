@@ -1,21 +1,27 @@
-const { shell, ipcRenderer, remote } = require('electron');
-const { hotelConfig, hotelPort, hotelHost, hotelUrl, hotelTld } = require('./hotel-config');
+const electron = require('electron');
+const {
+  shell,
+  ipcRenderer,
+  remote: { nativeTheme },
+} = electron;
+const {
+  hotelConfig,
+  hotelPort,
+  hotelHost,
+  hotelUrl,
+  hotelTld,
+} = require('./hotel-config');
 
 if (process.platform === 'darwin') {
-  const { systemPreferences } = remote;
   const setTheme = () => {
-    const theme = systemPreferences.isDarkMode() ? 'dark' : 'light';
-    systemPreferences.setAppLevelAppearance(theme);
+    const theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light';
     window.localStorage.osTheme = theme;
     if ('__setTheme' in window) {
-      window.__setTheme()
+      window.__setTheme();
     }
   };
+  nativeTheme.addListener('updated', setTheme);
 
-  systemPreferences.subscribeNotification(
-    'AppleInterfaceThemeChangedNotification',
-    setTheme,
-  );
   setTheme();
 }
 

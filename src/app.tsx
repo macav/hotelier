@@ -12,7 +12,7 @@ class App extends Component {
           <Route exact={true} path="/" component={Main} />
           <Route exact={true} path="/logs/:server" component={Logs} />
         </div>
-      </Router >
+      </Router>
     );
   }
 }

@@ -1,0 +1,18 @@
+version: v1.0
+name: Hotelier
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      jobs:
+        - name: Test
+          commands:
+            - checkout
+            - sem-version node 12
+            - cache restore
+            - yarn install
+            - cache store
+            - bin/check

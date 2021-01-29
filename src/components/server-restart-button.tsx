@@ -8,19 +8,30 @@ interface Props {
   btnStyle?: string;
 }
 
-export default class ServerRestartButton extends React.Component<Props> {
+interface State {
+  server: Server;
+}
+
+export default class ServerRestartButton extends React.Component<Props, State> {
+  private api: HotelApi;
+
+  constructor(props: Props) {
+    super(props);
+    this.api = new HotelApi();
+  }
+
   restartServer = async () => {
     const { server } = this.props;
 
     server.status = Status.RESTARTING;
     this.setState({ server });
-    await HotelApi.stopServer(server.id);
-    await HotelApi.startServer(server.id);
+    await this.api.stopServer(server.id);
+    await this.api.startServer(server.id);
     setTimeout(() => {
       server.status = Status.RUNNING;
       this.setState({ server });
     }, 1000);
-  }
+  };
 
   render() {
     const { server, btnStyle } = this.props;
@@ -32,8 +43,15 @@ export default class ServerRestartButton extends React.Component<Props> {
         classNames="server-item"
         timeout={{ enter: 350, exit: 350 }}
       >
-        <button className={`btn ${btnStyle || 'btn-secondary'} restart-button`} onClick={this.restartServer}>
-          <span className={`fas fa-redo ${server.status === Status.RESTARTING ? 'spin' : ''}`} />
+        <button
+          className={`btn ${btnStyle || 'btn-secondary'} restart-button`}
+          onClick={this.restartServer}
+        >
+          <span
+            className={`fas fa-redo ${
+              server.status === Status.RESTARTING ? 'spin' : ''
+            }`}
+          />
         </button>
       </CSSTransition>
     );

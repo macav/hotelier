@@ -23,12 +23,14 @@ interface State {
 class Logs extends Component<Props, State> {
   isAtBottom: boolean;
   logsRef: HTMLPreElement | null = null;
+  private api: HotelApi;
 
   constructor(props: Props) {
     super(props);
     this.state = { logs: {} };
     this.onScroll = this.onScroll.bind(this);
     this.isAtBottom = true;
+    this.api = new HotelApi();
   }
 
   componentDidMount() {
@@ -68,7 +70,7 @@ class Logs extends Component<Props, State> {
 
   getServer = async () => {
     const serverId = this.props.match.params.server;
-    const servers = await HotelApi.getServers();
+    const servers = await this.api.getServers();
     return servers.find((server) => server.id === serverId);
   };
 

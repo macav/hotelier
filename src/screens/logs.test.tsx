@@ -2,6 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Logs from './logs';
+import fetchMock from 'jest-fetch-mock';
+import { Status } from '../interfaces';
 
 class MockLogRef {
   scrollTop = 50;
@@ -21,6 +23,9 @@ describe('Logs', () => {
   const match = { params: { server: 'server1' } };
 
   beforeEach(() => {
+    fetchMock.mockResponse(
+      JSON.stringify({ server1: { status: Status.RUNNING } })
+    );
     rendered = renderer.create(<Logs match={match as any} />, {
       createNodeMock: (element) => {
         if (element.type === 'pre') {
@@ -29,7 +34,7 @@ describe('Logs', () => {
         return null;
       },
     });
-    instance = rendered.getInstance() as any as Logs;
+    instance = (rendered.getInstance() as any) as Logs;
   });
 
   it('matches the snapshot', () => {
@@ -55,8 +60,16 @@ describe('Logs', () => {
     expect(instance.isAtBottom).toEqual(true);
   });
 
+  it('does not error when ref is not set', () => {
+    instance.logsRef = null;
+    expect(() => instance.onScroll()).not.toThrowError();
+  });
+
   it('updates the state of logs', () => {
-    (global as any).ipcRenderer = { on: (name: string, callback: any) => callback(null, { id: 'server1', output: 'log output' }) };
+    (global as any).ipcRenderer = {
+      on: (name: string, callback: any) =>
+        callback(null, { id: 'server1', output: 'log output' }),
+    };
     instance.watch();
     expect(instance.state.logs.server1.length).toEqual(1);
     expect(rendered.toJSON()).toMatchSnapshot('with logs');

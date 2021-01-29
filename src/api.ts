@@ -1,20 +1,20 @@
 import { Server } from './interfaces';
 
 export default class HotelApi {
-  static getServers = (): Promise<Server[]> => {
-    return window
-      .fetch(`${HotelApi.getHotelUrl()}/_/servers`)
-      .then(async (response) => {
+  getServers = (): Promise<Server[]> => {
+    return fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(
+      async (response) => {
         if (response.ok) {
-          return HotelApi.transformServersData(await response.json());
+          return this.transformServersData(await response.json());
         } else {
           console.error('Failed to load the servers', response.body);
           return [];
         }
-      });
+      }
+    );
   };
 
-  static transformServersData = (data: any): Server[] => {
+  transformServersData = (data: any): Server[] => {
     return Object.keys(data)
       .sort()
       .map((serverId) => {
@@ -27,8 +27,8 @@ export default class HotelApi {
       });
   };
 
-  static watchServers = (cb: any) => {
-    setInterval(() => HotelApi.getServers().then((data) => cb(data)), 3000);
+  watchServers = (cb: any) => {
+    setInterval(() => this.getServers().then((data) => cb(data)), 3000);
   };
 
   static getHotelUrl = () => {
@@ -36,22 +36,23 @@ export default class HotelApi {
     return process.env.NODE_ENV === 'development' ? '' : window.hotelUrl;
   };
 
-  static sendCommand = (id: string, command: string) => {
-    return HotelApi.postData(
+  sendCommand = (id: string, command: string) => {
+    return this.postData(
       `${HotelApi.getHotelUrl()}/_/servers/${id}/${command}`,
       null
     );
   };
 
-  static startServer = (id: string) => {
-    return HotelApi.sendCommand(id, 'start');
+  startServer = (id: string) => {
+    return this.sendCommand(id, 'start');
   };
 
-  static stopServer = (id: string) => {
-    return HotelApi.sendCommand(id, 'stop');
+  stopServer = (id: string) => {
+    return this.sendCommand(id, 'stop');
   };
 
-  static postData = (url: string, data: any) => {
+  postData = (url: string, data: any) => {
+    // console.log('post data', window.fetch);
     return fetch(url, {
       method: 'POST',
       headers: {

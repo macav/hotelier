@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports['Logs matches the snapshot 1'] = `
+exports[`Logs matches the snapshot 1`] = `
 <div
   className="h-100"
 >
@@ -13,6 +13,15 @@ exports['Logs matches the snapshot 1'] = `
       server1
        logs
     </div>
+    <button
+      className="btn btn-primary restart-button"
+      onClick={[Function]}
+      title="Restart"
+    >
+      <span
+        className="fas fa-redo "
+      />
+    </button>
     <button
       className="btn btn-primary"
       onClick={[Function]}
@@ -29,7 +38,7 @@ exports['Logs matches the snapshot 1'] = `
 </div>
 `;
 
-exports['Logs updates the state of logs: with logs 1'] = `
+exports[`Logs updates the state of logs: with logs 1`] = `
 <div
   className="h-100"
 >
@@ -42,6 +51,15 @@ exports['Logs updates the state of logs: with logs 1'] = `
       server1
        logs
     </div>
+    <button
+      className="btn btn-primary restart-button"
+      onClick={[Function]}
+      title="Restart"
+    >
+      <span
+        className="fas fa-redo "
+      />
+    </button>
     <button
       className="btn btn-primary"
       onClick={[Function]}

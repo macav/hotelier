@@ -2,6 +2,7 @@ import React from 'react';
 import HotelApi from '../api';
 import { AppFooter, AppHeader, ServerList } from '../components';
 import { Server, Status } from '../interfaces';
+import Utils from '../utils';
 
 interface Props {}
 interface HotelEvent {}
@@ -11,30 +12,33 @@ interface State {
 }
 
 class Main extends React.Component<Props, State> {
+  private api: HotelApi;
+
   constructor(props: Props) {
     super(props);
     this.state = { loading: false, servers: [] };
+    this.api = new HotelApi();
   }
 
   componentDidMount() {
     this.loadServers();
-    HotelApi.watchServers((servers: Server[]) => {
+    this.api.watchServers((servers: Server[]) => {
       this.serversLoaded(servers);
     });
     window.ipcRenderer.on('events', (e: Event, event: HotelEvent) => {
-      this.serversLoaded(HotelApi.transformServersData(event));
+      this.serversLoaded(this.api.transformServersData(event));
     });
   }
 
   loadServers = () => {
     this.setState({ loading: true });
-    return HotelApi.getServers().then((servers) => {
-      this.setState({ loading: false, servers });
+    return this.api.getServers().then((servers) => {
+      this.serversLoaded(servers);
     });
   };
 
   serversLoaded = (servers: Server[]) => {
-    this.setState({ loading: false, servers });
+    this.setState({ loading: false, servers: Utils.sortServers(servers) });
   };
 
   updateServerStatus = (id: string, status: Status) => {

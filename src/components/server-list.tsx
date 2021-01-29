@@ -11,18 +11,29 @@ interface Props {
 }
 
 export default class ServerList extends Component<Props> {
-  startServer = (id: string) => {
-    HotelApi.startServer(id).then(() => this.props.updateServerStatus(id, Status.RUNNING));
+  private api: HotelApi;
+
+  constructor(props: Props) {
+    super(props);
+    this.api = new HotelApi();
   }
+
+  startServer = (id: string) => {
+    this.api
+      .startServer(id)
+      .then(() => this.props.updateServerStatus(id, Status.RUNNING));
+  };
 
   stopServer = (id: string) => {
-    HotelApi.stopServer(id).then(() => this.props.updateServerStatus(id, Status.STOPPED));
-  }
+    this.api
+      .stopServer(id)
+      .then(() => this.props.updateServerStatus(id, Status.STOPPED));
+  };
 
   restartServer = async (server: Server) => {
-    await HotelApi.stopServer(server.id);
-    await HotelApi.startServer(server.id);
-  }
+    await this.api.stopServer(server.id);
+    await this.api.startServer(server.id);
+  };
 
   toggleServer = (server: Server) => {
     if ([Status.STOPPED, Status.CRASHED].includes(server.status)) {
@@ -30,7 +41,7 @@ export default class ServerList extends Component<Props> {
     } else {
       this.stopServer(server.id);
     }
-  }
+  };
 
   openServer = (server: Server) => {
     let serverUrl = `http://${server.id}.${window.hotelTld}`;
@@ -39,17 +50,17 @@ export default class ServerList extends Component<Props> {
     }
     utils.openExternalLink(serverUrl);
     this.props.loadServers();
-  }
+  };
 
   openLogs = (server: Server) => {
     window.ipcRenderer.send('showDock', server.id);
-  }
+  };
 
   render() {
     return (
       <div>
         <ul className="list-group">
-          {this.props.servers.map(server => {
+          {this.props.servers.map((server) => {
             return (
               <ServerItem
                 key={server.id}

@@ -17,10 +17,9 @@
     "__DEV__": false
   },
   "plugins": ["@typescript-eslint", "react"],
-  "extends": [
-    "plugin:react/recommended"
-  ],
+  "extends": ["plugin:react/recommended"],
   "rules": {
+    "react/prop-types": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "semi": ["error", "always"],

@@ -24,7 +24,10 @@ export default class ServerItem extends React.Component<Props, State> {
 
   componentDidUpdate() {
     const { server } = this.state;
-    if (server.status !== this.props.server.status && server.status !== Status.RESTARTING) {
+    if (
+      server.status !== this.props.server.status &&
+      server.status !== Status.RESTARTING
+    ) {
       this.setState({ server: this.props.server });
     }
   }
@@ -37,7 +40,7 @@ export default class ServerItem extends React.Component<Props, State> {
       default:
         return 'btn-light';
     }
-  }
+  };
 
   actionIconClassName = (status: string) => {
     switch (status) {
@@ -47,7 +50,7 @@ export default class ServerItem extends React.Component<Props, State> {
       default:
         return '';
     }
-  }
+  };
 
   render() {
     const { openServer, toggleServer, openLogs } = this.props;
@@ -55,25 +58,39 @@ export default class ServerItem extends React.Component<Props, State> {
     return (
       <li className="list-group-item list-group-item-action server-item">
         <div className="d-flex justify-content-between">
-          <div className={`server-name server-name--${server.status}`} onClick={() => openServer(server)}>
+          <div
+            className={`server-name server-name--${server.status}`}
+            onClick={() => openServer(server)}
+          >
             {server.id}
           </div>
           <div className="float-right">
             <div className="d-inline">
-              <ServerRestartButton server={server} />
+              <ServerRestartButton serverId={server.id} />
             </div>
             <div className="d-inline mx-1">
               <button
                 type="button"
                 title="Toggle"
-                className={`btn toggle-state-button ${this.actionClassName(server.status)}`}
+                className={`btn toggle-state-button ${this.actionClassName(
+                  server.status
+                )}`}
                 onClick={() => toggleServer(server)}
               >
-                <span className={`tcon tcon-remove tcon-remove--chevron-right ${this.actionIconClassName(server.status)}`} />
+                <span
+                  className={`tcon tcon-remove tcon-remove--chevron-right ${this.actionIconClassName(
+                    server.status
+                  )}`}
+                />
               </button>
             </div>
             <div className="d-inline">
-              <button type="button" className="btn btn-light mr-1" title="Logs" onClick={() => openLogs(server)}>
+              <button
+                type="button"
+                className="btn btn-light mr-1"
+                title="Logs"
+                onClick={() => openLogs(server)}
+              >
                 <i className="fas fa-bars" />
               </button>
             </div>

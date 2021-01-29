@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import uniqueId from 'lodash/uniqueId';
 import { match } from 'react-router-dom';
 import { formatLines } from '../formatter';
 import ServerRestartButton from '../components/server-restart-button';
 import HotelApi from '../api';
 import { Server } from '../interfaces';
+import { HotelContext } from './hotel-context';
 
 interface Output {
   id: string;
@@ -15,101 +16,77 @@ interface Props {
   match: match<{ server: string }>;
 }
 
-interface State {
-  logs: { [key: string]: Array<{ id: string; html: string }> };
-  server?: Server;
-}
+const Logs: React.FC<Props> = ({ match }) => {
+  const logsRef = useRef<HTMLPreElement>(null);
+  const isAtBottom = useRef<boolean>(true);
 
-class Logs extends Component<Props, State> {
-  isAtBottom: boolean;
-  logsRef: HTMLPreElement | null = null;
-  private api: HotelApi;
+  const { api } = useContext(HotelContext);
 
-  constructor(props: Props) {
-    super(props);
-    this.state = { logs: {} };
-    this.onScroll = this.onScroll.bind(this);
-    this.isAtBottom = true;
-    this.api = new HotelApi();
-  }
+  const [logs, setLogs] = useState<{
+    [key: string]: Array<{ id: string; html: string }>;
+  }>({});
 
-  componentDidMount() {
-    this.watch();
-    if (this.logsRef) {
-      this.logsRef.addEventListener('scroll', this.onScroll);
-    }
-    this.getServer().then((server) => this.setState({ server }));
-  }
-
-  scrollToBottomIfNecessary() {
-    if (this.isAtBottom && this.logsRef) {
-      this.logsRef.scrollTop = this.logsRef.scrollHeight;
-    }
-  }
-
-  onScroll() {
-    if (!this.logsRef) {
+  const onScroll = () => {
+    if (!logsRef.current) {
       return;
     }
-    const { scrollHeight, scrollTop, clientHeight } = this.logsRef;
-    this.isAtBottom = scrollHeight - scrollTop === clientHeight;
-  }
+    const { scrollHeight, scrollTop, clientHeight } = logsRef.current;
+    isAtBottom.current = scrollHeight - scrollTop === clientHeight;
+  };
 
-  watch = () => {
+  const scrollToBottomIfNecessary = () => {
+    if (isAtBottom.current && logsRef.current) {
+      logsRef.current.scrollTop = logsRef.current.scrollHeight;
+    }
+  };
+
+  const watchRef = useRef(() => {
     window.ipcRenderer.on('output', (e: Event, output: Output) => {
-      const { logs } = this.state;
       const lines = formatLines(output.output).map((html) => ({
         html,
         id: uniqueId(),
       }));
       const logInstance = [...(logs[output.id] || []), ...lines];
-      this.setState({ logs: { ...logs, [output.id]: logInstance } });
-      this.scrollToBottomIfNecessary();
+      logs[output.id] = logInstance;
+      setLogs(logs);
+      scrollToBottomIfNecessary();
     });
+  });
+
+  useEffect(() => {
+    watchRef.current();
+    logsRef.current?.addEventListener('scroll', onScroll);
+  }, []);
+
+  const clearLogs = () => {
+    const appId = match.params.server;
+    setLogs({ ...logs, [appId]: [] });
   };
 
-  getServer = async () => {
-    const serverId = this.props.match.params.server;
-    const servers = await this.api.getServers();
-    return servers.find((server) => server.id === serverId);
-  };
-
-  clearLogs = () => {
-    const appId = this.props.match.params.server;
-    this.setState({ logs: { ...this.state.logs, [appId]: [] } });
-  };
-
-  render() {
-    const appId = this.props.match.params.server;
-    const logs = this.state.logs[appId] || [];
-    return (
-      <div className="h-100">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
-          <div className="mr-auto font-weight-bold text-center text-white">
-            {appId} logs
-          </div>
-          {this.state.server && (
-            <ServerRestartButton
-              btnStyle="btn-primary"
-              server={this.state.server}
-            />
-          )}
-          <button
-            className="btn btn-primary"
-            title="Clear logs"
-            onClick={this.clearLogs}
-          >
-            <i className="fas fa-eraser" />
-          </button>
-        </nav>
-        <pre className="logs-window" ref={(ref) => (this.logsRef = ref)}>
-          {logs.map((log) => (
-            <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }} />
-          ))}
-        </pre>
-      </div>
-    );
-  }
-}
+  const appId = match.params.server;
+  const currentLogs = logs[appId] || [];
+  return (
+    <div className="h-100">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
+        <div className="mr-auto font-weight-bold text-center text-white">
+          {appId} logs
+        </div>
+        <ServerRestartButton btnStyle="btn-primary" serverId={appId} />
+        <button
+          className="btn btn-primary"
+          title="Clear logs"
+          onClick={clearLogs}
+        >
+          <i className="fas fa-eraser" />
+        </button>
+      </nav>
+      <pre className="logs-window" ref={logsRef}>
+        {currentLogs.map((log) => (
+          <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }} />
+        ))}
+      </pre>
+    </div>
+  );
+};
 
 export default Logs;

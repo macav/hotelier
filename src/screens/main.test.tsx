@@ -98,7 +98,9 @@ describe('Main', () => {
     });
 
     it('updates the corresponding server with the new status', (done) => {
-      const instance = (renderer.create(<Main />).getInstance() as any) as Main;
+      const instance = (renderer
+        .create(<Main />)
+        .getInstance() as any) as typeof Main;
       process.nextTick(() => {
         instance.updateServerStatus('server1', Status.STOPPED);
         expect(instance.state.servers[0].status).toEqual(Status.STOPPED);

@@ -14,10 +14,14 @@ export const ServerRestartButton: React.FC<Props> = ({
 }) => {
   const { api, servers } = useContext(HotelContext);
 
-  const [server, setServer] = useState<Server | undefined>(undefined);
+  const getServer = () => {
+    return servers.find((server) => server.id === serverId)!;
+  };
+
+  const [server, setServer] = useState<Server>(getServer());
 
   useEffect(() => {
-    setServer(servers.find((server) => server.id === serverId)!);
+    setServer(getServer());
   }, [serverId]);
 
   const restartServer = async () => {
@@ -31,7 +35,7 @@ export const ServerRestartButton: React.FC<Props> = ({
     }, 1000);
   };
 
-  return server === undefined ? null : (
+  return (
     <CSSTransition
       title="Restart"
       in={[Status.RUNNING, Status.RESTARTING].includes(server!.status)}
@@ -44,6 +48,7 @@ export const ServerRestartButton: React.FC<Props> = ({
         onClick={restartServer}
       >
         <span
+          data-testid="restart-icon"
           className={`fas fa-redo ${
             server!.status === Status.RESTARTING ? 'spin' : ''
           }`}

@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ServerRestartButton matches snapshot with provided btnStyle 1`] = `ShallowWrapper {}`;
-
-exports[`ServerRestartButton matches the snapshot 1`] = `ShallowWrapper {}`;

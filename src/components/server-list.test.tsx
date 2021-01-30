@@ -1,169 +1,74 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import hotelApi from '../api';
-import { Server, Status } from '../interfaces';
+import { fireEvent, render, screen, waitFor, act } from '../test-utils';
 import utils from '../utils';
 import ServerList from './server-list';
 
 describe('ServerList', () => {
-  const servers: Server[] = [
-    { id: 'test-server-1', status: Status.RUNNING, env: {} },
-    { id: 'test-server-2', status: Status.STOPPED, env: {} },
-    { id: 'test-server-3', status: Status.RUNNING, env: { PORT: 3000 } },
-  ];
-  let updateServerStatusFn: any;
-  let loadServersFn: any;
-
-  beforeEach(() => {
-    updateServerStatusFn = jest.fn();
-    loadServersFn = jest.fn();
-  });
+  const api = {
+    startServer: jest.fn(),
+    stopServer: jest.fn(),
+  };
 
   function create() {
-    return shallow(
-      <ServerList
-        updateServerStatus={updateServerStatusFn}
-        loadServers={loadServersFn}
-        servers={servers}
-      />
-    );
+    return render(<ServerList />, api);
   }
 
-  it('matches the snapshot', () => {
-    const rendered = create();
-    expect(rendered).toMatchSnapshot();
+  it('renders the component', () => {
+    create();
+    expect(
+      screen
+        .getAllByText('server1')[0]
+        .classList.contains('server-name--stopped')
+    ).toEqual(true);
+    expect(
+      screen
+        .getAllByText('server2')[0]
+        .classList.contains('server-name--running')
+    ).toEqual(true);
   });
 
-  describe('#startServer', () => {
-    let instance: ServerList;
-
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-      instance['api'].startServer = jest
-        .fn()
-        .mockReturnValue(Promise.resolve());
-      instance.startServer(servers[0].id);
-    });
-
-    it('calls the api', () => {
-      expect(instance['api'].startServer).toHaveBeenCalledWith('test-server-1');
-    });
-
-    it('updates the state', () => {
-      expect(updateServerStatusFn).toHaveBeenCalledWith(
-        'test-server-1',
-        Status.RUNNING
-      );
-    });
+  it('can open logs', () => {
+    create();
+    window.ipcRenderer = {
+      send: jest.fn(),
+    };
+    fireEvent.click(screen.getAllByTitle('Logs')[0]);
+    // server2 is running, so it's the first element
+    expect(window.ipcRenderer.send).toHaveBeenCalledWith('showDock', 'server2');
   });
 
-  describe('#stopServer', () => {
-    let instance: ServerList;
+  it('can open the server', () => {
+    create();
+    utils.openExternalLink = jest.fn();
+    fireEvent.click(screen.getByText('server2'));
+    expect(utils.openExternalLink).toHaveBeenCalledWith(
+      expect.stringContaining('server2')
+    );
 
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-      instance['api'].stopServer = jest.fn().mockReturnValue(Promise.resolve());
-      instance.stopServer(servers[0].id);
-    });
-
-    it('calls the api', () => {
-      expect(instance['api'].stopServer).toHaveBeenCalledWith('test-server-1');
-    });
-
-    it('updates the state', () => {
-      expect(updateServerStatusFn).toHaveBeenCalledWith(
-        'test-server-1',
-        Status.STOPPED
-      );
-    });
+    fireEvent.click(screen.getByText('server3'));
+    expect(utils.openExternalLink).toHaveBeenCalledWith(
+      expect.stringContaining('server3')
+    );
+    // port is in the URL
+    expect(utils.openExternalLink).toHaveBeenCalledWith(
+      expect.stringContaining(':3000')
+    );
   });
 
-  describe('#restartServer', () => {
-    let instance: ServerList;
+  it('can toggle a server', async () => {
+    api.stopServer.mockResolvedValue(true);
+    create();
+    fireEvent.click(screen.getAllByTitle('Toggle')[0]);
+    expect(api.stopServer).toHaveBeenCalled();
 
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-      instance['api'].startServer = jest
-        .fn()
-        .mockReturnValue(Promise.resolve());
-      instance['api'].stopServer = jest.fn().mockReturnValue(Promise.resolve());
-      instance.restartServer(servers[0]);
-    });
+    api.startServer.mockResolvedValue(true);
+    fireEvent.click(screen.getAllByTitle('Toggle')[1]);
+    expect(api.startServer).toHaveBeenCalled();
 
-    it('calls the api', () => {
-      expect(instance['api'].startServer).toHaveBeenCalledWith('test-server-1');
-      expect(instance['api'].stopServer).toHaveBeenCalledWith('test-server-1');
-    });
-  });
-
-  describe('#toggleServer', () => {
-    let instance: ServerList;
-
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-      instance['api'].startServer = jest
-        .fn()
-        .mockReturnValue(Promise.resolve());
-      instance['api'].stopServer = jest.fn().mockReturnValue(Promise.resolve());
-    });
-
-    it('starts when it is stopped', () => {
-      instance.toggleServer(servers[1]);
-      expect(instance['api'].startServer).toHaveBeenCalledWith('test-server-2');
-    });
-
-    it('stops when it is started', () => {
-      instance.toggleServer(servers[0]);
-      expect(instance['api'].stopServer).toHaveBeenCalledWith('test-server-1');
-    });
-  });
-
-  describe('#openLogs', () => {
-    let instance: ServerList;
-
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-    });
-
-    it('send an event via ipcRenderer', () => {
-      (global as any).ipcRenderer = { send: jest.fn() };
-      instance.openLogs(servers[1]);
-      expect((global as any).ipcRenderer.send).toHaveBeenCalledWith(
-        'showDock',
-        servers[1].id
-      );
-    });
-  });
-
-  describe('#openServer', () => {
-    let instance: ServerList;
-    let openLinkSpy: jest.SpyInstance;
-
-    beforeEach(() => {
-      instance = create().instance() as ServerList;
-      openLinkSpy = jest.spyOn(utils, 'openExternalLink');
-      jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-      jest.useRealTimers();
-      openLinkSpy.mockClear();
-    });
-
-    it('can open server and reload servers afterwards', () => {
-      instance.openServer(servers[0]);
-      expect(utils.openExternalLink).toHaveBeenCalledWith(
-        'http://test-server-1.localhost'
-      );
-      expect(loadServersFn).toHaveBeenCalled();
-      loadServersFn.mockClear();
-    });
-
-    it('can open server with port in URL if defined', () => {
-      instance.openServer(servers[2]);
-      expect(utils.openExternalLink).toHaveBeenCalledWith(
-        'http://test-server-3.localhost:3000'
-      );
+    fireEvent.click(screen.getAllByTitle('Restart')[0]);
+    await waitFor(() => {
+      expect(api.stopServer).toHaveBeenCalled();
+      expect(api.startServer).toHaveBeenCalled();
     });
   });
 });

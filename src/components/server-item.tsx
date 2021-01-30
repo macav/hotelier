@@ -4,7 +4,6 @@ import ServerRestartButton from './server-restart-button';
 
 interface Props {
   server: Server;
-  restartServer: (server: Server) => void;
   openServer: (server: Server) => void;
   toggleServer: (server: Server) => void;
   openLogs: (server: Server) => void;

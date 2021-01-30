@@ -17,11 +17,6 @@ export const ServerList: React.FC<Props> = (props: Props) => {
     api.stopServer(id).then(() => updateServerStatus!(id, Status.STOPPED));
   };
 
-  const restartServer = async (server: Server) => {
-    await api.stopServer(server.id);
-    await api.startServer(server.id);
-  };
-
   const toggleServer = (server: Server) => {
     if ([Status.STOPPED, Status.CRASHED].includes(server.status)) {
       startServer(server.id);
@@ -53,7 +48,6 @@ export const ServerList: React.FC<Props> = (props: Props) => {
               toggleServer={toggleServer}
               openLogs={openLogs}
               openServer={openServer}
-              restartServer={restartServer}
             />
           );
         })}

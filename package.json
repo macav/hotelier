@@ -28,6 +28,7 @@
     "tail": "^2.2.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.3",
     "@types/electron": "^1.6.10",
     "@types/enzyme": "^3.9.3",
     "@types/escape-html": "^0.0.20",

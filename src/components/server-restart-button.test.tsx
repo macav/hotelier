@@ -1,63 +1,39 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import hotelApi from '../api';
-import { Server, Status } from '../interfaces';
-import utils from '../utils';
-import ServerList from './server-list';
+import { fireEvent, render, screen, waitFor, act } from '../test-utils';
 import ServerRestartButton from './server-restart-button';
 
 describe('ServerRestartButton', () => {
-  const server: Server = {
-    id: 'test-server-1',
-    status: Status.RUNNING,
-    env: {},
+  const api = {
+    startServer: jest.fn(),
+    stopServer: jest.fn(),
   };
-  let updateServerStatusFn: any;
-  let loadServersFn: any;
 
-  beforeEach(() => {
-    updateServerStatusFn = jest.fn();
-    loadServersFn = jest.fn();
-  });
-
-  function create(btnStyle?: string) {
-    return shallow(<ServerRestartButton btnStyle={btnStyle} server={server} />);
+  function create(serverId = 'server2') {
+    return render(<ServerRestartButton serverId={serverId} />, api);
   }
 
-  it('matches the snapshot', () => {
-    const rendered = create();
-    expect(rendered).toMatchSnapshot();
+  it('renders the component', () => {
+    create();
+    expect(
+      screen.getByRole('button').getElementsByClassName('fas fa-redo')
+    ).toHaveLength(1);
   });
 
-  it('matches snapshot with provided btnStyle', () => {
-    const rendered = create('btn-primary');
-    expect(rendered).toMatchSnapshot();
-  });
-
-  describe('#restartServer', () => {
-    let instance: ServerRestartButton;
-
-    beforeEach(() => {
-      instance = create().instance() as ServerRestartButton;
-      instance['api'].startServer = jest.fn().mockResolvedValue(true);
-      instance['api'].stopServer = jest.fn().mockResolvedValue(true);
-      jest.useFakeTimers();
-      instance.restartServer();
-    });
-
-    afterEach(() => {
-      jest.useRealTimers();
-    });
-
-    it('calls the api', () => {
-      expect(instance['api'].startServer).toHaveBeenCalledWith('test-server-1');
-      expect(instance['api'].stopServer).toHaveBeenCalledWith('test-server-1');
-    });
-
-    it('updates the state', () => {
-      expect(instance.state.server.status).toEqual(Status.RESTARTING);
+  it('restarts the server when clicking on the button', async () => {
+    jest.useFakeTimers();
+    const { rerender } = create();
+    fireEvent.click(screen.getByRole('button'));
+    await waitFor(() => expect(api.stopServer).toHaveBeenCalled());
+    await waitFor(() => expect(api.startServer).toHaveBeenCalled());
+    rerender(<ServerRestartButton serverId={'server2'} />);
+    let icon = await screen.findByTestId('restart-icon');
+    expect(icon.classList.contains('spin')).toEqual(true);
+    await act(async () => {
       jest.runTimersToTime(1000);
-      expect(instance.state.server.status).toEqual(Status.RUNNING);
+      rerender(<ServerRestartButton serverId={'server2'} />);
+      icon = await screen.findByTestId('restart-icon');
+      expect(icon.classList.contains('spin')).toEqual(false);
     });
+    jest.useRealTimers();
   });
 });

@@ -73,7 +73,7 @@
     "electron:build": "electron-builder build",
     "postbuild": "yarn electron:build",
     "pregh-publish": "react-scripts build",
-    "gh-publish": "build --mac --win -p always",
+    "gh-publish": "yarn build --mac --win -p always",
     "lint": "eslint src/**/*.ts{,x} --no-ignore",
     "lint:fix": "yarn lint --fix"
   },

@@ -10,37 +10,37 @@ describe('ServerItem', () => {
   let instance: ServerItem;
 
   beforeEach(() => {
-    runningServer = { id: 'test-server-1', status: Status.RUNNING };
-    stoppedServer = { id: 'test-server-2', status: Status.STOPPED };
+    runningServer = { id: 'test-server-1', status: Status.RUNNING, env: {} };
+    stoppedServer = { id: 'test-server-2', status: Status.STOPPED, env: {} };
     Utils.openExternalLink = jest.fn();
   });
 
-  function renderComponent({ restartServer, server, openServer, toggleServer, openLogs }:
-    { restartServer?: any, server?: Server, openServer?: any, toggleServer?: any, openLogs?: any } = {}) {
-    const rendered = shallow((
+  function renderComponent({
+    restartServer,
+    server,
+    openServer,
+    toggleServer,
+    openLogs,
+  }: {
+    restartServer?: any;
+    server?: Server;
+    openServer?: any;
+    toggleServer?: any;
+    openLogs?: any;
+  } = {}) {
+    const rendered = shallow(
       <ServerItem
         server={server || runningServer}
         openServer={openServer || jest.fn()}
         toggleServer={toggleServer || jest.fn()}
-        restartServer={restartServer || jest.fn()}
         openLogs={openLogs || jest.fn()}
       />
-    ));
+    );
     instance = rendered.instance() as ServerItem;
     return rendered;
   }
 
   describe('#componentDidUpdate', () => {
-    it('does not update the state if server is restarting', () => {
-      const restartServer = jest.fn();
-      const rendered = renderComponent({ restartServer });
-      instance.restartServer(runningServer);
-      const newServerState = { ...runningServer };
-      newServerState.status = Status.STOPPED;
-      rendered.setProps({ server: newServerState });
-      expect(instance.state.server.status).toEqual(Status.RESTARTING);
-    });
-
     it('updates the state from new props if server is not restarting', () => {
       const rendered = renderComponent();
       const newServerState = { ...runningServer };
@@ -68,7 +68,9 @@ describe('ServerItem', () => {
     });
 
     it('is danger when status is RUNNING', () => {
-      expect(instance.actionClassName(Status.RUNNING)).toEqual('btn-danger text-white');
+      expect(instance.actionClassName(Status.RUNNING)).toEqual(
+        'btn-danger text-white'
+      );
     });
 
     it('is light when status is unknown', () => {
@@ -86,29 +88,14 @@ describe('ServerItem', () => {
   it('can toggle server by clicking on the action button', () => {
     const toggleServer = jest.fn();
     const wrapper = renderComponent({ toggleServer });
-    wrapper.find('button').at(1).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(toggleServer).toHaveBeenCalled();
   });
 
   it('can open logs of server by clicking on the logs button', () => {
     const openLogs = jest.fn();
     const wrapper = renderComponent({ openLogs });
-    wrapper.find('button').at(2).simulate('click');
+    wrapper.find('button').at(1).simulate('click');
     expect(openLogs).toHaveBeenCalled();
-  });
-
-  describe('restart button', () => {
-    it('can restart server by clicking on the restart button', () => {
-      jest.useFakeTimers();
-      const restartServer = jest.fn();
-      const wrapper = renderComponent({ restartServer });
-      wrapper.find('.restart-button').first().simulate('click');
-      expect(restartServer).toHaveBeenCalled();
-      expect(runningServer.status).toEqual(Status.RESTARTING);
-      expect(instance.state.server.status).toEqual(Status.RESTARTING);
-      jest.runOnlyPendingTimers();
-      expect(runningServer.status).toEqual(Status.RUNNING);
-      expect(instance.state.server.status).toEqual(Status.RUNNING);
-    });
   });
 });

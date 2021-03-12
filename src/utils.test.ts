@@ -1,3 +1,4 @@
+import { Server, Status } from './interfaces';
 import utils from './utils';
 jest.mock('is-electron', () => () => false);
 
@@ -23,6 +24,22 @@ describe('utils', () => {
       };
       utils.openExternalLink('link');
       expect(window.shell.openExternal).toHaveBeenCalledWith('link');
+    });
+  });
+
+  describe('#sortServers', () => {
+    it('puts running servers on top, the rest is sorted by the id', () => {
+      const servers: Server[] = [
+        { id: 'c', status: Status.CRASHED, env: {} },
+        { id: 'b', status: Status.RUNNING, env: {} },
+        { id: 'a', status: Status.STOPPED, env: {} },
+        { id: 'a', status: Status.STOPPED, env: {} },
+      ];
+      utils.sortServers(servers);
+      expect(servers[0].id).toEqual('b');
+      expect(servers[1].id).toEqual('a');
+      expect(servers[2].id).toEqual('a');
+      expect(servers[3].id).toEqual('c');
     });
   });
 });

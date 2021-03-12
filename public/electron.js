@@ -5,20 +5,20 @@ const url = require('url');
 const positioner = require('electron-traywindow-positioner');
 var EventSource = require('eventsource');
 const { hotelUrl } = require('./hotel-config');
-const { autoUpdater } = require("electron-updater")
+const { autoUpdater } = require('electron-updater');
 
 autoUpdater.checkForUpdatesAndNotify();
 
 const assetsDirectory = path.join(__dirname, './assets');
 
 const output = new EventSource(`${hotelUrl}/_/events/output`);
-output.addEventListener('message', event => {
+output.addEventListener('message', (event) => {
   logsWindow.webContents.send('output', JSON.parse(event.data));
   window.webContents.send('output', JSON.parse(event.data));
 });
 
 const events = new EventSource(`${hotelUrl}/_/events`);
-events.addEventListener('message', event => {
+events.addEventListener('message', (event) => {
   logsWindow.webContents.send('events', JSON.parse(event.data));
   window.webContents.send('events', JSON.parse(event.data));
 });
@@ -68,11 +68,13 @@ const createTray = () => {
   });
 };
 
-const startUrl = process.env.ELECTRON_START_URL || url.format({
-  pathname: path.join(__dirname, './index.html'),
-  protocol: 'file:',
-  slashes: true,
-});
+const startUrl =
+  process.env.ELECTRON_START_URL ||
+  url.format({
+    pathname: path.join(__dirname, './index.html'),
+    protocol: 'file:',
+    slashes: true,
+  });
 
 const createWindow = () => {
   window = new BrowserWindow({
@@ -85,6 +87,7 @@ const createWindow = () => {
     transparent: true,
     webPreferences: {
       backgroundThrottling: false,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),
     },
   });
@@ -95,12 +98,12 @@ const createWindow = () => {
 
   window.on('blur', () => {
     blurredRecently = true;
-    setTimeout(() => blurredRecently = false, 100);
+    setTimeout(() => (blurredRecently = false), 100);
     if (!window.webContents.isDevToolsOpened()) {
       window.hide();
     }
   });
-  window.on('close', e => {
+  window.on('close', (e) => {
     closingApp = true;
     logsWindow.close();
   });
@@ -115,6 +118,7 @@ const createLogWindow = () => {
     frame: true,
     webPreferences: {
       backgroundThrottling: false,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),
     },
   });
@@ -123,7 +127,7 @@ const createLogWindow = () => {
     evt.preventDefault();
   });
   logsWindow.loadURL(startUrl);
-  logsWindow.on('close', e => {
+  logsWindow.on('close', (e) => {
     if (!closingApp) {
       e.preventDefault();
       if (process.platform === 'darwin') {
@@ -157,7 +161,9 @@ ipcMain.on('showDock', (_event, serverId) => {
   } else {
     activeLogsWindowServer = serverId;
     logsWindow.setTitle(`Hotelier - Logs of ${serverId}`);
-    logsWindow.webContents.executeJavaScript(`location.href = "#/logs/${serverId}"`);
+    logsWindow.webContents.executeJavaScript(
+      `location.href = "#/logs/${serverId}"`
+    );
     if (!logsWindow.isVisible()) {
       logsWindow.show();
       if (process.platform === 'darwin') {

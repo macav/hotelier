@@ -1,36 +1,58 @@
-export default class HotelApi {
-  static getServers = () => {
-    return window.fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return [];
-      }
-    });
-  }
+import { Server } from './interfaces';
 
-  static watchServers = (cb: any) => {
-    setInterval(() => HotelApi.getServers().then(data => cb(data)), 3000);
-  }
+export default class HotelApi {
+  getServers = (): Promise<Server[]> => {
+    return fetch(`${HotelApi.getHotelUrl()}/_/servers`).then(
+      async (response) => {
+        if (response.ok) {
+          return this.transformServersData(await response.json());
+        } else {
+          console.error('Failed to load the servers', response.body);
+          return [];
+        }
+      }
+    );
+  };
+
+  transformServersData = (data: any): Server[] => {
+    return Object.keys(data)
+      .sort()
+      .map((serverId) => {
+        const server: Server = data[serverId];
+        return {
+          id: serverId,
+          status: server.status,
+          env: server.env,
+        };
+      });
+  };
+
+  watchServers = (cb: any) => {
+    setInterval(() => this.getServers().then((data) => cb(data)), 3000);
+  };
 
   static getHotelUrl = () => {
     // In development, we have a reverse proxy to localhost:2000 (see package.json)
     return process.env.NODE_ENV === 'development' ? '' : window.hotelUrl;
-  }
+  };
 
-  static sendCommand = (id: string, command: string) => {
-    return HotelApi.postData(`${HotelApi.getHotelUrl()}/_/servers/${id}/${command}`, null);
-  }
+  sendCommand = (id: string, command: string) => {
+    return this.postData(
+      `${HotelApi.getHotelUrl()}/_/servers/${id}/${command}`,
+      null
+    );
+  };
 
-  static startServer = (id: string) => {
-    return HotelApi.sendCommand(id, 'start');
-  }
+  startServer = (id: string) => {
+    return this.sendCommand(id, 'start');
+  };
 
-  static stopServer = (id: string) => {
-    return HotelApi.sendCommand(id, 'stop');
-  }
+  stopServer = (id: string) => {
+    return this.sendCommand(id, 'stop');
+  };
 
-  static postData = (url: string, data: any) => {
+  postData = (url: string, data: any) => {
+    // console.log('post data', window.fetch);
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -38,5 +60,5 @@ export default class HotelApi {
       },
       body: JSON.stringify(data),
     });
-  }
+  };
 }

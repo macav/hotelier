@@ -1,7 +1,11 @@
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import uniqueId from 'lodash/uniqueId';
-import React, { Component } from 'react';
 import { match } from 'react-router-dom';
 import { formatLines } from '../formatter';
+import ServerRestartButton from '../components/server-restart-button';
+import HotelApi from '../api';
+import { Server } from '../interfaces';
+import { HotelContext } from './hotel-context';
 
 interface Output {
   id: string;
@@ -12,74 +16,75 @@ interface Props {
   match: match<{ server: string }>;
 }
 
-interface State {
-  logs: { [key: string]: Array<{ id: string, html: string }> };
-}
+const Logs: React.FC<Props> = ({ match }) => {
+  const { servers } = useContext(HotelContext);
+  const logsRef = useRef<HTMLPreElement>(null);
+  const isAtBottom = useRef<boolean>(true);
 
-class Logs extends Component<Props, State> {
-  isAtBottom: boolean;
-  logsRef: HTMLPreElement | null = null;
+  const [logs, setLogs] = useState<{
+    [key: string]: Array<{ id: string; html: string }>;
+  }>({});
 
-  constructor(props: Props) {
-    super(props);
-    this.state = { logs: {} };
-    this.onScroll = this.onScroll.bind(this);
-    this.isAtBottom = true;
-  }
+  const onScroll = () => {
+    const { scrollHeight, scrollTop, clientHeight } = logsRef.current!;
+    isAtBottom.current = scrollHeight - scrollTop === clientHeight;
+  };
 
-  componentDidMount() {
-    this.watch();
-    if (this.logsRef) {
-      this.logsRef.addEventListener('scroll', this.onScroll);
+  const scrollToBottomIfNecessary = () => {
+    if (isAtBottom.current) {
+      logsRef.current!.scrollTop = logsRef.current!.scrollHeight;
     }
-  }
+  };
 
-  scrollToBottomIfNecessary() {
-    if (this.isAtBottom && this.logsRef) {
-      this.logsRef.scrollTop = this.logsRef.scrollHeight;
-    }
-  }
-
-  onScroll() {
-    const { scrollHeight, scrollTop, clientHeight } = this.logsRef!;
-    this.isAtBottom = scrollHeight - scrollTop === clientHeight;
-  }
-
-  watch = () => {
+  const watchRef = useRef(() => {
     window.ipcRenderer.on('output', (e: Event, output: Output) => {
-      const { logs } = this.state;
-      const lines = formatLines(output.output).map(html => ({ html, id: uniqueId() }));
+      const lines = formatLines(output.output).map((html) => ({
+        html,
+        id: uniqueId(),
+      }));
       const logInstance = [...(logs[output.id] || []), ...lines];
-      this.setState({ logs: { ...logs, [output.id]: logInstance } });
-      this.scrollToBottomIfNecessary();
+      logs[output.id] = logInstance;
+      setLogs(logs);
+      scrollToBottomIfNecessary();
     });
-  }
+  });
 
-  clearLogs = () => {
-    const appId = this.props.match.params.server;
-    this.setState({ logs: { ...this.state.logs, [appId]: [] } });
-  }
+  useEffect(() => {
+    watchRef.current();
+    logsRef.current?.addEventListener('scroll', onScroll);
+  }, []);
 
-  render() {
-    const appId = this.props.match.params.server;
-    const logs = this.state.logs[appId] || [];
-    return (
-      <div className="h-100">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
-          <div className="mr-auto font-weight-bold text-center text-white">{appId} logs</div>
-          <button className="btn btn-primary" title="Clear logs" onClick={this.clearLogs}>
-            <i className="fas fa-eraser"/>
-          </button>
-        </nav>
-        <pre className="logs-window" ref={ref => this.logsRef = ref}>
-          {logs.map(log => (
+  const clearLogs = () => {
+    const appId = match.params.server;
+    setLogs({ ...logs, [appId]: [] });
+  };
 
-            <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }}/>
-          ))}
-        </pre>
-      </div>
-    );
-  }
-}
+  const serverId = match.params.server;
+  const server = servers.find((server) => server.id === serverId)!;
+  const currentLogs = logs[serverId] || [];
+
+  return (
+    <div className="h-100">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
+        <div className="mr-auto font-weight-bold text-center text-white">
+          {serverId} logs
+        </div>
+        <ServerRestartButton btnStyle="btn-primary" server={server} />
+        <button
+          className="btn btn-primary"
+          title="Clear logs"
+          onClick={clearLogs}
+        >
+          <i className="fas fa-eraser" />
+        </button>
+      </nav>
+      <pre data-testid="logs-window" className="logs-window" ref={logsRef}>
+        {currentLogs.map((log) => (
+          <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }} />
+        ))}
+      </pre>
+    </div>
+  );
+};
 
 export default Logs;

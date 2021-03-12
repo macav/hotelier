@@ -1,10 +1,17 @@
-# Hotelier [![CircleCI](https://circleci.com/gh/macav/hotelier/tree/master.svg?style=svg)](https://circleci.com/gh/macav/hotelier/tree/master)
+# Hotelier
 
 Tray App for [Hotel](https://github.com/typicode/hotel) process manager which works on Windows, Mac and (potentially) Linux.
 
 ## Install
 
-Download the [latest release](http://www.github.com/macav/hotelier/releases) and install it.
+Download the [latest release](https://www.github.com/macav/hotelier/releases) and install it.
+
+Alternately, install with [Homebrew](https://brew.sh) on macOS:
+
+```shellsession
+$ brew tap macav/hotelier https://www.github.com/macav/hotelier.git
+$ brew cask install hotelier
+```
 
 ## About
 
@@ -34,24 +41,24 @@ The builds are available for Mac (`.dmg`) and Windows (32 & 64 bit).
 
 Currently, the following features are implemented:
 
-* See all your servers with status
-* Start / stop servers
-* Open the server URL by clicking on the server
-* Browse logs
-* Handles Hotel configuration (host, port, TLD)
-* Dark mode
+- See all your servers with status
+- Start / stop servers
+- Open the server URL by clicking on the server
+- Browse logs
+- Handles Hotel configuration (host, port, TLD)
+- Dark mode
 
 In the future, I plan to add at least:
 
-* Handling of edge cases (e.g. Hotel not installed)
-* Custom config (per-server - such as opening URL, or global - theme)
+- Handling of edge cases (e.g. Hotel not installed)
+- Custom config (per-server - such as opening URL, or global - theme)
 
 ## Contribution
 
-* `git clone git@github.com:macav/hotelier.git`
-* `cd hotelier`
-* `yarn`
-* `yarn start`
+- `git clone git@github.com:macav/hotelier.git`
+- `cd hotelier`
+- `yarn`
+- `yarn start`
 
 PRs are very welcome!
 

@@ -118,6 +118,7 @@
       "extendInfo": {
         "LSUIElement": 1
       },
+      "type": "development",
       "icon": "build/icon.icns",
       "darkModeSupport": true
     },

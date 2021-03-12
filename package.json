@@ -6,47 +6,58 @@
   },
   "license": "MIT",
   "description": "Tray App for Hotel Process Manager",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "ansi2html": "^0.0.1",
     "bootstrap": "^4.3.1",
-    "electron-traywindow-positioner": "^0.0.2",
-    "electron-updater": "^4.0.6",
+    "electron-traywindow-positioner": "^1.1.0",
+    "electron-updater": "^4.3.7",
     "escape-html": "^1.0.3",
     "eventsource": "^1.0.7",
-    "is-electron": "^2.1.0",
+    "is-electron": "^2.2.0",
     "jquery": "^3.5.0",
     "lodash": "^4.17.19",
     "node-sass": "^4.13.1",
     "popper.js": "^1.15.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "3.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
     "react-transition-group": "~2.4",
-    "tail": "^1.2.4"
+    "tail": "^2.2.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.3",
     "@types/electron": "^1.6.10",
     "@types/enzyme": "^3.9.3",
     "@types/escape-html": "^0.0.20",
+    "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.134",
     "@types/react": "^16.8.20",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "@types/react-test-renderer": "^16.8.2",
     "@types/react-transition-group": "^2.9.2",
-    "electron": "^7.2.4",
-    "electron-builder": "^20.43.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "electron": "^11.2.1",
+    "electron-builder": "^22.10.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^7.18.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard-jsx": "^10.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.22.0",
     "foreman": "^3.0.1",
     "jest-fetch-mock": "^1.5.0",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0",
     "react-test-renderer": "^16.3.2",
-    "tslint": "^5.17.0",
-    "tslint-react": "^4.0.0",
-    "typescript": "3.4.5"
+    "typescript": "~4.1.3"
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -59,12 +70,12 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "electron-start": "node src/electron-wait-react",
-    "electron:build": "build",
-    "postbuild": "build",
+    "electron:build": "electron-builder build",
+    "postbuild": "yarn electron:build",
     "pregh-publish": "react-scripts build",
     "gh-publish": "build --mac --win -p always",
-    "lint": "tslint -c tslint.json 'src/**/*.ts{,x}'",
-    "fixcode": "yarn lint --fix"
+    "lint": "eslint src/**/*.ts{,x} --no-ignore",
+    "lint:fix": "yarn lint --fix"
   },
   "jest": {
     "coverageReporters": [
@@ -75,7 +86,8 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!**/node_modules/**",
-      "!src/index.tsx",
+      "!src/**/index.{ts,tsx}",
+      "!src/interfaces",
       "!src/electron-wait-react.js"
     ],
     "coverageThreshold": {
@@ -90,7 +102,6 @@
   "build": {
     "appId": "com.macav.hotelier",
     "productName": "Hotelier",
-    "electronVersion": "5.0.0",
     "asar": true,
     "publish": [
       {
@@ -100,6 +111,10 @@
       }
     ],
     "mac": {
+      "target": {
+        "target": "dmg",
+        "arch": "x64"
+      },
       "extendInfo": {
         "LSUIElement": 1
       },

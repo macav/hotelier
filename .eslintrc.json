@@ -1,39 +1,47 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "jest": true,
-        "es6": true
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "globals": {
-        "__DEV__": false
-    },
-    "plugins": [
-        "react"
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "globals": {
+    "__DEV__": false
+  },
+  "plugins": ["@typescript-eslint", "react"],
+  "extends": ["plugin:react/recommended"],
+  "rules": {
+    "react/prop-types": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "semi": ["error", "always"],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore"
+      }
     ],
-    "extends": [
-        "standard",
-        "plugin:react/recommended"
+    "space-before-function-paren": [
+      "error",
+      { "asyncArrow": "always", "named": "never", "anonymous": "never" }
     ],
-    "rules": {
-        "semi": [
-            "error",
-            "always"
-        ],
-        "comma-dangle": [
-            "error",
-            {
-                "arrays": "always-multiline",
-                "objects": "always-multiline",
-                "imports": "never",
-                "exports": "never",
-                "functions": "ignore"
-            }
-        ],
-        "space-before-function-paren": [
-            "error",
-            "never"
-        ],
-        "no-return-assign": "off"
+    "no-return-assign": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
+  }
 }

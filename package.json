@@ -87,6 +87,7 @@
       "src/**/*.{ts,tsx}",
       "!**/node_modules/**",
       "!src/**/index.{ts,tsx}",
+      "!src/interfaces",
       "!src/electron-wait-react.js"
     ],
     "coverageThreshold": {

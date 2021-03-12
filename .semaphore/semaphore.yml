@@ -16,3 +16,7 @@ blocks:
             - yarn install
             - cache store
             - bin/check
+      epilogue:
+        on_fail:
+          commands:
+            - artifact push job coverage

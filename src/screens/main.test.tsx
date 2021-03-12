@@ -1,3 +1,4 @@
+import React from 'react';
 import { mockServers, render, screen } from '../test-utils';
 import Main from './main';
 

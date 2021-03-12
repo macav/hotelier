@@ -9,7 +9,7 @@ import {
   getByText,
   getByTitle,
   render,
-  screen,
+  screen
 } from '../test-utils';
 
 class MockLogRef {

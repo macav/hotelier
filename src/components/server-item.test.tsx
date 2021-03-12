@@ -33,7 +33,6 @@ describe('ServerItem', () => {
         server={server || runningServer}
         openServer={openServer || jest.fn()}
         toggleServer={toggleServer || jest.fn()}
-        restartServer={restartServer || jest.fn()}
         openLogs={openLogs || jest.fn()}
       />
     );
@@ -42,16 +41,6 @@ describe('ServerItem', () => {
   }
 
   describe('#componentDidUpdate', () => {
-    it('does not update the state if server is restarting', () => {
-      const restartServer = jest.fn();
-      const rendered = renderComponent({ restartServer });
-      runningServer.status = Status.RESTARTING;
-      const newServerState = { ...runningServer };
-      newServerState.status = Status.STOPPED;
-      rendered.setProps({ server: newServerState });
-      expect(instance.state.server.status).toEqual(Status.RESTARTING);
-    });
-
     it('updates the state from new props if server is not restarting', () => {
       const rendered = renderComponent();
       const newServerState = { ...runningServer };

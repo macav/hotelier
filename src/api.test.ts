@@ -1,5 +1,5 @@
 import HotelApi from './api';
-import { Server } from './interfaces';
+import { Server, Status } from './interfaces';
 import mockFetch from 'jest-fetch-mock';
 
 describe('api', () => {
@@ -22,11 +22,21 @@ describe('api', () => {
     });
   });
 
+  describe('#getServers', () => {
+    it('handles errors', async () => {
+      console.error = jest.fn();
+      mockFetch.mockResponse(null, { status: 404 });
+      const servers = await api.getServers();
+      expect(servers).toEqual([]);
+      expect(console.error).toHaveBeenCalled();
+    });
+  });
+
   describe('#watchServers', () => {
     beforeEach(() => jest.useFakeTimers());
 
     it('polls on servers', (done) => {
-      const servers: Server[] = [{ id: 'server1', status: 'running' }];
+      const servers: Server[] = [{ id: 'server1', status: Status.RUNNING, env: {} }];
       const callback = jest.fn();
       jest.spyOn(api, 'getServers').mockReturnValue(Promise.resolve(servers));
       api.watchServers(callback);

@@ -4,41 +4,25 @@ import { CSSTransition } from 'react-transition-group';
 import { HotelContext } from '../screens/hotel-context';
 
 interface Props {
-  serverId: string;
+  server: Server;
   btnStyle?: string;
 }
 
-export const ServerRestartButton: React.FC<Props> = ({
-  serverId,
-  btnStyle,
-}) => {
-  const { api, servers } = useContext(HotelContext);
-
-  const getServer = () => {
-    return servers.find((server) => server.id === serverId)!;
-  };
-
-  const [server, setServer] = useState<Server>(getServer());
-
-  useEffect(() => {
-    setServer(getServer());
-  }, [serverId]);
+export const ServerRestartButton: React.FC<Props> = ({ server, btnStyle }) => {
+  const { api } = useContext(HotelContext);
+  const [restarting, setRestarting] = useState(false);
 
   const restartServer = async () => {
-    server!.status = Status.RESTARTING;
-    setServer(server);
+    setRestarting(true);
     await api.stopServer(server!.id);
     await api.startServer(server!.id);
-    setTimeout(() => {
-      server!.status = Status.RUNNING;
-      setServer(server);
-    }, 1000);
+    setTimeout(() => setRestarting(false), 1000);
   };
 
   return (
     <CSSTransition
       title="Restart"
-      in={[Status.RUNNING, Status.RESTARTING].includes(server!.status)}
+      in={[Status.RUNNING].includes(server.status)}
       unmountOnExit={true}
       classNames="server-item"
       timeout={{ enter: 350, exit: 350 }}
@@ -49,9 +33,7 @@ export const ServerRestartButton: React.FC<Props> = ({
       >
         <span
           data-testid="restart-icon"
-          className={`fas fa-redo ${
-            server!.status === Status.RESTARTING ? 'spin' : ''
-          }`}
+          className={`fas fa-redo ${restarting ? 'spin' : ''}`}
         />
       </button>
     </CSSTransition>

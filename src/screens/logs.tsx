@@ -17,26 +17,22 @@ interface Props {
 }
 
 const Logs: React.FC<Props> = ({ match }) => {
+  const { servers } = useContext(HotelContext);
   const logsRef = useRef<HTMLPreElement>(null);
   const isAtBottom = useRef<boolean>(true);
-
-  const { api } = useContext(HotelContext);
 
   const [logs, setLogs] = useState<{
     [key: string]: Array<{ id: string; html: string }>;
   }>({});
 
   const onScroll = () => {
-    if (!logsRef.current) {
-      return;
-    }
-    const { scrollHeight, scrollTop, clientHeight } = logsRef.current;
+    const { scrollHeight, scrollTop, clientHeight } = logsRef.current!;
     isAtBottom.current = scrollHeight - scrollTop === clientHeight;
   };
 
   const scrollToBottomIfNecessary = () => {
-    if (isAtBottom.current && logsRef.current) {
-      logsRef.current.scrollTop = logsRef.current.scrollHeight;
+    if (isAtBottom.current) {
+      logsRef.current!.scrollTop = logsRef.current!.scrollHeight;
     }
   };
 
@@ -63,15 +59,17 @@ const Logs: React.FC<Props> = ({ match }) => {
     setLogs({ ...logs, [appId]: [] });
   };
 
-  const appId = match.params.server;
-  const currentLogs = logs[appId] || [];
+  const serverId = match.params.server;
+  const server = servers.find((server) => server.id === serverId)!;
+  const currentLogs = logs[serverId] || [];
+
   return (
     <div className="h-100">
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-1">
         <div className="mr-auto font-weight-bold text-center text-white">
-          {appId} logs
+          {serverId} logs
         </div>
-        <ServerRestartButton btnStyle="btn-primary" serverId={appId} />
+        <ServerRestartButton btnStyle="btn-primary" server={server} />
         <button
           className="btn btn-primary"
           title="Clear logs"
@@ -80,7 +78,7 @@ const Logs: React.FC<Props> = ({ match }) => {
           <i className="fas fa-eraser" />
         </button>
       </nav>
-      <pre className="logs-window" ref={logsRef}>
+      <pre data-testid="logs-window" className="logs-window" ref={logsRef}>
         {currentLogs.map((log) => (
           <div key={log.id} dangerouslySetInnerHTML={{ __html: log.html }} />
         ))}

@@ -86,7 +86,7 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!**/node_modules/**",
-      "!src/index.tsx",
+      "!src/**/index.{ts,tsx}",
       "!src/electron-wait-react.js"
     ],
     "coverageThreshold": {

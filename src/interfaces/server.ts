@@ -1,6 +1,5 @@
 export enum Status {
   RUNNING = 'running',
-  RESTARTING = 'restarting',
   STOPPED = 'stopped',
   CRASHED = 'crashed',
 }

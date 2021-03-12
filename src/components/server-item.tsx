@@ -23,10 +23,7 @@ export default class ServerItem extends React.Component<Props, State> {
 
   componentDidUpdate() {
     const { server } = this.state;
-    if (
-      server.status !== this.props.server.status &&
-      server.status !== Status.RESTARTING
-    ) {
+    if (server.status !== this.props.server.status) {
       this.setState({ server: this.props.server });
     }
   }
@@ -34,7 +31,6 @@ export default class ServerItem extends React.Component<Props, State> {
   actionClassName = (status: string) => {
     switch (status) {
       case Status.RUNNING:
-      case Status.RESTARTING:
         return 'btn-danger text-white';
       default:
         return 'btn-light';
@@ -65,7 +61,7 @@ export default class ServerItem extends React.Component<Props, State> {
           </div>
           <div className="float-right">
             <div className="d-inline">
-              <ServerRestartButton serverId={server.id} />
+              <ServerRestartButton server={server} />
             </div>
             <div className="d-inline mx-1">
               <button

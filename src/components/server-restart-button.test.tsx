@@ -25,9 +25,10 @@ describe('ServerRestartButton', () => {
     fireEvent.click(screen.getByRole('button'));
     await waitFor(() => expect(api.stopServer).toHaveBeenCalled());
     await waitFor(() => expect(api.startServer).toHaveBeenCalled());
-    rerender(<ServerRestartButton server={mockServers[0]} />);
+
     let icon = await screen.findByTestId('restart-icon');
     expect(icon.classList.contains('spin')).toEqual(true);
+
     await act(async () => {
       jest.runTimersToTime(1000);
       rerender(<ServerRestartButton server={mockServers[0]} />);

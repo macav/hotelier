@@ -66,17 +66,11 @@ describe('Logs', () => {
 
   const renderWithLogs = () => {
     mockLog();
-    const renderObj = render(<Logs match={matchForRunningServer as any} />, {});
-    renderObj.rerender(<Logs match={matchForRunningServer as any} />);
-    return renderObj;
+    return render(<Logs match={matchForRunningServer as any} />, {});
   };
 
   it('updates the state of logs', () => {
-    mockLog();
-    const { rerender } = render(
-      <Logs match={matchForRunningServer as any} />,
-      {}
-    );
+    const { rerender } = renderWithLogs();
     expect(screen.queryAllByTitle('log output').length).toEqual(0);
 
     rerender(<Logs match={matchForRunningServer as any} />);
@@ -96,7 +90,7 @@ describe('Logs', () => {
         (logWriter = (output: string) =>
           callback(null, { id: 'server2', output })),
     };
-    const { rerender } = render(
+    render(
       <Logs match={matchForRunningServer as any} />,
       {}
     );
@@ -105,7 +99,6 @@ describe('Logs', () => {
       for (let i = 0; i < 1000; i++) {
         logWriter(`output ${i}`);
       }
-      rerender(<Logs match={matchForRunningServer as any} />);
 
       const logsContainer = await screen.findByTestId('logs-window');
       mockLogsContainer(logsContainer);

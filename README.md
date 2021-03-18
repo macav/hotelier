@@ -10,7 +10,7 @@ Alternately, install with [Homebrew](https://brew.sh) on macOS:
 
 ```shellsession
 $ brew tap macav/hotelier https://www.github.com/macav/hotelier.git
-$ brew cask install hotelier
+$ brew install --cask hotelier
 ```
 
 ## About

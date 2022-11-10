@@ -41,7 +41,7 @@
     "@types/react-transition-group": "^2.9.2",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
-    "electron": "^11.5.0",
+    "electron": "^18.3.7",
     "electron-builder": "^22.10.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
